@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If request is already targeting public/, let it through
+    RewriteRule ^public/.*$ - [L]
+
+    # Route everything else into public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+</IfModule>
