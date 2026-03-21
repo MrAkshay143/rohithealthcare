@@ -42,7 +42,7 @@ export default function BlogsPage() {
         ) : (
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 sm:gap-6">
             {blogs.map((blog, i) => {
-              const wordCount = blog.content.replace(/<[^>]+>/g, '').split(" ").length;
+              const wordCount = (blog.content ?? '').replace(/<[^>]+>/g, '').split(" ").length;
               const readMin = Math.max(1, Math.round(wordCount / 200));
               const href = "/blogs/" + (blog.slug || blog.id);
               return (
@@ -95,7 +95,7 @@ export default function BlogsPage() {
                     </div>
                     <h3 className="font-bold text-gray-900 leading-snug mb-1.5 line-clamp-2 text-sm sm:text-base">{blog.title}</h3>
                     <p className="text-gray-500 text-[11px] sm:text-xs leading-relaxed line-clamp-3 grow">
-                      {blog.content.replace(/<[^>]+>/g, '')}
+                      {(blog.content ?? '').replace(/<[^>]+>/g, '')}
                     </p>
                     <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#015851] group-hover:gap-2 transition-all">
                       {blog.videoUrl ? 'Watch Now' : (content['blogs_read_more'] ?? 'Read More')} <ArrowRight className="w-3 h-3" />

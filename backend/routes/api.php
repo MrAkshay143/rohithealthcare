@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\EnquiryController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\NavLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::get('/settings', [SettingController::class, 'index']);
 
 // Public services
 Route::get('/services', [ServiceController::class, 'index']);
+
+// Public nav links
+Route::get('/nav-links', [NavLinkController::class, 'index']);
 
 // Public enquiry submission
 Route::post('/enquiries', [EnquiryController::class, 'store']);
@@ -110,4 +114,11 @@ Route::middleware(\App\Http\Middleware\AdminAuth::class)->group(function () {
     Route::put('/services/{id}', [ServiceController::class, 'update']);
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
     Route::post('/services/reorder', [ServiceController::class, 'reorder']);
+
+    // Nav Links CRUD
+    Route::get('/admin/nav-links', [NavLinkController::class, 'adminIndex']);
+    Route::post('/nav-links', [NavLinkController::class, 'store']);
+    Route::put('/nav-links/reorder', [NavLinkController::class, 'reorder']);
+    Route::put('/nav-links/{id}', [NavLinkController::class, 'update']);
+    Route::delete('/nav-links/{id}', [NavLinkController::class, 'destroy']);
 });

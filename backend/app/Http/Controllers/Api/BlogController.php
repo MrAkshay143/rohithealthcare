@@ -18,8 +18,9 @@ class BlogController extends Controller
             $query->where('draft', false);
         }
 
-        $orderBy = $request->query('orderBy', 'createdAt');
-        $orderDir = $request->query('orderDir', 'desc');
+        $allowed = ['id', 'title', 'createdAt', 'created_at', 'slug'];
+        $orderBy = in_array($request->query('orderBy'), $allowed) ? $request->query('orderBy') : 'createdAt';
+        $orderDir = in_array(strtolower($request->query('orderDir', 'desc')), ['asc', 'desc']) ? $request->query('orderDir') : 'desc';
         $query->orderBy($orderBy, $orderDir);
 
         $take = $request->query('take');

@@ -332,6 +332,8 @@ class DatabaseSeeder extends Seeder
             ['key' => 'form_success_title',       'value' => 'Message Received!'],
             ['key' => 'form_success_text',        'value' => 'Thank you for reaching out. Our team will get back to you shortly via phone or WhatsApp.'],
             ['key' => 'form_success_again',       'value' => 'Send another message'],
+            ['key' => 'form_email_label',          'value' => 'Email'],
+            ['key' => 'form_email_placeholder',    'value' => 'your@email.com'],
             // Blogs Page
             ['key' => 'blogs_page_badge',    'value' => 'Stay Informed'],
             ['key' => 'blogs_page_heading',  'value' => 'News & Health Camps'],

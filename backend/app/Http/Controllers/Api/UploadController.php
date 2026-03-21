@@ -21,6 +21,6 @@ class UploadController extends Controller
 
         $file->move(public_path('uploads'), $safeName);
 
-        return response()->json(['url' => '/backend/uploads/' . $safeName]);
+        return response()->json(['url' => '/uploads/' . $safeName]);
     }
 }

@@ -10,8 +10,9 @@ class DoctorController extends Controller
 {
     public function index(Request $request)
     {
-        $orderBy = $request->query('orderBy', 'order');
-        $orderDir = $request->query('orderDir', 'asc');
+        $allowed = ['id', 'name', 'specialty', 'order', 'created_at'];
+        $orderBy = in_array($request->query('orderBy'), $allowed) ? $request->query('orderBy') : 'order';
+        $orderDir = in_array(strtolower($request->query('orderDir', 'asc')), ['asc', 'desc']) ? $request->query('orderDir') : 'asc';
         $take = $request->query('take');
 
         $query = Doctor::orderBy($orderBy, $orderDir);

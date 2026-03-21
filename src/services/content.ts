@@ -225,6 +225,8 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   form_phone_placeholder:   { value: '+91 98765 43210', label: 'Phone Placeholder', group: 'Contact Form' },
   form_message_label:       { value: 'Message or Query', label: 'Message Label', group: 'Contact Form' },
   form_message_placeholder: { value: 'I would like to know more about…', label: 'Message Placeholder', group: 'Contact Form' },
+  form_email_label:          { value: 'Email', label: 'Email Label', group: 'Contact Form' },
+  form_email_placeholder:    { value: 'your@email.com', label: 'Email Placeholder', group: 'Contact Form' },
   form_submit_label:        { value: 'Send Message', label: 'Submit Button', group: 'Contact Form' },
   form_consent_text:        { value: 'By submitting you agree to be contacted via phone or WhatsApp.', label: 'Consent Text', group: 'Contact Form' },
   form_success_title:       { value: 'Message Received!', label: 'Success Title', group: 'Contact Form' },

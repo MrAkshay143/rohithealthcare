@@ -155,7 +155,7 @@ export default function HomePage() {
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#A62B2B] mb-2">{content['home_services_badge'] ?? 'What We Offer'}</span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">{content['home_services_heading'] ?? 'Comprehensive Diagnostic Services'}</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
-              {content['services_subheading']}
+              {content['home_services_subtext'] ?? 'Cutting-edge technology and skilled professionals - all under one roof.'}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
