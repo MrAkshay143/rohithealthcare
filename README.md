@@ -146,6 +146,7 @@ cd rohithealthcare
 
 ```bash
 npm install
+cp .env.example .env  # Configure VITE_BACKEND_ORIGIN as needed
 npm run dev          # Start dev server at http://localhost:5173
 ```
 
@@ -154,7 +155,7 @@ npm run dev          # Start dev server at http://localhost:5173
 ```bash
 cd backend
 composer install
-cp .env.example .env
+cp .env.example .env  # Configure your local DB credentials here
 php artisan key:generate
 ```
 
@@ -184,7 +185,48 @@ npx vite build       # Outputs to dist/
 
 ---
 
-## 📡 API Overview
+## � Deployment (Hostinger / SSH)
+
+Deploying to a shared hosting environment (like Hostinger) via SSH simplifies updates and minimizes FTP overhead.
+
+### 1. Build Local Assets
+
+Compile the React code into static files:
+
+```bash
+npm run build
+```
+
+### 2. Upload via SCP (SSH File Copy)
+
+Use `scp` to securely copy your compiled `dist` directory and backend files to your remote server. Ensure you have the SSH port (`-P 65002` for Hostinger) and user details handy.
+
+**Upload Frontend Assets:**
+
+```bash
+scp -P 65002 -r dist/assets/* u_your_user@your_ip:domains/rhc.imakshay.in/public_html/assets/
+scp -P 65002 dist/index.html u_your_user@your_ip:domains/rhc.imakshay.in/public_html/
+```
+
+**Upload Backend API Code:**
+
+```bash
+scp -P 65002 -r backend/app/* backend/routes/* backend/database/* u_your_user@your_ip:domains/rhc.imakshay.in/public_html/backend/
+```
+
+### 3. Run Remote Migrations via SSH
+
+Execute artisan commands dynamically without leaving your terminal by piping them through ssh:
+
+```bash
+ssh -p 65002 u_your_user@your_ip "cd domains/rhc.imakshay.in/public_html/backend && /opt/alt/php83/usr/bin/php artisan migrate"
+```
+
+_Note: You may need to replace `/opt/alt/php83/usr/bin/php` with your specific hosting provider's PHP executable path if the default `php` falls back to an older version._
+
+---
+
+## �📡 API Overview
 
 All API endpoints are prefixed with `/api`. Authentication uses session-based cookies.
 
@@ -251,4 +293,3 @@ This project is proprietary software. See [LICENSE](LICENSE) for details.
 ---
 
 Built with care for the community.
-
