@@ -101,6 +101,7 @@ export default function ContactPage() {
                 className="w-full h-full border-0"
                 allowFullScreen={false}
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
                 title="Clinic Location"
               />
             </div>

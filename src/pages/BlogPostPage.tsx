@@ -97,6 +97,7 @@ export default function BlogPostPage() {
                     src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1`}
                     title={blog.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   />
                 ) : (
@@ -149,8 +150,7 @@ export default function BlogPostPage() {
               </a>
             )}
             <article>
-              <p className="text-gray-700 leading-[1.85] text-base sm:text-[17px] font-normal tracking-[0.01em]">
-                {blog.content}
+                <p className="text-gray-700 leading-[1.85] text-base sm:text-[17px] font-normal tracking-[0.01em] whitespace-pre-wrap">
               </p>
             </article>
 
