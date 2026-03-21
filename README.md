@@ -185,48 +185,46 @@ npx vite build       # Outputs to dist/
 
 ---
 
-## � Deployment (Hostinger / SSH)
+## 🚢 Deployment
 
-Deploying to a shared hosting environment (like Hostinger) via SSH simplifies updates and minimizes FTP overhead.
+The project is structured to be hosted on any modern environment including Virtual Private Servers (AWS, DigitalOcean), managed hosting (Hostinger, cPanel), or decentralized CDNs (Vercel, Netlify) for the frontend alongside a dedicated backend. Must require **PHP 8.3+**.
 
-### 1. Build Local Assets
+### Option A: Shared Hosting / cPanel / Hostinger (via SSH)
 
+Deploying to a shared hosting environment via SSH simplifies updates and minimizes FTP overhead.
+
+**1. Build Local Assets:**
 Compile the React code into static files:
-
 ```bash
 npm run build
 ```
 
-### 2. Upload via SCP (SSH File Copy)
+**2. Upload via SCP (SSH File Copy):**
+Use `scp` to securely copy your compiled `dist` directory and backend files to your remote server. Ensure you have the SSH port (`-P 65002` for Hostinger, standard `-p 22` for typical Linux servers).
 
-Use `scp` to securely copy your compiled `dist` directory and backend files to your remote server. Ensure you have the SSH port (`-P 65002` for Hostinger) and user details handy.
-
-**Upload Frontend Assets:**
-
+*Upload Frontend Assets:*
 ```bash
-scp -P 65002 -r dist/assets/* u_your_user@your_ip:domains/rhc.imakshay.in/public_html/assets/
-scp -P 65002 dist/index.html u_your_user@your_ip:domains/rhc.imakshay.in/public_html/
+scp -P 65002 -r dist/assets/* u_your_user@your_ip:domains/yourdomain.com/public_html/assets/
+scp -P 65002 dist/index.html u_your_user@your_ip:domains/yourdomain.com/public_html/
 ```
 
-**Upload Backend API Code:**
-
+*Upload Backend API Code:*
 ```bash
-scp -P 65002 -r backend/app/* backend/routes/* backend/database/* u_your_user@your_ip:domains/rhc.imakshay.in/public_html/backend/
+scp -P 65002 -r backend/app/* backend/routes/* backend/database/* u_your_user@your_ip:domains/yourdomain.com/public_html/backend/
 ```
 
-### 3. Run Remote Migrations via SSH
-
+**3. Run Remote Migrations via SSH:**
 Execute artisan commands dynamically without leaving your terminal by piping them through ssh:
-
 ```bash
-ssh -p 65002 u_your_user@your_ip "cd domains/rhc.imakshay.in/public_html/backend && /opt/alt/php83/usr/bin/php artisan migrate"
+ssh -p 65002 u_your_user@your_ip "cd domains/yourdomain.com/public_html/backend && /opt/alt/php83/usr/bin/php artisan migrate"
 ```
 
-_Note: You may need to replace `/opt/alt/php83/usr/bin/php` with your specific hosting provider's PHP executable path if the default `php` falls back to an older version._
+### Option B: Cloud Architecture (Vercel Frontend + AWS Backend)
 
----
+1. **Frontend (Vercel):** Create a new Vercel project, link the GitHub repository, set the Root Directory to the base folder (or `src`), and configure the Vercel branch environment variable `VITE_BACKEND_ORIGIN` to point toward your deployed API endpoint.
+2. **Backend (AWS EC2 / DigitalOcean):** Clone the repository onto your Ubuntu server, install PHP 8.3+, Nginx/Apache, Composer, and MySQL. Configure your `backend/.env` with production RDS/MySQL credentials, run `php artisan migrate`, and expose the Laravel entry point `/public` to the web server routing.
 
-## �📡 API Overview
+## 📡 API Overview
 
 All API endpoints are prefixed with `/api`. Authentication uses session-based cookies.
 
@@ -286,10 +284,20 @@ This project is proprietary software. See [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**Built with ❤️ for Rohit Health Care**
+**Built with care for the community.**
 
 </div>
 
 ---
 
-Built with care for the community.
+
+<div align="center">
+
+**Developed by Akshay Mondal**  
+📧 [contact@imakshay.in](mailto:contact@imakshay.in)  
+🌐 [www.imakshay.in](https://www.imakshay.in)
+
+</div>
+
+
+
