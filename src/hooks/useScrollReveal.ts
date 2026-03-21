@@ -8,6 +8,8 @@ import { useEffect, useRef, useCallback } from 'react';
  */
 export function useScrollReveal() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  // Elements registered before the observer was created are queued here
+  const pendingRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -19,8 +21,12 @@ export function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+      { threshold: 0.08, rootMargin: '0px 0px -20px 0px' },
     );
+
+    // Observe all elements that were registered before the observer was ready
+    pendingRef.current.forEach((el) => observerRef.current!.observe(el));
+    pendingRef.current = [];
 
     return () => observerRef.current?.disconnect();
   }, []);
@@ -30,7 +36,12 @@ export function useScrollReveal() {
       if (!el || el.classList.contains('reveal')) return;
       el.classList.add('reveal');
       if (delay > 0) el.style.transitionDelay = `${delay}ms`;
-      observerRef.current?.observe(el);
+      if (observerRef.current) {
+        observerRef.current.observe(el);
+      } else {
+        // Observer not ready yet — queue for when useEffect fires
+        pendingRef.current.push(el);
+      }
     };
   }, []);
 
