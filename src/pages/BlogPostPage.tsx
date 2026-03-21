@@ -152,7 +152,8 @@ export default function BlogPostPage() {
             )}
             <article>
                 <p className="text-gray-700 leading-[1.85] text-base sm:text-[17px] font-normal tracking-[0.01em] whitespace-pre-wrap">
-              </p>
+                  {blog.content}
+                </p>
             </article>
 
             {/* Divider */}
