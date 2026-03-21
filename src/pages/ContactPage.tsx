@@ -2,11 +2,12 @@ import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function ContactPage() {
   const content = useContent();
   useSEO('contact');
+  const reveal = useScrollReveal();
   const phone = content['contact_phone'] ?? '';
   const phoneDisplay = content['contact_phone_display'] ?? '';
   const whatsapp = content['contact_whatsapp'] ?? '';
@@ -20,22 +21,16 @@ export default function ContactPage() {
       {/* Header */}
       <div className="relative isolate overflow-hidden bg-brand-green py-8 sm:py-12 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80')] bg-cover bg-center" />
-        <div className="relative">
-          <ScrollReveal animation="fade-up" staggerIndex={0}>
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
-              {content['contact_page_badge']}
-            </span>
-          </ScrollReveal>
-          <ScrollReveal animation="fade-up" staggerIndex={1}>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
-              {content['contact_page_heading']}
-            </h1>
-          </ScrollReveal>
-          <ScrollReveal animation="fade-up" staggerIndex={2}>
-            <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
-              {content['contact_page_subtext']}
-            </p>
-          </ScrollReveal>
+        <div ref={reveal()} className="relative">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
+            {content['contact_page_badge']}
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
+            {content['contact_page_heading']}
+          </h1>
+          <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
+            {content['contact_page_subtext']}
+          </p>
         </div>
       </div>
 
@@ -44,8 +39,7 @@ export default function ContactPage() {
           {/* Left info column (2/5) */}
           <div className="lg:col-span-2 space-y-5">
             {/* Quick action buttons */}
-            <ScrollReveal animation="fade-up" staggerIndex={0}>
-            <div className="grid grid-cols-2 gap-4">
+            <div ref={reveal()} className="grid grid-cols-2 gap-4">
               <a
                 href={`tel:+${phone}`}
                 className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-brand-green p-4 text-white hover:bg-brand-green-dark transition-colors shadow-lg shadow-brand-green/20"
@@ -65,11 +59,9 @@ export default function ContactPage() {
                 <span className="text-xs opacity-80">{content['contact_whatsapp_sub'] ?? 'Chat instantly'}</span>
               </a>
             </div>
-            </ScrollReveal>
 
             {/* Info cards */}
-            <ScrollReveal animation="fade-up" staggerIndex={1}>
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-100">
+            <div ref={reveal(100)} className="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-100">
               <div className="flex items-start gap-4 p-4">
                 <div className="shrink-0 h-9 w-9 rounded-xl bg-blue-50 flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-blue-600" />
@@ -103,11 +95,9 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-            </ScrollReveal>
 
             {/* Map */}
-            <ScrollReveal animation="fade-up" staggerIndex={2}>
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-48 sm:h-56">
+            <div ref={reveal(200)} className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-48 sm:h-56">
               <iframe
                 src={content['google_maps_embed'] ?? ''}
                 className="w-full h-full border-0"
@@ -117,13 +107,12 @@ export default function ContactPage() {
                 title="Clinic Location"
               />
             </div>
-            </ScrollReveal>
           </div>
 
           {/* Right form column (3/5) */}
-          <ScrollReveal animation="fade-left" className="lg:col-span-3">
+          <div ref={reveal()} className="lg:col-span-3">
             <ContactForm />
-          </ScrollReveal>
+          </div>
         </div>
       </div>
     </div>

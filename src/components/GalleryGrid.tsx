@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 type Photo = { id: number; imageUrl: string; title: string };
 
 export function GalleryGrid({ photos }: { photos: Photo[] }) {
   const [selected, setSelected] = useState<number | null>(null);
+  const reveal = useScrollReveal();
 
   const close = useCallback(() => setSelected(null), []);
   const prev = useCallback(() =>
@@ -29,6 +31,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
         {photos.map((photo, i) => (
           <div
             key={photo.id}
+            ref={reveal((i % 4) * 100)}
             className="group relative aspect-square overflow-hidden rounded-2xl bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5"
             onClick={() => setSelected(i)}
           >

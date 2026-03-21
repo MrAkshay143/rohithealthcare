@@ -64,29 +64,24 @@ body {
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
 
-/* ── ScrollReveal animation classes ── */
-.sr-fade-up,
-.sr-fade-in,
-.sr-scale-in,
-.sr-fade-left,
-.sr-fade-right {
+/* ── Scroll-reveal animations ── */
+.reveal {
   opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
-  transition-property: opacity, transform;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sr-fade-up   { transform: translateY(32px); }
-.sr-fade-in   { transform: none; }
-.sr-scale-in  { transform: scale(0.95); }
-.sr-fade-left { transform: translateX(-32px); }
-.sr-fade-right{ transform: translateX(32px); }
-
-.sr-visible.sr-fade-up,
-.sr-visible.sr-fade-in,
-.sr-visible.sr-scale-in,
-.sr-visible.sr-fade-left,
-.sr-visible.sr-fade-right {
+.reveal.revealed {
   opacity: 1;
-  transform: none;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

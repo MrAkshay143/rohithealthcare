@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { isTrueValue } from "@/services/content";
 import { api } from "@/services/api";
 import { HeroSlider } from "@/components/HeroSlider";
 import { DoctorCard } from "@/components/DoctorCard";
-import { ScrollReveal } from "@/components/ScrollReveal";
 
 const ICON_MAP: Record<string, any> = {
   Activity, Droplet, TestTube, Microscope, HeartPulse, Stethoscope,
@@ -37,6 +37,7 @@ const SVC_STYLES = [
 export default function HomePage() {
   const content = useContent();
   useSEO('home');
+  const reveal = useScrollReveal();
   const [doctors, setDoctors] = useState<any[]>([]);
   const [recentBlogs, setRecentBlogs] = useState<any[]>([]);
   const [heroSlides, setHeroSlides] = useState<{ id: number; imageUrl: string; alt: string }[]>([]);
@@ -137,12 +138,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-gray-100">
             {stats.map((s, i) => (
-              <ScrollReveal key={s.label} animation="fade-up" staggerIndex={i}>
-              <div className="flex flex-col items-center justify-center py-6 sm:py-8 px-3 sm:px-4 text-center group hover:bg-[#015851]/5 transition-colors">
+              <div key={s.label} ref={reveal(i * 100)} className="flex flex-col items-center justify-center py-6 sm:py-8 px-3 sm:px-4 text-center group hover:bg-[#015851]/5 transition-colors">
                 <span className="text-2xl sm:text-3xl font-extrabold text-[#015851] group-hover:scale-105 transition-transform">{s.value}</span>
                 <span className="mt-1 sm:mt-2 text-[11px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide">{s.label}</span>
               </div>
-              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -152,25 +151,18 @@ export default function HomePage() {
       {isTrueValue(content['home_services_visible']) && (
       <section className="py-10 sm:py-16 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <ScrollReveal animation="fade-up" staggerIndex={0}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#A62B2B] mb-2">{content['home_services_badge'] ?? 'What We Offer'}</span>
-            </ScrollReveal>
-            <ScrollReveal animation="fade-up" staggerIndex={1}>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">{content['home_services_heading'] ?? 'Comprehensive Diagnostic Services'}</h2>
-            </ScrollReveal>
-            <ScrollReveal animation="fade-up" staggerIndex={2}>
-              <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
-                {content['services_subheading']}
-              </p>
-            </ScrollReveal>
+          <div ref={reveal()} className="text-center mb-10">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#A62B2B] mb-2">{content['home_services_badge'] ?? 'What We Offer'}</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">{content['home_services_heading'] ?? 'Comprehensive Diagnostic Services'}</h2>
+            <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
+              {content['services_subheading']}
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {services.slice(0, 4).map((svc, i) => {
               const Icon = svc.icon;
               return (
-                <ScrollReveal key={svc.title} animation="fade-up" staggerIndex={i + 3}>
-                <Link to={svc.href}
+                <Link key={svc.title} to={svc.href} ref={reveal((i + 1) * 100)}
                   className={`group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex-col h-full w-full max-w-90 ${
                     i === 0 ? 'flex' : i === 1 ? 'hidden sm:flex' : i === 2 ? 'hidden md:flex' : 'hidden lg:flex'
                   }`}>
@@ -183,17 +175,14 @@ export default function HomePage() {
                   <h3 className="text-base font-bold text-gray-900 mb-2">{svc.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed grow">{svc.desc}</p>
                 </Link>
-                </ScrollReveal>
               );
             })}
           </div>
-          <ScrollReveal animation="fade-up" staggerIndex={7}>
           <div className="text-center mt-10">
             <Link to="/services" className="inline-flex items-center gap-2 rounded-xl border-2 border-[#015851] px-7 py-3 text-sm font-bold text-[#015851] hover:bg-[#015851] hover:text-white transition-all">
               {content['home_services_btn'] ?? 'View All Services'} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          </ScrollReveal>
         </div>
       </section>
       )}
@@ -202,8 +191,7 @@ export default function HomePage() {
       {isTrueValue(content['home_whyus_visible']) && (
       <section className="py-8 sm:py-14 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal animation="scale-in">
-          <div className="rounded-2xl overflow-hidden bg-gray-900 shadow-xl">
+          <div ref={reveal()} className="rounded-2xl overflow-hidden bg-gray-900 shadow-xl">
             <div className="grid md:grid-cols-2">
               <div className="p-8 md:p-12 flex flex-col justify-center">
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['home_whyus_badge'] ?? 'Why Choose Us'}</span>
@@ -233,7 +221,6 @@ export default function HomePage() {
                 style={{ backgroundImage: `url('${content['home_whyus_image'] || 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000'}')` }} />
             </div>
           </div>
-          </ScrollReveal>
         </div>
       </section>
       )}
@@ -242,8 +229,7 @@ export default function HomePage() {
       {doctors.length > 0 && isTrueValue(content['home_team_visible']) && (
         <section className="py-8 sm:py-14 bg-gray-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ScrollReveal animation="fade-up">
-            <div className="flex items-center justify-between mb-8">
+            <div ref={reveal()} className="flex items-center justify-between mb-8">
               <div>
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#A62B2B] mb-2">{content['home_team_badge'] ?? 'Expert Doctors'}</span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{content['home_team_heading'] ?? 'Our Medical Team'}</h2>
@@ -252,14 +238,11 @@ export default function HomePage() {
                 {content['home_team_link'] ?? 'Meet All Doctors'} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            </ScrollReveal>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
               {doctors.slice(0, 4).map((doc, i) => (
-                <ScrollReveal key={doc.id} animation="fade-up" staggerIndex={i}>
-                <div className={`w-full max-w-80 ${i === 0 ? 'block' : i === 1 ? 'hidden sm:block' : i === 2 ? 'hidden md:block' : 'hidden lg:block'}`}>
+                <div key={doc.id} ref={reveal(i * 100)} className={`w-full max-w-80 ${i === 0 ? 'block' : i === 1 ? 'hidden sm:block' : i === 2 ? 'hidden md:block' : 'hidden lg:block'}`}>
                   <DoctorCard doc={doc} index={i} />
                 </div>
-                </ScrollReveal>
               ))}
             </div>
             <div className="text-center mt-8 sm:hidden">
@@ -275,8 +258,7 @@ export default function HomePage() {
       {recentBlogs.length > 0 && isTrueValue(content['home_blog_visible']) && (
         <section className="py-8 sm:py-14 bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ScrollReveal animation="fade-up">
-            <div className="flex items-center justify-between mb-8">
+            <div ref={reveal()} className="flex items-center justify-between mb-8">
               <div>
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#A62B2B] mb-2">{content['home_blog_badge'] ?? 'Latest Updates'}</span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{content['home_blog_heading'] ?? 'News & Health Camps'}</h2>
@@ -285,11 +267,9 @@ export default function HomePage() {
                 {content['home_blog_link'] ?? 'All Posts'} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            </ScrollReveal>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
               {recentBlogs.slice(0, 4).map((blog, i) => (
-                <ScrollReveal key={blog.id} animation="fade-up" staggerIndex={i}>
-                <Link to={`/blogs/${blog.slug || blog.id}`}
+                <Link key={blog.id} to={`/blogs/${blog.slug || blog.id}`} ref={reveal(i * 100)}
                   className={`group bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex-col w-full max-w-90 ${
                     i === 0 ? 'flex' : i === 1 ? 'hidden sm:flex' : i === 2 ? 'hidden md:flex' : 'hidden lg:flex'
                   }`}>
@@ -313,7 +293,6 @@ export default function HomePage() {
                     </span>
                   </div>
                 </Link>
-                </ScrollReveal>
               ))}
             </div>
             <div className="text-center mt-8 sm:hidden">
@@ -329,14 +308,9 @@ export default function HomePage() {
       {isTrueValue(content['cta_visible']) && (
       <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-8 sm:py-12">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=40&w=1400')] bg-cover bg-center opacity-10" />
-        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal animation="fade-up" staggerIndex={0}>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">{content['cta_title']}</h2>
-          </ScrollReveal>
-          <ScrollReveal animation="fade-up" staggerIndex={1}>
-            <p className="text-white/80 mb-6 text-sm">{content['cta_subtitle']}</p>
-          </ScrollReveal>
-          <ScrollReveal animation="fade-up" staggerIndex={2}>
+        <div ref={reveal()} className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">{content['cta_title']}</h2>
+          <p className="text-white/80 mb-6 text-sm">{content['cta_subtitle']}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href={`tel:+${content['contact_phone'] ?? ''}`}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 text-sm font-bold text-[#A62B2B] hover:bg-gray-100 transition-colors shadow-lg">
@@ -347,7 +321,6 @@ export default function HomePage() {
               {content['cta_btn_inquiry'] ?? 'Send an Inquiry'}
             </Link>
           </div>
-          </ScrollReveal>
         </div>
       </section>
       )}

@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play } from "lucide-react";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 function extractYoutubeId(url: string): string | null {
   const match = url?.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
@@ -12,6 +13,7 @@ function extractYoutubeId(url: string): string | null {
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const content = useContent();
+  const reveal = useScrollReveal();
   const [blog, setBlog] = useState<any>(null);
   const [notFound, setNotFound] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -86,7 +88,7 @@ export default function BlogPostPage() {
 
       {/* Article card */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div ref={reveal()} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {/* YouTube embed - click to play */}
           {videoId ? (
             <div className="w-full bg-black">
@@ -150,7 +152,6 @@ export default function BlogPostPage() {
             )}
             <article>
                 <p className="text-gray-700 leading-[1.85] text-base sm:text-[17px] font-normal tracking-[0.01em] whitespace-pre-wrap">
-                  {blog.content}
               </p>
             </article>
 
@@ -175,7 +176,7 @@ export default function BlogPostPage() {
         </div>
 
         {/* CTA card */}
-        <div className="mt-6 rounded-2xl bg-linear-to-br from-[#014d43] to-[#015851] p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#014d43] to-[#015851] p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-4">
             <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
               <HeartPulse className="w-6 h-6 text-white/70" />
