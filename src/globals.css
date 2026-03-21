@@ -63,3 +63,30 @@ body {
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
+
+/* ── ScrollReveal animation classes ── */
+.sr-fade-up,
+.sr-fade-in,
+.sr-scale-in,
+.sr-fade-left,
+.sr-fade-right {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sr-fade-up   { transform: translateY(32px); }
+.sr-fade-in   { transform: none; }
+.sr-scale-in  { transform: scale(0.95); }
+.sr-fade-left { transform: translateX(-32px); }
+.sr-fade-right{ transform: translateX(32px); }
+
+.sr-visible.sr-fade-up,
+.sr-visible.sr-fade-in,
+.sr-visible.sr-scale-in,
+.sr-visible.sr-fade-left,
+.sr-visible.sr-fade-right {
+  opacity: 1;
+  transform: none;
+}

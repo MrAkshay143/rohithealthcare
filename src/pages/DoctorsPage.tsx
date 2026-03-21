@@ -5,6 +5,7 @@ import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
 import { api } from "@/services/api";
 import { DoctorCard } from "@/components/DoctorCard";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function DoctorsPage() {
   const content = useContent();
@@ -24,15 +25,21 @@ api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() 
       <div className="relative isolate overflow-hidden bg-brand-green py-8 sm:py-12 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80')] bg-cover bg-center" />
         <div className="relative max-w-3xl mx-auto">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
-            {content['doctors_page_badge']}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
-            {content['doctors_page_heading']}
-          </h1>
-          <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
-            {content['doctors_page_subtext']}
-          </p>
+          <ScrollReveal animation="fade-up" staggerIndex={0}>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
+              {content['doctors_page_badge']}
+            </span>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={1}>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
+              {content['doctors_page_heading']}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={2}>
+            <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
+              {content['doctors_page_subtext']}
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
@@ -43,12 +50,15 @@ api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() 
         ) : (
           <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 sm:gap-6">
             {doctors.map((doc, i) => (
-              <DoctorCard key={doc.id} doc={doc} index={i} />
+              <ScrollReveal key={doc.id} animation="fade-up" staggerIndex={i}>
+                <DoctorCard doc={doc} index={i} />
+              </ScrollReveal>
             ))}
           </div>
         )}
 
         {/* CTA */}
+        <ScrollReveal animation="scale-in">
         <div className="mt-10 rounded-2xl bg-gray-900 p-7 sm:p-8 text-center">
           <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">
             {content['doctors_cta_heading']}
@@ -79,6 +89,7 @@ api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() 
             </Link>
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function BlogsPage() {
   const content = useContent();
@@ -20,11 +21,17 @@ export default function BlogsPage() {
       <div className="relative isolate overflow-hidden bg-linear-to-br from-[#014d43] via-[#015851] to-[#017a6a] py-12 sm:py-16 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=60')] bg-cover bg-center" />
         <div className="relative">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['blogs_page_badge'] ?? 'Stay Informed'}</span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">{content['blogs_page_heading'] ?? 'News & Health Camps'}</h1>
-          <p className="text-white/75 max-w-4xl mx-auto text-sm">
-            {content['blogs_page_subtext'] ?? 'Updates on free outdoor checkup camps, community events, and medical advice.'}
-          </p>
+          <ScrollReveal animation="fade-up" staggerIndex={0}>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['blogs_page_badge'] ?? 'Stay Informed'}</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={1}>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">{content['blogs_page_heading'] ?? 'News & Health Camps'}</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={2}>
+            <p className="text-white/75 max-w-4xl mx-auto text-sm">
+              {content['blogs_page_subtext'] ?? 'Updates on free outdoor checkup camps, community events, and medical advice.'}
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
@@ -39,14 +46,13 @@ export default function BlogsPage() {
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 sm:gap-6">
-            {blogs.map((blog) => {
+            {blogs.map((blog, i) => {
               const wordCount = blog.content.replace(/<[^>]+>/g, '').split(" ").length;
               const readMin = Math.max(1, Math.round(wordCount / 200));
               const href = "/blogs/" + (blog.slug || blog.id);
               return (
-                <Link
-                  key={blog.id}
-                  to={href}
+                <ScrollReveal key={blog.id} animation="fade-up" staggerIndex={i}>
+                <Link to={href}
                   className="group bg-white border border-gray-100 shadow-sm rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col"
                 >
                   {/* Image */}
@@ -99,6 +105,7 @@ export default function BlogsPage() {
                     </span>
                   </div>
                 </Link>
+                </ScrollReveal>
               );
             })}
           </div>

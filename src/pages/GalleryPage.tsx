@@ -4,6 +4,7 @@ import { api } from "@/services/api";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function GalleryPage() {
   const content = useContent();
@@ -20,11 +21,17 @@ export default function GalleryPage() {
       <div className="relative isolate overflow-hidden bg-linear-to-br from-[#014d43] via-[#015851] to-[#017a6a] py-10 sm:py-14 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=60')] bg-cover bg-center" />
         <div className="relative">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['gallery_page_badge'] ?? 'Our Facility & Events'}</span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">{content['gallery_page_heading'] ?? 'Photo Gallery'}</h1>
-          <p className="text-white/75 max-w-4xl mx-auto text-sm sm:text-base">
-            {content['gallery_page_subtext'] ?? 'A glimpse into our modern diagnostics center and community health camps.'}
-          </p>
+          <ScrollReveal animation="fade-up" staggerIndex={0}>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['gallery_page_badge'] ?? 'Our Facility & Events'}</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={1}>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">{content['gallery_page_heading'] ?? 'Photo Gallery'}</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={2}>
+            <p className="text-white/75 max-w-4xl mx-auto text-sm sm:text-base">
+              {content['gallery_page_subtext'] ?? 'A glimpse into our modern diagnostics center and community health camps.'}
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
@@ -38,7 +45,9 @@ export default function GalleryPage() {
             <p className="text-gray-500 text-sm">{content['gallery_empty_subtext'] ?? 'Check back soon for updates from our events and facility.'}</p>
           </div>
         ) : (
-          <GalleryGrid photos={photos} />
+          <ScrollReveal animation="fade-up">
+            <GalleryGrid photos={photos} />
+          </ScrollReveal>
         )}
       </div>
     </div>

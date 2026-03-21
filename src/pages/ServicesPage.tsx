@@ -11,6 +11,7 @@ import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
 import { useMemo, useEffect, useState } from "react";
 import { api } from "@/services/api";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const ICON_MAP: Record<string, any> = {
   Activity, Droplet, TestTube, Microscope, HeartPulse, Stethoscope,
@@ -56,25 +57,32 @@ export default function ServicesPage() {
       <div className="relative isolate overflow-hidden bg-brand-green py-8 sm:py-12 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80')] bg-cover bg-center" />
         <div className="relative max-w-3xl mx-auto">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
-            {content['services_page_badge']}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
-            {content['services_page_heading']}
-          </h1>
-          <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
-            {content['services_page_subtext']}
-          </p>
+          <ScrollReveal animation="fade-up" staggerIndex={0}>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
+              {content['services_page_badge']}
+            </span>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={1}>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
+              {content['services_page_heading']}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" staggerIndex={2}>
+            <p className="text-sm sm:text-base text-white/80 max-w-4xl mx-auto">
+              {content['services_page_subtext']}
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
       {/* Services grid */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5">
-          {services.map((svc) => {
+          {services.map((svc, i) => {
             const Icon = svc.icon;
             return (
-              <div key={svc.title} className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col h-full cursor-pointer">
+              <ScrollReveal key={svc.title} animation="fade-up" staggerIndex={i}>
+              <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col h-full cursor-pointer">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`h-12 w-12 rounded-xl ${svc.bg} flex items-center justify-center ${svc.hoverBg} transition-colors duration-200`}>
                     <Icon className={`h-6 w-6 ${svc.color} group-hover:text-white transition-colors duration-200`} />
@@ -84,11 +92,13 @@ export default function ServicesPage() {
                 <h3 className="font-bold text-gray-900 mb-2 text-base">{svc.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed grow">{svc.desc}</p>
               </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
         {/* CTA */}
+        <ScrollReveal animation="scale-in">
         <div className="mt-8 sm:mt-14 rounded-2xl bg-gray-900 p-5 sm:p-8 text-center">
           <h2 className="text-lg sm:text-2xl font-extrabold text-white mb-1.5 sm:mb-2">
             {content['services_cta_heading']}
@@ -119,6 +129,7 @@ export default function ServicesPage() {
             </Link>
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </div>
   );
