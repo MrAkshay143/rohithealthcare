@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('nav_links', function (Blueprint $table) {
+            $table->id();
+            $table->enum('type', ['navbar', 'footer'])->default('navbar');
+            $table->string('label', 255);
+            $table->string('url', 500);
+            $table->integer('order')->default(0);
+            $table->boolean('is_visible')->default(true);
+            $table->boolean('open_new_tab')->default(false);
+            $table->boolean('desktop_visible')->default(true);
+            $table->boolean('mobile_visible')->default(true);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('nav_links');
+    }
+};
