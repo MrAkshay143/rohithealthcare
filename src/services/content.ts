@@ -108,7 +108,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Home Services ────────────────────────────────────────
   home_services_badge:   { value: 'What We Offer', label: 'Section Badge', group: 'Home Services' },
   home_services_heading: { value: 'Comprehensive Diagnostic Services', label: 'Section Heading', group: 'Home Services' },
-  home_services_subtext: { value: 'Cutting-edge technology and skilled professionals — all under one roof.', label: 'Section Sub-text', group: 'Home Services' },
+  home_services_subtext: { value: 'Cutting-edge technology and skilled professionals, all under one roof.', label: 'Section Sub-text', group: 'Home Services' },
   home_services_visible: { value: 'true', label: 'Show Section', group: 'Home Services', type: 'toggle' },
   home_services_btn:     { value: 'View All Services', label: 'View All Button', group: 'Home Services' },
 
@@ -154,11 +154,11 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── About Page ───────────────────────────────────────────
   about_page_badge:       { value: 'Our Story', label: 'Hero Badge', group: 'About Page' },
   about_page_heading:     { value: 'Built on Trust, Driven by Accuracy', label: 'Hero Heading', group: 'About Page' },
-  about_page_subtext:     { value: 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community — with full NABL backing.', label: 'Hero Sub-text', group: 'About Page' },
+  about_page_subtext:     { value: 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community, backed by full NABL accreditation.', label: 'Hero Sub-text', group: 'About Page' },
   about_excellence_badge: { value: 'Committed to Excellence', label: 'Content Section Badge', group: 'About Page' },
   about_section_heading:  { value: 'The Right Diagnosis Changes Everything', label: 'Content Heading', group: 'About Page' },
   about_body_1:           { value: 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.', label: 'Body Paragraph 1', group: 'About Page' },
-  about_body_2:           { value: 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy — whether it is a routine blood test or a complex clinical profile.', label: 'Body Paragraph 2', group: 'About Page' },
+  about_body_2:           { value: 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy. Whether it is a routine blood test or a complex clinical profile, we deliver results you can trust.', label: 'Body Paragraph 2', group: 'About Page' },
   about_hero_bg:          { value: '', label: 'Hero Background Image URL', group: 'About Page', type: 'image' },
   about_image:            { value: '', label: 'Section Photo URL', group: 'About Page', type: 'image' },
   about_years_label:      { value: 'Years serving the community', label: 'Years Badge Label', group: 'About Page' },
@@ -177,7 +177,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── About Why Us ─────────────────────────────────────────
   about_whyus_heading: { value: 'Why Rohit Health Care?', label: 'Section Heading', group: 'About Why Us' },
-  about_whyus_items:   { value: 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time — walk-in friendly, Home sample collection at your schedule, Hygienic sterile and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
+  about_whyus_items:   { value: 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time with walk-in facility, Home sample collection at your schedule, Hygienic sterile and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
   about_cta_title:     { value: 'Experience Care Like Never Before', label: 'CTA Heading', group: 'About Why Us' },
   about_cta_subtitle:  { value: 'Walk in today or arrange a home collection. Your health remains our top priority.', label: 'CTA Sub-text', group: 'About Why Us' },
   about_cta_btn:       { value: 'Get in Touch', label: 'CTA Button Label', group: 'About Why Us' },
@@ -185,7 +185,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Services Page ────────────────────────────────────────
   services_page_badge:   { value: 'Premium Diagnostics', label: 'Page Badge', group: 'Services Page' },
   services_page_heading: { value: 'Our Diagnostic Services', label: 'Page Heading', group: 'Services Page' },
-  services_page_subtext: { value: 'Advanced technology, trained professionals, and a top-tier NABL-accredited network — delivering accurate results on time, every time.', label: 'Page Sub-text', group: 'Services Page' },
+  services_page_subtext: { value: 'Advanced technology, trained professionals, and a top-tier NABL-accredited network delivering accurate results on time, every time.', label: 'Page Sub-text', group: 'Services Page' },
 
   // ─── Services CTA ─────────────────────────────────────────
   services_cta_heading:      { value: 'Need a specific test?', label: 'CTA Heading', group: 'Services CTA' },

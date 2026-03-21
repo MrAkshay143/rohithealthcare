@@ -42,7 +42,7 @@ export default function HomePage() {
   const [apiServices, setApiServices] = useState<any[]>([]);
 
   useEffect(() => {
-    api.get<any[]>('/doctors?orderBy=id&orderDir=asc&take=4').then(setDoctors).catch(() => {});
+    api.get<any[]>('/doctors?orderBy=order&orderDir=asc&take=4').then(setDoctors).catch(() => {});
     api.get<any[]>('/blogs?orderBy=createdAt&orderDir=desc&take=3').then(setRecentBlogs).catch(() => {});
     api.get<any[]>('/hero-slides').then(setHeroSlides).catch(() => {});
     api.get<any[]>('/services').then(setApiServices).catch(() => {});

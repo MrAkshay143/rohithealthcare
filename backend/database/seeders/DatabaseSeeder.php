@@ -33,13 +33,27 @@ class DatabaseSeeder extends Seeder
             DB::table('doctors')->insertOrIgnore($doc);
         }
 
-        // Blogs — exact data from SQLite (IDs preserved)
+        // Blogs — improved content, IDs preserved
         $blogs = [
             [
                 'id' => 1,
                 'slug' => 'free-health-checkup-camp-april-2026',
-                'title' => 'Free Health Check-up Camp – 15th April 2026',
-                'content' => 'Rohit Health Care is organising a free health check-up camp on 15th April 2026. Services include blood pressure monitoring, blood sugar screening, eye check-up, and BMI assessment. All residents are welcome. No prior appointment needed. Camp will be held from 9 AM to 2 PM at our main centre.',
+                'title' => 'Free Health Check-up Camp on 15th April 2026',
+                'content' => 'Rohit Health Care is organising a free community health check-up camp on 15th April 2026 at our centre in Balarampur, West Bengal. The camp will run from 9:00 AM to 2:00 PM.
+
+Services available at the camp include:
+- Blood pressure measurement
+- Random blood sugar screening (RBS)
+- Body weight and BMI assessment
+- Eye check-up (basic vision test)
+- Haemoglobin check (Hb)
+- Doctor consultation with general physician
+
+All services are completely free of charge. No prior appointment is needed. Simply walk in with a valid ID or your Aadhaar card.
+
+This camp is specifically planned for senior citizens, daily wage workers, school students, and anyone who has not had a health check-up in the past year. Early detection of conditions like diabetes, hypertension, and anaemia makes a significant difference in treatment outcomes.
+
+For more information, please call us on +91 85972 15824 or send a WhatsApp message. Spread the word and bring your family members along.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
@@ -47,33 +61,107 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => 2,
                 'slug' => 'world-blood-donor-day-awareness',
-                'title' => 'World Blood Donor Day – Awareness & Drive',
-                'content' => 'On the occasion of World Blood Donor Day, our team organised a community awareness drive and blood donation camp. Over 120 units of blood were collected, benefiting patients across the region. We thank all volunteers and donors for their selfless contribution.',
+                'title' => 'World Blood Donor Day: Our Community Blood Donation Drive',
+                'content' => 'On the occasion of World Blood Donor Day (14th June), Rohit Health Care organised a community awareness and blood donation drive at our Balarampur centre. The response from the community was truly heartwarming.
+
+Why blood donation matters:
+A single unit of donated blood can save up to three lives. In India, approximately 14.6 million units of blood are needed annually, and there is always a shortage in smaller towns and rural areas. West Bengal alone sees a significant gap between demand and collection every year.
+
+What we collected:
+During this drive, over 85 voluntary donors stepped forward. Blood was collected and coordinated with the nearest blood bank for safe storage and distribution to patients in need across the Purulia district.
+
+Who can donate blood:
+- Age: 18 to 65 years
+- Weight: at least 50 kg
+- No fever, cold, or illness in the past 14 days
+- No tattooing or piercing in the last 6 months
+- Blood pressure: 100/60 to 160/100 mmHg
+
+If you missed this drive, please reach out to us. We regularly coordinate with blood banks and can guide you on how and where to donate in your area.
+
+A heartfelt thank you to every donor, volunteer, and health worker who made this drive a success.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
             [
                 'id' => 3,
-                'slug' => 'home-sample-collection-24x7',
-                'title' => 'New: Home Sample Collection Now Available 24×7',
-                'content' => 'We are delighted to announce that our home sample collection service is now available round-the-clock, 7 days a week. Our trained phlebotomists will arrive at your doorstep at a time of your choosing. Book via WhatsApp or call us directly. Same-day results guaranteed for most tests.',
+                'slug' => 'home-sample-collection-service',
+                'title' => 'Home Sample Collection: Get Your Tests Done From Home',
+                'content' => 'We understand that visiting a diagnostic centre is not always easy, especially for elderly patients, new mothers, or anyone recovering from illness. That is why Rohit Health Care offers a trained phlebotomist home visit service across Balarampur and nearby areas.
+
+How it works:
+1. Call us or send a WhatsApp message on +91 85972 15824 to book your slot.
+2. Tell us which tests you need. We will confirm availability and pricing.
+3. A trained phlebotomist arrives at your home at the chosen time with all sterilised equipment.
+4. Samples are collected in a hygienic, safe, and painless manner.
+5. Reports are shared digitally via WhatsApp on the same day for most tests.
+
+Tests available for home collection:
+- Complete Blood Count (CBC)
+- Blood Sugar (Fasting, PP, Random)
+- Lipid Profile, Liver Function, Kidney Function
+- Thyroid Panel (TSH, T3, T4)
+- HbA1c for long-term sugar monitoring
+- Urine Routine Examination
+- Dengue NS1, Malaria, Typhoid (Widal)
+- And hundreds more through our Apollo Diagnostics partnership
+
+Charges:
+A small home collection fee applies. All test rates are as per standard diagnostics pricing. Discounts available for senior citizens and bulk packages.
+
+Your health should not wait. Book a home visit today.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
             [
                 'id' => 4,
-                'slug' => 'thyroid-awareness-month',
-                'title' => 'Thyroid Awareness Month – Get Tested',
-                'content' => 'January is Thyroid Awareness Month. Did you know that over 42 million people in India suffer from thyroid disorders? We are offering a 30% discount on TSH, T3, and T4 tests throughout this month. Early detection leads to better outcomes. Book your test today.',
+                'slug' => 'thyroid-awareness-know-the-signs',
+                'title' => 'Thyroid Disorders: Know the Signs and Get Tested Early',
+                'content' => 'Thyroid disorders are among the most common yet under-diagnosed health conditions in India. According to a study published in the Indian Journal of Endocrinology, over 42 million people in India suffer from some form of thyroid disease. In West Bengal, iodine deficiency and lifestyle-related factors make this number even more significant.
+
+The worrying part is that many people live with thyroid problems for years without knowing it.
+
+Common signs of thyroid imbalance:
+
+Hypothyroidism (underactive thyroid):
+- Unexplained weight gain
+- Persistent fatigue and weakness
+- Feeling cold all the time
+- Hair thinning and dry skin
+- Irregular periods in women
+- Depression or low mood
+
+Hyperthyroidism (overactive thyroid):
+- Rapid heartbeat or palpitations
+- Sudden weight loss without dieting
+- Excessive sweating and heat intolerance
+- Anxiety and restlessness
+- Frequent bowel movements
+
+Who should get tested:
+- Women over 30 years of age (thyroid disorders are five to eight times more common in women)
+- Individuals with a family history of thyroid disease
+- Anyone experiencing the symptoms listed above
+- Patients already on thyroid medication who need regular monitoring
+
+Tests we offer at Rohit Health Care:
+- TSH (Thyroid Stimulating Hormone), the most important screening test
+- Free T3 and Free T4
+- Anti-TPO and Anti-Thyroglobulin antibodies (for autoimmune thyroid diseases)
+- Thyroid ultrasound referral for structural assessment
+
+Reports are available the same day for TSH and T3/T4. Results are sent directly to your WhatsApp.
+
+Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective treatment. Walk in or call us to book your thyroid panel today.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
         ];
         foreach ($blogs as $blog) {
-            DB::table('blogs')->insertOrIgnore($blog);
+            DB::table('blogs')->upsert($blog, ['id'], ['title', 'slug', 'content', 'imageUrl', 'draft']);
         }
 
         // Gallery — exact data from SQLite (IDs preserved)
