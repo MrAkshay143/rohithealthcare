@@ -107,10 +107,9 @@ export default function BlogPostPage() {
                     className="absolute inset-0 w-full h-full group cursor-pointer"
                   >
                     <img
-                      src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                      alt={blog.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; }}
+                        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                        alt={blog.title}
+                        className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                       <div className="bg-red-600 rounded-full w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
