@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+﻿import { useEffect, useState, useCallback, useRef } from "react";
 import {
   MessageSquare, Phone, MapPin, Clock, Globe, Monitor, Smartphone,
   Mail, Search, Send, Trash2, Eye,
@@ -177,7 +177,7 @@ export default function AdminEnquiriesPage() {
               { label: 'Read', value: stats.read, Icon: Eye, color: 'text-amber-600', bg: 'bg-amber-50' },
               { label: 'Replied', value: stats.replied, Icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
               { label: 'Reply Rate', value: `${stats.responseRate}%`, Icon: TrendingUp, color: 'text-violet-600', bg: 'bg-violet-50' },
-              { label: 'Avg Response', value: stats.avgResponse != null ? `${Math.round(stats.avgResponse)}h` : '—', Icon: Timer, color: 'text-rose-600', bg: 'bg-rose-50' },
+              { label: 'Avg Response', value: stats.avgResponse != null ? `${Math.round(stats.avgResponse)}h` : '-', Icon: Timer, color: 'text-rose-600', bg: 'bg-rose-50' },
             ].map(({ label, value, Icon, color, bg }) => (
               <div key={label} className="bg-white border border-gray-100 rounded-xl p-3 shadow-sm">
                 <div className="flex items-center gap-2">
@@ -243,9 +243,9 @@ export default function AdminEnquiriesPage() {
         </div>
       )}
 
-      {/* Main Content — Split Panel */}
+      {/* Main Content - Split Panel */}
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-3">
-        {/* LEFT PANEL — Enquiry List */}
+        {/* LEFT PANEL - Enquiry List */}
         <div className={`${selectedId ? 'hidden lg:flex' : 'flex'} flex-col w-full lg:w-95 xl:w-105 lg:shrink-0 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden`}>
           {/* Filter + Search Bar */}
           <div className="p-3 border-b border-gray-100 space-y-2">
@@ -338,7 +338,7 @@ export default function AdminEnquiriesPage() {
           </div>
         </div>
 
-        {/* RIGHT PANEL — Conversation */}
+        {/* RIGHT PANEL - Conversation */}
         <div className={`${selectedId ? 'flex' : 'hidden lg:flex'} flex-col flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-h-100`}>
           {!selectedId ? (
             /* Empty state */
@@ -496,7 +496,7 @@ export default function AdminEnquiriesPage() {
                 {!selectedEnquiry.email ? (
                   <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-50 rounded-xl px-4 py-3">
                     <MailX className="w-4 h-4 shrink-0" />
-                    <span>Reply unavailable — this customer didn't provide an email address. Use <strong className="text-gray-600">WhatsApp</strong> or <strong className="text-gray-600">Call</strong> instead.</span>
+                    <span>Reply unavailable - this customer didn't provide an email address. Use <strong className="text-gray-600">WhatsApp</strong> or <strong className="text-gray-600">Call</strong> instead.</span>
                   </div>
                 ) : (
                   <>
@@ -565,3 +565,4 @@ export default function AdminEnquiriesPage() {
     </div>
   );
 }
+

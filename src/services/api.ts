@@ -1,5 +1,5 @@
-// Backend API client for browser-side requests
-// Base path is driven by VITE_BACKEND_PATH in .env — no hardcoded URLs
+﻿// Backend API client for browser-side requests
+// Base path is driven by VITE_BACKEND_PATH in .env - no hardcoded URLs
 const API_BASE = `${import.meta.env.VITE_BACKEND_PATH}/api`;
 
 async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -47,3 +47,4 @@ export const api = {
 
   delete: <T>(path: string, opts?: RequestInit) => apiFetch<T>(path, { method: 'DELETE', ...opts }),
 };
+

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+﻿import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Pencil, Users, Search, UserPlus, Stethoscope, GraduationCap, ChevronDown, ChevronUp, GripVertical } from "lucide-react";
 import { api } from "@/services/api";
@@ -173,7 +173,7 @@ export default function AdminDoctorsPage() {
         </div>
       )}
 
-      {/* Doctors List — Card Grid */}
+      {/* Doctors List - Card Grid */}
       {filtered.length === 0 && doctors.length === 0 ? (
         <div className="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
           <div className="h-16 w-16 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-4">
@@ -254,3 +254,4 @@ export default function AdminDoctorsPage() {
     </div>
   );
 }
+

@@ -56,7 +56,7 @@ export default function AdminSettingsPage() {
   // Email form
   const [emailForm, setEmailForm] = useState({ smtp_host: '', smtp_port: '', smtp_user: '', smtp_pass: '', smtp_from: '' });
 
-  // SEO form — per-page title/description/keywords + global og_image & analytics
+  // SEO form - per-page title/description/keywords + global og_image & analytics
   const [seoForm, setSeoForm] = useState<Record<string, string>>({});
   const [seoPage, setSeoPage] = useState<SeoPageKey>('home');
 
@@ -388,7 +388,7 @@ export default function AdminSettingsPage() {
                   <Mail className="w-3.5 h-3.5 text-gray-400" /> From Name
                 </label>
                 <input type="text" value={emailForm.smtp_from} onChange={e => setEmailForm(f => ({ ...f, smtp_from: e.target.value }))} placeholder={generalForm.site_name || 'Your Clinic Name'} className={INPUT} />
-                <p className="text-[11px] text-gray-400 mt-1">Display name in sent emails — defaults to site name if blank</p>
+                <p className="text-[11px] text-gray-400 mt-1">Display name in sent emails - defaults to site name if blank</p>
               </div>
             </div>
           </div>
@@ -404,7 +404,7 @@ export default function AdminSettingsPage() {
             </div>
             <div>
               <h2 className="font-bold text-gray-800 text-sm">Search Engine Optimization</h2>
-              <p className="text-[11px] text-gray-400">Per-page SEO — control title, description & keywords for each page.</p>
+              <p className="text-[11px] text-gray-400">Per-page SEO - control title, description & keywords for each page.</p>
             </div>
           </div>
 
@@ -602,3 +602,4 @@ export default function AdminSettingsPage() {
     </div>
   );
 }
+

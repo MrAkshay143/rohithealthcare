@@ -1,4 +1,4 @@
-import { api } from './api';
+﻿import { api } from './api';
 
 export type FieldType = 'text' | 'toggle' | 'image' | 'pills';
 export type ContentFieldDef = { value: string; label: string; group: string; type?: FieldType };
@@ -16,41 +16,41 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   facebook_url:         { value: 'https://www.facebook.com/p/Rohit-Health-Care-100092529805396/', label: 'Facebook Page URL', group: 'General' },
 
   // ─── Navbar ────────────────────────────────────────────────
-  navbar_logo_desktop:   { value: 'true', label: 'Show Logo — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_logo_mobile:    { value: 'true', label: 'Show Logo — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_logo_desktop:   { value: 'true', label: 'Show Logo - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_logo_mobile:    { value: 'true', label: 'Show Logo - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_cta_label:      { value: 'Call Now', label: 'CTA Button Text', group: 'Navbar' },
-  navbar_cta_desktop:    { value: 'true', label: 'Show CTA — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_cta_mobile:     { value: 'true', label: 'Show CTA — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_cta_desktop:    { value: 'true', label: 'Show CTA - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_cta_mobile:     { value: 'true', label: 'Show CTA - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_1_label:   { value: 'Home', label: 'Link 1 Label', group: 'Navbar' },
-  navbar_link_1_desktop: { value: 'true', label: 'Link 1 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_1_mobile:  { value: 'true', label: 'Link 1 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_1_desktop: { value: 'true', label: 'Link 1 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_1_mobile:  { value: 'true', label: 'Link 1 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_2_label:   { value: 'About', label: 'Link 2 Label', group: 'Navbar' },
-  navbar_link_2_desktop: { value: 'true', label: 'Link 2 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_2_mobile:  { value: 'true', label: 'Link 2 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_2_desktop: { value: 'true', label: 'Link 2 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_2_mobile:  { value: 'true', label: 'Link 2 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_3_label:   { value: 'Our Team', label: 'Link 3 Label', group: 'Navbar' },
-  navbar_link_3_desktop: { value: 'true', label: 'Link 3 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_3_mobile:  { value: 'true', label: 'Link 3 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_3_desktop: { value: 'true', label: 'Link 3 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_3_mobile:  { value: 'true', label: 'Link 3 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_4_label:   { value: 'Services', label: 'Link 4 Label', group: 'Navbar' },
-  navbar_link_4_desktop: { value: 'true', label: 'Link 4 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_4_mobile:  { value: 'true', label: 'Link 4 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_4_desktop: { value: 'true', label: 'Link 4 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_4_mobile:  { value: 'true', label: 'Link 4 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_5_label:   { value: 'Gallery', label: 'Link 5 Label', group: 'Navbar' },
-  navbar_link_5_desktop: { value: 'true', label: 'Link 5 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_5_mobile:  { value: 'true', label: 'Link 5 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_5_desktop: { value: 'true', label: 'Link 5 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_5_mobile:  { value: 'true', label: 'Link 5 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_6_label:   { value: 'News & Camps', label: 'Link 6 Label', group: 'Navbar' },
-  navbar_link_6_desktop: { value: 'true', label: 'Link 6 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_6_mobile:  { value: 'true', label: 'Link 6 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_6_desktop: { value: 'true', label: 'Link 6 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_6_mobile:  { value: 'true', label: 'Link 6 - Mobile', group: 'Navbar', type: 'toggle' },
   navbar_link_7_label:   { value: 'Contact', label: 'Link 7 Label', group: 'Navbar' },
-  navbar_link_7_desktop: { value: 'true', label: 'Link 7 — Desktop', group: 'Navbar', type: 'toggle' },
-  navbar_link_7_mobile:  { value: 'true', label: 'Link 7 — Mobile', group: 'Navbar', type: 'toggle' },
+  navbar_link_7_desktop: { value: 'true', label: 'Link 7 - Desktop', group: 'Navbar', type: 'toggle' },
+  navbar_link_7_mobile:  { value: 'true', label: 'Link 7 - Mobile', group: 'Navbar', type: 'toggle' },
 
   // ─── Footer ────────────────────────────────────────────────
   footer_tagline:            { value: 'Your trusted partner for comprehensive medical services, diagnostics, and daycare.', label: 'Footer Tagline', group: 'Footer' },
   footer_address_short:      { value: '123 Medical Hub Ave,\nDiagnostic Square, City, 110011', label: 'Footer Address (short)', group: 'Footer' },
-  footer_logo_desktop:       { value: 'true', label: 'Show Logo — Desktop', group: 'Footer', type: 'toggle' },
-  footer_logo_mobile:        { value: 'true', label: 'Show Logo — Mobile', group: 'Footer', type: 'toggle' },
+  footer_logo_desktop:       { value: 'true', label: 'Show Logo - Desktop', group: 'Footer', type: 'toggle' },
+  footer_logo_mobile:        { value: 'true', label: 'Show Logo - Mobile', group: 'Footer', type: 'toggle' },
   footer_quicklinks_heading: { value: 'Quick Links', label: 'Quick Links Section Title', group: 'Footer' },
-  footer_quicklinks_desktop: { value: 'true', label: 'Quick Links — Desktop', group: 'Footer', type: 'toggle' },
-  footer_quicklinks_mobile:  { value: 'true', label: 'Quick Links — Mobile', group: 'Footer', type: 'toggle' },
+  footer_quicklinks_desktop: { value: 'true', label: 'Quick Links - Desktop', group: 'Footer', type: 'toggle' },
+  footer_quicklinks_mobile:  { value: 'true', label: 'Quick Links - Mobile', group: 'Footer', type: 'toggle' },
   footer_link_1_label:       { value: 'Home', label: 'Quick Link 1', group: 'Footer' },
   footer_link_1_visible:     { value: 'true', label: 'Quick Link 1 Visible', group: 'Footer', type: 'toggle' },
   footer_link_2_label:       { value: 'Medical Team', label: 'Quick Link 2', group: 'Footer' },
@@ -66,14 +66,14 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   footer_link_7_label:       { value: 'Contact', label: 'Quick Link 7', group: 'Footer' },
   footer_link_7_visible:     { value: 'true', label: 'Quick Link 7 Visible', group: 'Footer', type: 'toggle' },
   footer_contact_heading:    { value: 'Get in Touch', label: 'Contact Section Title', group: 'Footer' },
-  footer_contact_desktop:    { value: 'true', label: 'Contact — Desktop', group: 'Footer', type: 'toggle' },
-  footer_contact_mobile:     { value: 'true', label: 'Contact — Mobile', group: 'Footer', type: 'toggle' },
+  footer_contact_desktop:    { value: 'true', label: 'Contact - Desktop', group: 'Footer', type: 'toggle' },
+  footer_contact_mobile:     { value: 'true', label: 'Contact - Mobile', group: 'Footer', type: 'toggle' },
   footer_call_label:         { value: 'Call Us', label: 'Call Label', group: 'Footer' },
   footer_email_label:        { value: 'Email', label: 'Email Label', group: 'Footer' },
   footer_location_label:     { value: 'Location', label: 'Location Label', group: 'Footer' },
   footer_hours_heading:      { value: 'Operating Hours', label: 'Hours Section Title', group: 'Footer' },
-  footer_hours_desktop:      { value: 'true', label: 'Hours — Desktop', group: 'Footer', type: 'toggle' },
-  footer_hours_mobile:       { value: 'true', label: 'Hours — Mobile', group: 'Footer', type: 'toggle' },
+  footer_hours_desktop:      { value: 'true', label: 'Hours - Desktop', group: 'Footer', type: 'toggle' },
+  footer_hours_mobile:       { value: 'true', label: 'Hours - Mobile', group: 'Footer', type: 'toggle' },
   footer_social_whatsapp:    { value: 'true', label: 'Show WhatsApp Icon', group: 'Footer', type: 'toggle' },
   footer_social_phone:       { value: 'true', label: 'Show Phone Icon', group: 'Footer', type: 'toggle' },
   footer_social_youtube:     { value: 'true', label: 'Show YouTube Icon', group: 'Footer', type: 'toggle' },
@@ -97,18 +97,18 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   hero_pills:          { value: 'NABL Accredited, Same Day Reports, Home Collection, 10+ Years', label: 'Hero Trust Pills (comma-separated)', group: 'Hero Section', type: 'pills' },
 
   // ─── Stats Strip ──────────────────────────────────────────
-  stat_1_value: { value: '50,000+', label: 'Stat 1 — Number', group: 'Stats Strip' },
-  stat_1_label: { value: 'Happy Patients', label: 'Stat 1 — Label', group: 'Stats Strip' },
-  stat_2_value: { value: '3,000+', label: 'Stat 2 — Number', group: 'Stats Strip' },
-  stat_2_label: { value: 'Diagnostic Tests', label: 'Stat 2 — Label', group: 'Stats Strip' },
-  stat_3_label: { value: 'Years of Service', label: 'Stat 3 — Label', group: 'Stats Strip' },
-  stat_4_value: { value: '100%', label: 'Stat 4 — Number', group: 'Stats Strip' },
-  stat_4_label: { value: 'Same-Day Reports', label: 'Stat 4 — Label', group: 'Stats Strip' },
+  stat_1_value: { value: '50,000+', label: 'Stat 1 - Number', group: 'Stats Strip' },
+  stat_1_label: { value: 'Happy Patients', label: 'Stat 1 - Label', group: 'Stats Strip' },
+  stat_2_value: { value: '3,000+', label: 'Stat 2 - Number', group: 'Stats Strip' },
+  stat_2_label: { value: 'Diagnostic Tests', label: 'Stat 2 - Label', group: 'Stats Strip' },
+  stat_3_label: { value: 'Years of Service', label: 'Stat 3 - Label', group: 'Stats Strip' },
+  stat_4_value: { value: '100%', label: 'Stat 4 - Number', group: 'Stats Strip' },
+  stat_4_label: { value: 'Same-Day Reports', label: 'Stat 4 - Label', group: 'Stats Strip' },
 
   // ─── Home Services ────────────────────────────────────────
   home_services_badge:   { value: 'What We Offer', label: 'Section Badge', group: 'Home Services' },
   home_services_heading: { value: 'Comprehensive Diagnostic Services', label: 'Section Heading', group: 'Home Services' },
-  home_services_subtext: { value: 'Cutting-edge technology and skilled professionals, all under one roof.', label: 'Section Sub-text', group: 'Home Services' },
+  home_services_subtext: { value: 'Cutting-edge technology and skilled professionals - all under one roof.', label: 'Section Sub-text', group: 'Home Services' },
   home_services_visible: { value: 'true', label: 'Show Section', group: 'Home Services', type: 'toggle' },
   home_services_btn:     { value: 'View All Services', label: 'View All Button', group: 'Home Services' },
 
@@ -154,11 +154,11 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── About Page ───────────────────────────────────────────
   about_page_badge:       { value: 'Our Story', label: 'Hero Badge', group: 'About Page' },
   about_page_heading:     { value: 'Built on Trust, Driven by Accuracy', label: 'Hero Heading', group: 'About Page' },
-  about_page_subtext:     { value: 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community, backed by full NABL accreditation.', label: 'Hero Sub-text', group: 'About Page' },
+  about_page_subtext:     { value: 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community - with full NABL backing.', label: 'Hero Sub-text', group: 'About Page' },
   about_excellence_badge: { value: 'Committed to Excellence', label: 'Content Section Badge', group: 'About Page' },
   about_section_heading:  { value: 'The Right Diagnosis Changes Everything', label: 'Content Heading', group: 'About Page' },
   about_body_1:           { value: 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.', label: 'Body Paragraph 1', group: 'About Page' },
-  about_body_2:           { value: 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy. Whether it is a routine blood test or a complex clinical profile, we deliver results you can trust.', label: 'Body Paragraph 2', group: 'About Page' },
+  about_body_2:           { value: 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy - whether it is a routine blood test or a complex clinical profile.', label: 'Body Paragraph 2', group: 'About Page' },
   about_hero_bg:          { value: '', label: 'Hero Background Image URL', group: 'About Page', type: 'image' },
   about_image:            { value: '', label: 'Section Photo URL', group: 'About Page', type: 'image' },
   about_years_label:      { value: 'Years serving the community', label: 'Years Badge Label', group: 'About Page' },
@@ -177,7 +177,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── About Why Us ─────────────────────────────────────────
   about_whyus_heading: { value: 'Why Rohit Health Care?', label: 'Section Heading', group: 'About Why Us' },
-  about_whyus_items:   { value: 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time with walk-in facility, Home sample collection at your schedule, Hygienic sterile and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
+  about_whyus_items:   { value: 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time - walk-in friendly, Home sample collection at your schedule, Hygienic sterile and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
   about_cta_title:     { value: 'Experience Care Like Never Before', label: 'CTA Heading', group: 'About Why Us' },
   about_cta_subtitle:  { value: 'Walk in today or arrange a home collection. Your health remains our top priority.', label: 'CTA Sub-text', group: 'About Why Us' },
   about_cta_btn:       { value: 'Get in Touch', label: 'CTA Button Label', group: 'About Why Us' },
@@ -185,7 +185,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Services Page ────────────────────────────────────────
   services_page_badge:   { value: 'Premium Diagnostics', label: 'Page Badge', group: 'Services Page' },
   services_page_heading: { value: 'Our Diagnostic Services', label: 'Page Heading', group: 'Services Page' },
-  services_page_subtext: { value: 'Advanced technology, trained professionals, and a top-tier NABL-accredited network delivering accurate results on time, every time.', label: 'Page Sub-text', group: 'Services Page' },
+  services_page_subtext: { value: 'Advanced technology, trained professionals, and a top-tier NABL-accredited network - delivering accurate results on time, every time.', label: 'Page Sub-text', group: 'Services Page' },
 
   // ─── Services CTA ─────────────────────────────────────────
   services_cta_heading:      { value: 'Need a specific test?', label: 'CTA Heading', group: 'Services CTA' },
@@ -308,3 +308,4 @@ export async function getSiteContent(): Promise<Record<string, string>> {
   } catch { /* defaults already set */ }
   return merged;
 }
+

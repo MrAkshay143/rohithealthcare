@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play } from "lucide-react";
 import { api } from "@/services/api";
@@ -87,7 +87,7 @@ export default function BlogPostPage() {
       {/* Article card */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          {/* YouTube embed — click to play */}
+          {/* YouTube embed - click to play */}
           {videoId ? (
             <div className="w-full bg-black">
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
@@ -196,3 +196,4 @@ export default function BlogPostPage() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+﻿import { useState, useEffect, useRef, useCallback } from 'react'
 import {
   Plus, Pencil, Trash2, GripVertical, Eye, EyeOff,
   ExternalLink, Monitor, Smartphone, ChevronUp, ChevronDown,
@@ -208,7 +208,7 @@ export default function AdminNavLinksPage() {
       }
       closeForm()
     } catch {
-      showToast('Failed to save — check fields and try again', 'error')
+      showToast('Failed to save - check fields and try again', 'error')
     } finally {
       setSaving(false)
     }
@@ -308,7 +308,7 @@ export default function AdminNavLinksPage() {
         <div className="flex-1 min-w-0">
           <h1 className="text-xl font-extrabold text-gray-900">Navigation Manager</h1>
           <p className="text-xs text-gray-500 mt-0.5">
-            Dynamically manage navbar and footer links — add, edit, reorder, or remove any link
+            Dynamically manage navbar and footer links - add, edit, reorder, or remove any link
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -653,3 +653,4 @@ export default function AdminNavLinksPage() {
     </div>
   )
 }
+

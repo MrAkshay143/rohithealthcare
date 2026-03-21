@@ -12,7 +12,7 @@ export default function DoctorsPage() {
   const [doctors, setDoctors] = useState<any[]>([]);
 
   useEffect(() => {
-    api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() => {});
+api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() => {});
   }, []);
 
   const phone = content['contact_phone'] ?? '';

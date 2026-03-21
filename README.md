@@ -1,10 +1,10 @@
-<div align="center">
+﻿<div align="center">
 
 # 🏥 Rohit Health Care
 
 **Modern Full-Stack Clinic Management Website**
 
-A responsive, feature-rich healthcare website and admin panel for **Rohit Health Care** — a diagnostic healthcare facility. Built with a modern tech stack for performance, usability, and easy content management.
+A responsive, feature-rich healthcare website and admin panel for **Rohit Health Care** - a diagnostic healthcare facility. Built with a modern tech stack for performance, usability, and easy content management.
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
@@ -24,30 +24,30 @@ A responsive, feature-rich healthcare website and admin panel for **Rohit Health
 
 ### 🌍 Public Website
 
-- **Home Page** — Hero slider, services overview, doctor highlights, stats strip, blog previews, CTA section
-- **About Page** — Clinic information, highlights, and why-choose-us section
-- **Services Page** — Dynamic service listings with health-themed icons
-- **Doctors Page** — Doctor profiles with photos, specialties, and qualifications
-- **Blog & News** — Full blog system with YouTube video embed support
-- **Gallery** — Photo gallery with lightbox/masonry display
-- **Contact Page** — Contact form with smart enquiry system, Google Maps embed
-- **Floating Buttons** — Always-visible WhatsApp & phone quick-contact buttons
-- **SEO Optimized** — Per-page meta tags, Open Graph support
+- **Home Page** - Hero slider, services overview, doctor highlights, stats strip, blog previews, CTA section
+- **About Page** - Clinic information, highlights, and why-choose-us section
+- **Services Page** - Dynamic service listings with health-themed icons
+- **Doctors Page** - Doctor profiles with photos, specialties, and qualifications
+- **Blog & News** - Full blog system with YouTube video embed support
+- **Gallery** - Photo gallery with lightbox/masonry display
+- **Contact Page** - Contact form with smart enquiry system, Google Maps embed
+- **Floating Buttons** - Always-visible WhatsApp & phone quick-contact buttons
+- **SEO Optimized** - Per-page meta tags, Open Graph support
 
 ### 🔐 Admin Panel (`/admin`)
 
-- **Dashboard** — At-a-glance statistics for all content
-- **Doctors Management** — Add/edit/delete doctor profiles, drag-to-reorder display order
-- **Services CRUD** — Icon picker (30+ health icons), reorder, visibility toggle
-- **Blog Management** — Rich content editor, draft/publish, YouTube embed
-- **Gallery Manager** — Upload and manage clinic photos
-- **Hero Slides** — Configure homepage carousel images
-- **Enquiries Dashboard** — Conversation-style lead management with reply via email, IP geolocation, device/browser detection, response analytics
-- **Site Content** — Edit every text on the website from one panel with per-page/section organization, toggle visibility, image uploads
-- **Navigation Manager** — Dynamically manage navbar/footer links with drag-reorder
-- **Site Settings** — General settings, SMTP email config, per-page SEO, database configuration, logo upload, password management
-- **Toast Notifications** — Minimalist floating toasts with sound feedback across all admin pages
-- **Mobile Responsive** — Full admin panel functionality on mobile devices
+- **Dashboard** - At-a-glance statistics for all content
+- **Doctors Management** - Add/edit/delete doctor profiles, drag-to-reorder display order
+- **Services CRUD** - Icon picker (30+ health icons), reorder, visibility toggle
+- **Blog Management** - Rich content editor, draft/publish, YouTube embed
+- **Gallery Manager** - Upload and manage clinic photos
+- **Hero Slides** - Configure homepage carousel images
+- **Enquiries Dashboard** - Conversation-style lead management with reply via email, IP geolocation, device/browser detection, response analytics
+- **Site Content** - Edit every text on the website from one panel with per-page/section organization, toggle visibility, image uploads
+- **Navigation Manager** - Dynamically manage navbar/footer links with drag-reorder
+- **Site Settings** - General settings, SMTP email config, per-page SEO, database configuration, logo upload, password management
+- **Toast Notifications** - Minimalist floating toasts with sound feedback across all admin pages
+- **Mobile Responsive** - Full admin panel functionality on mobile devices
 
 ---
 
@@ -251,3 +251,4 @@ This project is proprietary software. See [LICENSE](LICENSE) for details.
 ---
 
 Built with care for the community.
+

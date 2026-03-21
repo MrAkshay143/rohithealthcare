@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+﻿import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   Save, Settings2, LayoutTemplate, MessageSquare,
   Phone, Info, Users, Briefcase, FileText, CheckCircle2,
@@ -465,7 +465,7 @@ export default function AdminContentPage() {
           })}
         </div>
 
-        {/* Body — Left TOC + Right content */}
+        {/* Body - Left TOC + Right content */}
         <div className="flex gap-4 flex-1 min-h-0">
 
           {/* Left Section TOC (desktop only) */}
@@ -594,12 +594,12 @@ export default function AdminContentPage() {
                             const dKey = base + '_desktop', mKey = base + '_mobile';
                             const hasDM = items.some(i => i.key === dKey) && items.some(i => i.key === mKey);
                             if (hasDM && (item.key === dKey || item.key === mKey)) {
-                              // Paired — render both together
+                              // Paired - render both together
                               rendered.add(dKey); rendered.add(mKey);
                               const dItem = items.find(i => i.key === dKey)!, mItem = items.find(i => i.key === mKey)!;
                               const dVal = toggleValues[dKey] !== undefined ? toggleValues[dKey] : dItem.currentValue !== 'false';
                               const mVal = toggleValues[mKey] !== undefined ? toggleValues[mKey] : mItem.currentValue !== 'false';
-                              const pairLabel = dItem.label.replace(/\s*—\s*Desktop$/i, '').replace(/Show\s*/i, '');
+                              const pairLabel = dItem.label.replace(/\s*-\s*Desktop$/i, '').replace(/Show\s*/i, '');
                               return (
                                 <div key={base} className="bg-gray-50/70 border border-gray-100 hover:border-brand-green/25 hover:bg-white p-3 rounded-xl transition-all flex items-center gap-2">
                                   <label className="text-[12px] font-semibold text-gray-700">{pairLabel}</label>
@@ -613,7 +613,7 @@ export default function AdminContentPage() {
                                 </div>
                               );
                             }
-                            // Single toggle — show as desktop+mobile auto
+                            // Single toggle - show as desktop+mobile auto
                             const checked = toggleValues[item.key] !== undefined ? toggleValues[item.key] : item.currentValue !== 'false';
                             const autoDK = base + '_desktop', autoMK = base + '_mobile';
                             const autoDVal = toggleValues[autoDK] !== undefined ? toggleValues[autoDK] : (dbMap[autoDK] ?? (checked ? 'true' : 'false')) !== 'false';
@@ -746,3 +746,4 @@ export default function AdminContentPage() {
     </>
   );
 }
+

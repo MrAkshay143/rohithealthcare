@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace Database\Seeders;
 
@@ -9,12 +9,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // AdminUser — exact data from SQLite
+        // AdminUser - exact data from SQLite
         DB::table('admin_users')->insertOrIgnore([
             ['id' => 2, 'username' => 'admin', 'password' => 'Rohit@2025'],
         ]);
 
-        // Doctors — exact data from SQLite (IDs preserved)
+        // Doctors - exact data from SQLite (IDs preserved)
         $doctors = [
             ['id' => 16, 'name' => 'Dr. Sourav Sen', 'specialty' => 'General Physician & Sugar, Pressure, Thyroid', 'qualifications' => 'MBBS, MD (Medicine)', 'imageUrl' => null],
             ['id' => 17, 'name' => 'Dr. K.K. Gupta', 'specialty' => 'General Physician & Sugar, Pressure, Thyroid', 'qualifications' => 'MBBS, MD', 'imageUrl' => null],
@@ -33,27 +33,13 @@ class DatabaseSeeder extends Seeder
             DB::table('doctors')->insertOrIgnore($doc);
         }
 
-        // Blogs — improved content, IDs preserved
+        // Blogs - exact data from SQLite (IDs preserved)
         $blogs = [
             [
                 'id' => 1,
                 'slug' => 'free-health-checkup-camp-april-2026',
-                'title' => 'Free Health Check-up Camp on 15th April 2026',
-                'content' => 'Rohit Health Care is organising a free community health check-up camp on 15th April 2026 at our centre in Balarampur, West Bengal. The camp will run from 9:00 AM to 2:00 PM.
-
-Services available at the camp include:
-- Blood pressure measurement
-- Random blood sugar screening (RBS)
-- Body weight and BMI assessment
-- Eye check-up (basic vision test)
-- Haemoglobin check (Hb)
-- Doctor consultation with general physician
-
-All services are completely free of charge. No prior appointment is needed. Simply walk in with a valid ID or your Aadhaar card.
-
-This camp is specifically planned for senior citizens, daily wage workers, school students, and anyone who has not had a health check-up in the past year. Early detection of conditions like diabetes, hypertension, and anaemia makes a significant difference in treatment outcomes.
-
-For more information, please call us on +91 85972 15824 or send a WhatsApp message. Spread the word and bring your family members along.',
+                'title' => 'Free Health Check-up Camp – 15th April 2026',
+                'content' => 'Rohit Health Care is organising a free health check-up camp on 15th April 2026. Services include blood pressure monitoring, blood sugar screening, eye check-up, and BMI assessment. All residents are welcome. No prior appointment needed. Camp will be held from 9 AM to 2 PM at our main centre.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
@@ -61,110 +47,36 @@ For more information, please call us on +91 85972 15824 or send a WhatsApp messa
             [
                 'id' => 2,
                 'slug' => 'world-blood-donor-day-awareness',
-                'title' => 'World Blood Donor Day: Our Community Blood Donation Drive',
-                'content' => 'On the occasion of World Blood Donor Day (14th June), Rohit Health Care organised a community awareness and blood donation drive at our Balarampur centre. The response from the community was truly heartwarming.
-
-Why blood donation matters:
-A single unit of donated blood can save up to three lives. In India, approximately 14.6 million units of blood are needed annually, and there is always a shortage in smaller towns and rural areas. West Bengal alone sees a significant gap between demand and collection every year.
-
-What we collected:
-During this drive, over 85 voluntary donors stepped forward. Blood was collected and coordinated with the nearest blood bank for safe storage and distribution to patients in need across the Purulia district.
-
-Who can donate blood:
-- Age: 18 to 65 years
-- Weight: at least 50 kg
-- No fever, cold, or illness in the past 14 days
-- No tattooing or piercing in the last 6 months
-- Blood pressure: 100/60 to 160/100 mmHg
-
-If you missed this drive, please reach out to us. We regularly coordinate with blood banks and can guide you on how and where to donate in your area.
-
-A heartfelt thank you to every donor, volunteer, and health worker who made this drive a success.',
+                'title' => 'World Blood Donor Day – Awareness & Drive',
+                'content' => 'On the occasion of World Blood Donor Day, our team organised a community awareness drive and blood donation camp. Over 120 units of blood were collected, benefiting patients across the region. We thank all volunteers and donors for their selfless contribution.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
             [
                 'id' => 3,
-                'slug' => 'home-sample-collection-service',
-                'title' => 'Home Sample Collection: Get Your Tests Done From Home',
-                'content' => 'We understand that visiting a diagnostic centre is not always easy, especially for elderly patients, new mothers, or anyone recovering from illness. That is why Rohit Health Care offers a trained phlebotomist home visit service across Balarampur and nearby areas.
-
-How it works:
-1. Call us or send a WhatsApp message on +91 85972 15824 to book your slot.
-2. Tell us which tests you need. We will confirm availability and pricing.
-3. A trained phlebotomist arrives at your home at the chosen time with all sterilised equipment.
-4. Samples are collected in a hygienic, safe, and painless manner.
-5. Reports are shared digitally via WhatsApp on the same day for most tests.
-
-Tests available for home collection:
-- Complete Blood Count (CBC)
-- Blood Sugar (Fasting, PP, Random)
-- Lipid Profile, Liver Function, Kidney Function
-- Thyroid Panel (TSH, T3, T4)
-- HbA1c for long-term sugar monitoring
-- Urine Routine Examination
-- Dengue NS1, Malaria, Typhoid (Widal)
-- And hundreds more through our Apollo Diagnostics partnership
-
-Charges:
-A small home collection fee applies. All test rates are as per standard diagnostics pricing. Discounts available for senior citizens and bulk packages.
-
-Your health should not wait. Book a home visit today.',
+                'slug' => 'home-sample-collection-24x7',
+                'title' => 'New: Home Sample Collection Now Available 24×7',
+                'content' => 'We are delighted to announce that our home sample collection service is now available round-the-clock, 7 days a week. Our trained phlebotomists will arrive at your doorstep at a time of your choosing. Book via WhatsApp or call us directly. Same-day results guaranteed for most tests.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
             [
                 'id' => 4,
-                'slug' => 'thyroid-awareness-know-the-signs',
-                'title' => 'Thyroid Disorders: Know the Signs and Get Tested Early',
-                'content' => 'Thyroid disorders are among the most common yet under-diagnosed health conditions in India. According to a study published in the Indian Journal of Endocrinology, over 42 million people in India suffer from some form of thyroid disease. In West Bengal, iodine deficiency and lifestyle-related factors make this number even more significant.
-
-The worrying part is that many people live with thyroid problems for years without knowing it.
-
-Common signs of thyroid imbalance:
-
-Hypothyroidism (underactive thyroid):
-- Unexplained weight gain
-- Persistent fatigue and weakness
-- Feeling cold all the time
-- Hair thinning and dry skin
-- Irregular periods in women
-- Depression or low mood
-
-Hyperthyroidism (overactive thyroid):
-- Rapid heartbeat or palpitations
-- Sudden weight loss without dieting
-- Excessive sweating and heat intolerance
-- Anxiety and restlessness
-- Frequent bowel movements
-
-Who should get tested:
-- Women over 30 years of age (thyroid disorders are five to eight times more common in women)
-- Individuals with a family history of thyroid disease
-- Anyone experiencing the symptoms listed above
-- Patients already on thyroid medication who need regular monitoring
-
-Tests we offer at Rohit Health Care:
-- TSH (Thyroid Stimulating Hormone), the most important screening test
-- Free T3 and Free T4
-- Anti-TPO and Anti-Thyroglobulin antibodies (for autoimmune thyroid diseases)
-- Thyroid ultrasound referral for structural assessment
-
-Reports are available the same day for TSH and T3/T4. Results are sent directly to your WhatsApp.
-
-Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective treatment. Walk in or call us to book your thyroid panel today.',
+                'slug' => 'thyroid-awareness-month',
+                'title' => 'Thyroid Awareness Month – Get Tested',
+                'content' => 'January is Thyroid Awareness Month. Did you know that over 42 million people in India suffer from thyroid disorders? We are offering a 30% discount on TSH, T3, and T4 tests throughout this month. Early detection leads to better outcomes. Book your test today.',
                 'imageUrl' => 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&q=80&w=800',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
         ];
         foreach ($blogs as $blog) {
-            DB::table('blogs')->upsert($blog, ['id'], ['title', 'slug', 'content', 'imageUrl', 'draft']);
+            DB::table('blogs')->insertOrIgnore($blog);
         }
 
-        // Gallery — exact data from SQLite (IDs preserved)
+        // Gallery - exact data from SQLite (IDs preserved)
         $gallery = [
             ['id' => 1, 'title' => 'Our Laboratory', 'imageUrl' => 'https://images.unsplash.com/photo-1581093196278-a29c46f5fc6c?auto=format&fit=crop&q=80&w=800'],
             ['id' => 2, 'title' => 'Sample Collection', 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=800'],
@@ -177,7 +89,7 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             DB::table('galleries')->insertOrIgnore($photo);
         }
 
-        // HeroSlides — exact data from SQLite (IDs preserved)
+        // HeroSlides - exact data from SQLite (IDs preserved)
         $heroSlides = [
             ['id' => 1, 'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200', 'alt' => 'Healthcare professionals at work', 'order' => 1, 'createdAt' => '2026-03-17 00:00:00'],
             ['id' => 2, 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=1200', 'alt' => 'Modern diagnostic laboratory', 'order' => 2, 'createdAt' => '2026-03-17 00:00:00'],
@@ -187,7 +99,7 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             DB::table('hero_slides')->insertOrIgnore($slide);
         }
 
-        // ─── SiteContent — all CONTENT_DEFAULTS (insertOrIgnore = safe to re-run) ───
+        // ─── SiteContent - all CONTENT_DEFAULTS (insertOrIgnore = safe to re-run) ───
         $siteContent = [
             // General
             ['key' => 'site_name',            'value' => 'Rohit Health Care'],
@@ -280,7 +192,7 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             // Home Services
             ['key' => 'home_services_badge',   'value' => 'What We Offer'],
             ['key' => 'home_services_heading', 'value' => 'Comprehensive Diagnostic Services'],
-            ['key' => 'home_services_subtext', 'value' => 'Cutting-edge technology and skilled professionals — all under one roof.'],
+            ['key' => 'home_services_subtext', 'value' => 'Cutting-edge technology and skilled professionals - all under one roof.'],
             ['key' => 'home_services_visible', 'value' => 'true'],
             ['key' => 'home_services_btn',     'value' => 'View All Services'],
             ['key' => 'home_svc_1_title',      'value' => 'Pathology & Hematology'],
@@ -332,17 +244,17 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             ['key' => 'contact_phone_display', 'value' => '+91 98765 43210'],
             ['key' => 'contact_whatsapp',      'value' => '919876543210'],
             ['key' => 'contact_email',         'value' => ''],
-            ['key' => 'contact_address',       'value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State — PIN 110011'],
+            ['key' => 'contact_address',       'value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State - PIN 110011'],
             ['key' => 'contact_hours_weekday', 'value' => 'Mon–Sat: 7:00 AM – 9:00 PM'],
             ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM – 2:00 PM'],
             // About Page
             ['key' => 'about_page_badge',       'value' => 'Our Story'],
             ['key' => 'about_page_heading',     'value' => 'Built on Trust, Driven by Accuracy'],
-            ['key' => 'about_page_subtext',     'value' => 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community — with full NABL backing.'],
+            ['key' => 'about_page_subtext',     'value' => 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community - with full NABL backing.'],
             ['key' => 'about_excellence_badge', 'value' => 'Committed to Excellence'],
             ['key' => 'about_section_heading',  'value' => 'The Right Diagnosis Changes Everything'],
             ['key' => 'about_body_1',           'value' => 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.'],
-            ['key' => 'about_body_2',           'value' => 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy — whether it is a routine blood test or a complex clinical profile.'],
+            ['key' => 'about_body_2',           'value' => 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy - whether it is a routine blood test or a complex clinical profile.'],
             ['key' => 'about_hero_bg',          'value' => ''],
             ['key' => 'about_image',            'value' => ''],
             ['key' => 'about_years_label',      'value' => 'Years serving the community'],
@@ -359,14 +271,14 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             ['key' => 'about_hl_5_desc',  'value' => 'Fast turnaround so you never wait for clarity.'],
             // About Why Us
             ['key' => 'about_whyus_heading', 'value' => 'Why Rohit Health Care?'],
-            ['key' => 'about_whyus_items',   'value' => 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time — walk-in friendly, Home sample collection at your schedule, Hygienic sterile and modern collection facility'],
+            ['key' => 'about_whyus_items',   'value' => 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time - walk-in friendly, Home sample collection at your schedule, Hygienic sterile and modern collection facility'],
             ['key' => 'about_cta_title',     'value' => 'Experience Care Like Never Before'],
             ['key' => 'about_cta_subtitle',  'value' => 'Walk in today or arrange a home collection. Your health remains our top priority.'],
             ['key' => 'about_cta_btn',       'value' => 'Get in Touch'],
             // Services Page
             ['key' => 'services_page_badge',   'value' => 'Premium Diagnostics'],
             ['key' => 'services_page_heading', 'value' => 'Our Diagnostic Services'],
-            ['key' => 'services_page_subtext', 'value' => 'Advanced technology, trained professionals, and a top-tier NABL-accredited network — delivering accurate results on time, every time.'],
+            ['key' => 'services_page_subtext', 'value' => 'Advanced technology, trained professionals, and a top-tier NABL-accredited network - delivering accurate results on time, every time.'],
             // Service Cards
             ['key' => 'svc_1_title', 'value' => 'Clinical Pathology'],
             ['key' => 'svc_1_desc',  'value' => 'Routine and specialised tests for blood, urine, and stool essential to any diagnosis.'],
@@ -454,42 +366,42 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
             DB::table('site_contents')->insertOrIgnore($item);
         }
 
-        // ─── SiteSettings — general + SEO (insertOrIgnore = safe to re-run) ───
+        // ─── SiteSettings - general + SEO (insertOrIgnore = safe to re-run) ───
         $siteSettings = [
             // General settings (shown in Admin > Settings > General tab)
             ['key' => 'site_name',         'value' => 'Rohit Health Care'],
             ['key' => 'site_domain',       'value' => 'rhc.imakshay.in'],
             ['key' => 'google_maps_embed', 'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115228.468765432!2d77.1024901!3d28.7040592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1611111111111!5m2!1sen!2sin'],
             ['key' => 'site_logo',         'value' => ''],
-            // SEO — Home page
+            // SEO - Home page
             ['key' => 'seo_home_title',       'value' => 'Rohit Health Care | Accurate Diagnostics & Home Sample Collection'],
             ['key' => 'seo_home_description', 'value' => 'NABL-accredited diagnostic centre offering pathology, cardiology, biochemistry tests, and 24x7 home sample collection. Fast, accurate reports delivered to WhatsApp.'],
             ['key' => 'seo_home_keywords',    'value' => 'Rohit Health Care, diagnostic centre, NABL, blood test, home sample collection, pathology, ECG'],
-            // SEO — About page
+            // SEO - About page
             ['key' => 'seo_about_title',       'value' => 'About Rohit Health Care | Our Story & Mission'],
             ['key' => 'seo_about_description', 'value' => 'Learn about Rohit Health Care\'s commitment to accurate diagnostics, NABL accreditation, and delivering quality healthcare to the community.'],
             ['key' => 'seo_about_keywords',    'value' => 'about Rohit Health Care, NABL accredited lab, diagnostic centre history, community health'],
-            // SEO — Services page
+            // SEO - Services page
             ['key' => 'seo_services_title',       'value' => 'Diagnostic Services | Rohit Health Care'],
             ['key' => 'seo_services_description', 'value' => 'Explore our comprehensive diagnostic services: pathology, haematology, biochemistry, cardiology, microbiology, and home sample collection.'],
             ['key' => 'seo_services_keywords',    'value' => 'diagnostic services, pathology, blood test, ECG, Echo, biochemistry, home collection, NABL lab'],
-            // SEO — Doctors page
+            // SEO - Doctors page
             ['key' => 'seo_doctors_title',       'value' => 'Our Medical Team | Rohit Health Care'],
-            ['key' => 'seo_doctors_description', 'value' => 'Meet our experienced team of specialist doctors and healthcare professionals at Rohit Health Care — available 7 days a week.'],
+            ['key' => 'seo_doctors_description', 'value' => 'Meet our experienced team of specialist doctors and healthcare professionals at Rohit Health Care - available 7 days a week.'],
             ['key' => 'seo_doctors_keywords',    'value' => 'doctors, medical team, specialist, gynaecology, paediatrics, orthopaedic, general physician'],
-            // SEO — Gallery page
+            // SEO - Gallery page
             ['key' => 'seo_gallery_title',       'value' => 'Gallery | Rohit Health Care Facility & Events'],
             ['key' => 'seo_gallery_description', 'value' => 'Explore photos of our modern diagnostic facility, health camps, and community events at Rohit Health Care.'],
             ['key' => 'seo_gallery_keywords',    'value' => 'gallery, health camp, diagnostic facility, lab photos, events, community health'],
-            // SEO — Blogs page
+            // SEO - Blogs page
             ['key' => 'seo_blogs_title',       'value' => 'News & Health Camps | Rohit Health Care'],
             ['key' => 'seo_blogs_description', 'value' => 'Stay informed with the latest health updates, free check-up camps, and community health news from Rohit Health Care.'],
             ['key' => 'seo_blogs_keywords',    'value' => 'health camps, news, free check-up camp, community health, blood donation, awareness'],
-            // SEO — Contact page
+            // SEO - Contact page
             ['key' => 'seo_contact_title',       'value' => 'Contact Us | Rohit Health Care'],
             ['key' => 'seo_contact_description', 'value' => 'Get in touch with Rohit Health Care for appointments, queries, or home sample collection. Call, WhatsApp, or email us anytime.'],
             ['key' => 'seo_contact_keywords',    'value' => 'contact, appointment, phone, WhatsApp, email, health care contact, book test'],
-            // SEO — Global
+            // SEO - Global
             ['key' => 'seo_og_image',         'value' => ''],
             ['key' => 'google_analytics_id',  'value' => ''],
         ];
@@ -500,3 +412,4 @@ Do not wait for symptoms to worsen. Early diagnosis leads to simple, effective t
         echo "✅ Database seeded with all existing data (IDs preserved)\n";
     }
 }
+
