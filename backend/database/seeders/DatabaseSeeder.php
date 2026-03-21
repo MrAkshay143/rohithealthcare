@@ -414,4 +414,3 @@ class DatabaseSeeder extends Seeder
         echo "✅ Database seeded with all existing data (IDs preserved)\n";
     }
 }
-

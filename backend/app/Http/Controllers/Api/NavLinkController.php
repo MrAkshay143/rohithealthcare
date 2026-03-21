@@ -110,4 +110,3 @@ class NavLinkController extends Controller
         return response()->json(['success' => 'Reordered']);
     }
 }
-

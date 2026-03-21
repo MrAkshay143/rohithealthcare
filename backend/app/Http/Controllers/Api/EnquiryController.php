@@ -285,4 +285,3 @@ class EnquiryController extends Controller
         }
     }
 }
-
