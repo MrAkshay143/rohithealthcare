@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -24,7 +24,7 @@ class ContentController extends Controller
                 $dbMap[$item->key] = $item->value;
             }
         } catch (\Exception $e) {
-            // DB unavailable — fall through to defaults
+            // DB unavailable - fall through to defaults
         }
 
         try {
@@ -100,7 +100,7 @@ class ContentController extends Controller
     }
 
     /**
-     * Reset all content — delete all rows from site_content table.
+     * Reset all content - delete all rows from site_content table.
      */
     public function resetAll()
     {
@@ -136,16 +136,16 @@ class ContentController extends Controller
             'hero_btn_directions' => ['value' => 'Directions', 'label' => 'Hero Directions Button Label', 'group' => 'Hero Section'],
             'hero_pills' => ['value' => 'NABL Accredited, Same Day Reports, Home Collection, 10+ Years', 'label' => 'Hero Trust Pills (comma-separated)', 'group' => 'Hero Section'],
 
-            'stat_1_value' => ['value' => '50,000+', 'label' => 'Stat 1 — Number', 'group' => 'Stats Strip'],
-            'stat_1_label' => ['value' => 'Happy Patients', 'label' => 'Stat 1 — Label', 'group' => 'Stats Strip'],
-            'stat_2_value' => ['value' => '3,000+', 'label' => 'Stat 2 — Number', 'group' => 'Stats Strip'],
-            'stat_2_label' => ['value' => 'Diagnostic Tests', 'label' => 'Stat 2 — Label', 'group' => 'Stats Strip'],
-            'stat_3_label' => ['value' => 'Years of Service', 'label' => 'Stat 3 — Label', 'group' => 'Stats Strip'],
-            'stat_4_value' => ['value' => '100%', 'label' => 'Stat 4 — Number', 'group' => 'Stats Strip'],
-            'stat_4_label' => ['value' => 'Same-Day Reports', 'label' => 'Stat 4 — Label', 'group' => 'Stats Strip'],
+            'stat_1_value' => ['value' => '50,000+', 'label' => 'Stat 1 - Number', 'group' => 'Stats Strip'],
+            'stat_1_label' => ['value' => 'Happy Patients', 'label' => 'Stat 1 - Label', 'group' => 'Stats Strip'],
+            'stat_2_value' => ['value' => '3,000+', 'label' => 'Stat 2 - Number', 'group' => 'Stats Strip'],
+            'stat_2_label' => ['value' => 'Diagnostic Tests', 'label' => 'Stat 2 - Label', 'group' => 'Stats Strip'],
+            'stat_3_label' => ['value' => 'Years of Service', 'label' => 'Stat 3 - Label', 'group' => 'Stats Strip'],
+            'stat_4_value' => ['value' => '100%', 'label' => 'Stat 4 - Number', 'group' => 'Stats Strip'],
+            'stat_4_label' => ['value' => 'Same-Day Reports', 'label' => 'Stat 4 - Label', 'group' => 'Stats Strip'],
 
             'services_heading' => ['value' => 'Comprehensive Diagnostic Services', 'label' => 'Services Heading', 'group' => 'Services Section'],
-            'services_subheading' => ['value' => 'Cutting-edge technology and skilled professionals — all under one roof.', 'label' => 'Services Sub-heading', 'group' => 'Services Section'],
+            'services_subheading' => ['value' => 'Cutting-edge technology and skilled professionals - all under one roof.', 'label' => 'Services Sub-heading', 'group' => 'Services Section'],
 
             'cta_title' => ['value' => 'Ready to prioritise your health?', 'label' => 'CTA Section Title', 'group' => 'CTA Section'],
             'cta_subtitle' => ['value' => 'Walk in, call, or send a WhatsApp. We are open 7 days a week.', 'label' => 'CTA Sub-text', 'group' => 'CTA Section'],
@@ -156,7 +156,7 @@ class ContentController extends Controller
             'contact_phone_display' => ['value' => '+91 98765 43210', 'label' => 'Phone Display Text', 'group' => 'Contact Info'],
             'contact_whatsapp' => ['value' => '919876543210', 'label' => 'WhatsApp (with country code)', 'group' => 'Contact Info'],
             'contact_email' => ['value' => '', 'label' => 'Email Address', 'group' => 'Contact Info'],
-            'contact_address' => ['value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State — PIN 110011', 'label' => 'Clinic Address', 'group' => 'Contact Info'],
+            'contact_address' => ['value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State - PIN 110011', 'label' => 'Clinic Address', 'group' => 'Contact Info'],
             'contact_hours_weekday' => ['value' => 'Mon–Sat: 7:00 AM – 9:00 PM', 'label' => 'Weekday Hours', 'group' => 'Contact Info'],
             'contact_hours_sunday' => ['value' => 'Sunday: 7:00 AM – 2:00 PM', 'label' => 'Sunday Hours', 'group' => 'Contact Info'],
 
@@ -172,10 +172,10 @@ class ContentController extends Controller
 
             'about_page_badge' => ['value' => 'Our Story', 'label' => 'About Hero Badge', 'group' => 'About Page'],
             'about_page_heading' => ['value' => 'Built on Trust, Driven by Accuracy', 'label' => 'About Hero Heading', 'group' => 'About Page'],
-            'about_page_subtext' => ['value' => 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community — with full NABL backing.', 'label' => 'About Hero Sub-text', 'group' => 'About Page'],
+            'about_page_subtext' => ['value' => 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community - with full NABL backing.', 'label' => 'About Hero Sub-text', 'group' => 'About Page'],
             'about_section_heading' => ['value' => 'The Right Diagnosis Changes Everything', 'label' => 'About Main Section Heading', 'group' => 'About Page'],
             'about_body_1' => ['value' => 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.', 'label' => 'About Body Paragraph 1', 'group' => 'About Page'],
-            'about_body_2' => ['value' => 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy — whether it is a routine blood test or a complex clinical profile.', 'label' => 'About Body Paragraph 2', 'group' => 'About Page'],
+            'about_body_2' => ['value' => 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy - whether it is a routine blood test or a complex clinical profile.', 'label' => 'About Body Paragraph 2', 'group' => 'About Page'],
             'about_hero_bg' => ['value' => '', 'label' => 'About Hero Background Image URL (leave empty for default)', 'group' => 'About Page'],
             'about_image' => ['value' => '', 'label' => 'About Section Photo URL (leave empty for default)', 'group' => 'About Page'],
             'about_years_label' => ['value' => 'Years serving the community', 'label' => 'About Years Badge Label', 'group' => 'About Page'],
@@ -184,7 +184,7 @@ class ContentController extends Controller
 
             'services_page_badge' => ['value' => 'Premium Diagnostics', 'label' => 'Services Page Badge', 'group' => 'Services Page'],
             'services_page_heading' => ['value' => 'Our Diagnostic Services', 'label' => 'Services Page Heading', 'group' => 'Services Page'],
-            'services_page_subtext' => ['value' => 'Advanced technology, trained professionals, and a top-tier NABL-accredited network — delivering accurate results on time, every time.', 'label' => 'Services Page Sub-text', 'group' => 'Services Page'],
+            'services_page_subtext' => ['value' => 'Advanced technology, trained professionals, and a top-tier NABL-accredited network - delivering accurate results on time, every time.', 'label' => 'Services Page Sub-text', 'group' => 'Services Page'],
             'services_cta_heading' => ['value' => 'Need a specific test?', 'label' => 'Services CTA Heading', 'group' => 'Services Page'],
             'services_cta_subtext' => ['value' => 'We offer a vast catalog of advanced tests. Contact us directly to check availability and pricing for any test.', 'label' => 'Services CTA Sub-text', 'group' => 'Services Page'],
 
@@ -200,3 +200,4 @@ class ContentController extends Controller
         ];
     }
 }
+

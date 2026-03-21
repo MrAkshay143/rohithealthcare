@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -194,7 +194,7 @@ class EnquiryController extends Controller
 
         try {
             Mail::raw('This is a test email from Rohit Health Care admin panel.', function ($m) use ($validated) {
-                $m->to($validated['to'])->subject('SMTP Test — Rohit Health Care');
+                $m->to($validated['to'])->subject('SMTP Test - Rohit Health Care');
             });
             return response()->json(['success' => 'Test email sent to ' . $validated['to']]);
         } catch (\Exception $e) {
@@ -267,12 +267,12 @@ class EnquiryController extends Controller
 
             $body = "Dear {$name},\n\n"
                 . $replyMessage . "\n\n"
-                . "— Rohit Health Care\n"
+                . "- Rohit Health Care\n"
                 . "This is a reply to your enquiry submitted on our website.";
 
             Mail::raw($body, function ($m) use ($email, $name) {
                 $m->to($email, $name)
-                    ->subject('Reply to your enquiry — Rohit Health Care');
+                    ->subject('Reply to your enquiry - Rohit Health Care');
             });
 
             return true;
@@ -285,3 +285,4 @@ class EnquiryController extends Controller
         }
     }
 }
+

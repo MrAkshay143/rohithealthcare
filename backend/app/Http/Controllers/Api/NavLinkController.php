@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -30,7 +30,7 @@ class NavLinkController extends Controller
     }
 
     /**
-     * GET /admin/nav-links — Returns ALL links (including hidden) for admin panel.
+     * GET /admin/nav-links - Returns ALL links (including hidden) for admin panel.
      */
     public function adminIndex(Request $request)
     {
@@ -110,3 +110,4 @@ class NavLinkController extends Controller
         return response()->json(['success' => 'Reordered']);
     }
 }
+
