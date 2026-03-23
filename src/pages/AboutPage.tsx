@@ -188,56 +188,56 @@ export default function AboutPage() {
             </div>
 
             {/* Heading — responsive sizes */}
-            <h2 className="text-lg sm:text-xl lg:text-[2.1rem] font-extrabold text-gray-900 leading-[1.2] mb-3 sm:mb-4 lg:mb-5 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-[1.2] mb-4 sm:mb-6 lg:mb-8 tracking-tight">
               {content['about_section_heading']}
             </h2>
 
-            {/* Body text — ultra-compact */}
-            <p className="text-gray-600 text-xs sm:text-sm lg:text-base leading-snug mb-1">
+            {/* Body text — breathable */}
+            <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4 lg:mb-5">
               {content['about_body_1']}
             </p>
-            <p className="text-gray-400 text-xs sm:text-sm lg:text-base leading-snug mb-2 sm:mb-3 lg:mb-4">
+            <p className="text-gray-500 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 lg:mb-10">
               {content['about_body_2']}
             </p>
 
-            {/* Divider — ultra-compact */}
-            <div className="w-6 sm:w-8 lg:w-10 h-0.5 sm:h-0.75 lg:h-1 bg-[#4e66b3] rounded-full mb-2 sm:mb-2.5 lg:mb-4" />
+            {/* Divider */}
+            <div className="w-12 sm:w-16 lg:w-20 h-1 sm:h-1.5 bg-[#4e66b3] rounded-full mb-6 sm:mb-8 lg:mb-10" />
 
-            {/* Why Us heading — ultra-compact */}
-            <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-2.5 mb-2 lg:mb-3">
-              <div className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 rounded-lg lg:rounded-xl bg-[#4e66b3]/10 flex items-center justify-center">
-                <ShieldCheck className="h-3 sm:h-3.5 lg:h-4 w-3 sm:w-3.5 lg:w-4 text-[#4e66b3]" />
+            {/* Why Us heading */}
+            <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6">
+              <div className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 rounded-xl lg:rounded-2xl bg-[#4e66b3]/10 flex items-center justify-center">
+                <ShieldCheck className="h-4 sm:h-5 lg:h-6 w-4 sm:w-5 lg:w-6 text-[#4e66b3]" />
               </div>
-              <h4 className="font-extrabold text-gray-900 text-sm sm:text-base lg:text-base">{content['about_whyus_heading']}</h4>
+              <h4 className="font-extrabold text-gray-900 text-base sm:text-lg lg:text-xl tracking-tight">{content['about_whyus_heading']}</h4>
             </div>
 
-            {/* Checklist — ultra-compact spacing */}
-            <ul className="space-y-1 sm:space-y-1.5 lg:space-y-2 mb-2 sm:mb-3 lg:mb-6">
+            {/* Checklist — breathable spacing */}
+            <ul className="space-y-3 sm:space-y-4 lg:space-y-5 mb-8 sm:mb-10 lg:mb-12">
               {whyUsItems.map((pt: string, i: number) => (
-                <li key={pt} ref={reveal(i * 40)} className="flex items-start gap-2 sm:gap-2.5 lg:gap-3 group">
-                  <div className="mt-0.5 h-4 w-4 sm:h-5 sm:w-5 lg:h-5 lg:w-5 rounded-full bg-[#4e66b3] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="h-2.5 sm:h-3 lg:h-3 w-2.5 sm:w-3 lg:w-3 text-white" />
+                <li key={pt} ref={reveal(i * 40)} className="flex items-start gap-3 sm:gap-4 lg:gap-4 group">
+                  <div className="mt-1 h-5 w-5 sm:h-6 sm:w-6 lg:h-6 lg:w-6 rounded-full bg-[#4e66b3] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <CheckCircle className="h-3 sm:h-3.5 lg:h-3.5 w-3 sm:w-3.5 lg:w-3.5 text-white" />
                   </div>
-                  <span className="text-gray-600 text-xs sm:text-sm lg:text-sm font-medium leading-snug">{pt}</span>
+                  <span className="text-gray-700 text-sm sm:text-base lg:text-base font-medium leading-relaxed">{pt}</span>
                 </li>
               ))}
             </ul>
 
-            {/* Action row — compact */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-3">
+            {/* Action row — breathable */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 lg:gap-5">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-[#4e66b3] px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm lg:text-sm font-bold text-white hover:bg-[#3a4f99] transition-all shadow-lg shadow-[#4e66b3]/25 hover:scale-[1.02] active:scale-95"
+                className="inline-flex items-center gap-2 rounded-xl sm:rounded-2xl bg-[#4e66b3] px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base lg:text-base font-bold text-white hover:bg-[#3a4f99] transition-all shadow-lg shadow-[#4e66b3]/25 hover:scale-[1.02] active:scale-95"
               >
-                <PhoneCall className="h-3 sm:h-4 w-3 sm:w-4" /> Contact Us
+                <PhoneCall className="h-4 sm:h-5 w-4 sm:w-5" /> Contact Us
               </Link>
               <a
                 href={content['google_maps_url'] || ''}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl border-2 border-gray-200 px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm lg:text-sm font-bold text-gray-700 hover:border-[#4e66b3]/30 hover:text-[#4e66b3] transition-all"
+                className="inline-flex items-center gap-2 rounded-xl sm:rounded-2xl border-2 border-gray-200 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base lg:text-base font-bold text-gray-700 hover:border-[#4e66b3]/30 hover:text-[#4e66b3] transition-all hover:bg-gray-50"
               >
-                <MapPin className="h-3 sm:h-4 w-3 sm:w-4" /> Find Us
+                <MapPin className="h-4 sm:h-5 w-4 sm:w-5" /> Find Us
               </a>
             </div>
           </div>

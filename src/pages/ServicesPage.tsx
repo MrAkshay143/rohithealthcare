@@ -96,24 +96,25 @@ export default function ServicesPage() {
         )}
 
         {/* CTA */}
-        <div ref={reveal()} className="mt-6 sm:mt-10 rounded-2xl bg-gray-900 px-5 py-4 sm:px-8 sm:py-5">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <h2 className="text-base sm:text-lg font-extrabold text-white">{content['services_cta_heading']}</h2>
-              <p className="text-gray-400 text-xs mt-0.5 max-w-sm">{content['services_cta_subtext']}</p>
+        <div ref={reveal()} className="mt-10 sm:mt-12 lg:mt-16 rounded-[2rem] bg-gray-900 px-6 py-8 sm:px-10 sm:py-10 shadow-xl overflow-hidden relative">
+          <div className="absolute inset-0 bg-linear-to-br from-[#4e66b3]/10 to-transparent pointer-events-none" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 sm:gap-10 relative z-10">
+            <div className="text-center sm:text-left">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">{content['services_cta_heading']}</h2>
+              <p className="text-gray-400 text-sm sm:text-base mt-2 max-w-md mx-auto sm:mx-0 leading-relaxed">{content['services_cta_subtext']}</p>
             </div>
-            <div className="flex flex-wrap gap-2 shrink-0">
+            <div className="flex flex-wrap justify-center sm:justify-end gap-3 sm:gap-4 shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
               <a href={`tel:+${phone}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-4 py-2 text-xs font-bold text-white hover:bg-brand-red-dark transition-colors">
-                <PhoneCall className="h-3.5 w-3.5" /> {content['services_cta_btn_call'] || 'Call Now'}
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-xl bg-brand-red px-6 py-3.5 text-sm font-bold text-white hover:bg-brand-red-dark transition-colors shadow">
+                <PhoneCall className="h-4 sm:h-5 w-4 sm:w-5" /> {content['services_cta_btn_call'] || 'Call Now'}
               </a>
               <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2 text-xs font-bold text-white hover:bg-[#1da851] transition-colors">
-                <MessageCircle className="h-3.5 w-3.5" /> {content['services_cta_btn_whatsapp'] || 'WhatsApp'}
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#1da851] transition-colors shadow">
+                <MessageCircle className="h-4 sm:h-5 w-4 sm:w-5" /> {content['services_cta_btn_whatsapp'] || 'WhatsApp'}
               </a>
               <Link to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
-                {content['services_cta_btn_book'] || 'Book Appointment'} <ArrowRight className="h-3.5 w-3.5" />
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-xl border border-white/20 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10 backdrop-blur-md transition-colors">
+                {content['services_cta_btn_book'] || 'Book Appointment'} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

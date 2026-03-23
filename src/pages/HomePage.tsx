@@ -326,21 +326,21 @@ export default function HomePage() {
 
       {/* =========== CTA =========== */}
       {isTrueValue(content['cta_visible']) && (
-      <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-4 sm:py-5">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=40&w=1400')] bg-cover bg-center opacity-10" />
-        <div ref={reveal()} className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-8 sm:py-12 lg:py-16">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=40&w=1400')] bg-cover bg-center opacity-10 mix-blend-overlay" />
+        <div ref={reveal()} className="relative mx-auto max-w-5xl px-5 sm:px-8 lg:px-12">
+          <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-6 sm:gap-10">
             <div className="text-center sm:text-left">
-              <h2 className="text-base sm:text-lg font-extrabold text-white leading-tight">{content['cta_title']}</h2>
-              <p className="text-white/70 text-xs mt-0.5">{content['cta_subtitle']}</p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight tracking-tight">{content['cta_title']}</h2>
+              <p className="text-white/80 text-sm sm:text-base mt-2 sm:mt-3 font-medium max-w-lg">{content['cta_subtitle']}</p>
             </div>
-            <div className="flex flex-wrap justify-center sm:justify-end gap-2 shrink-0">
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-end gap-3 sm:gap-4 shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
               <a href={`tel:+${content['contact_phone'] || ''}`}
-                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#A62B2B] hover:bg-gray-100 transition-colors shadow">
-                <PhoneCall className="h-3.5 w-3.5" /> {content['cta_btn_call']}
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-xl bg-white px-6 sm:px-8 py-3.5 sm:py-4 text-sm font-bold text-[#A62B2B] hover:bg-gray-50 transition-colors shadow-lg shadow-black/10">
+                <PhoneCall className="h-4 sm:h-5 w-4 sm:w-5" /> {content['cta_btn_call']}
               </a>
               <Link to="/contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-white/15 border border-white/30 px-4 py-2 text-xs font-bold text-white hover:bg-white/25 transition-colors">
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-xl bg-white/10 border border-white/20 px-6 sm:px-8 py-3.5 sm:py-4 text-sm font-bold text-white hover:bg-white/15 backdrop-blur-md transition-colors">
                 {content['cta_btn_inquiry'] || 'Send an Inquiry'}
               </Link>
             </div>

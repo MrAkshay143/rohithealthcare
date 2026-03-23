@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play, PhoneCall } from "lucide-react";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -187,19 +187,20 @@ export default function BlogPostPage() {
         </div>
 
         {/* CTA card */}
-        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#3d5099] to-[#4e66b3] px-5 py-4 sm:px-7 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-              <HeartPulse className="w-5 h-5 text-white/70" />
+        <div ref={reveal(100)} className="mt-10 sm:mt-12 lg:mt-16 rounded-[2rem] bg-linear-to-br from-[#3d5099] to-[#4e66b3] px-6 py-8 sm:px-10 sm:py-10 flex flex-col sm:flex-row items-center sm:justify-between gap-6 sm:gap-10 shadow-xl overflow-hidden relative">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=40')] opacity-5 mix-blend-overlay bg-cover bg-center pointer-events-none" />
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 relative z-10">
+            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white/15 flex items-center justify-center shrink-0 backdrop-blur-sm shadow-inner">
+              <HeartPulse className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
             </div>
             <div>
-              <p className="font-bold text-white text-sm">{content['blogs_cta_heading'] || 'Have a health concern?'}</p>
-              <p className="text-white/60 text-xs mt-0.5">{content['blogs_cta_subtext'] || 'Our team is ready to help you today.'}</p>
+              <p className="font-extrabold text-white text-lg sm:text-xl tracking-tight">{content['blogs_cta_heading'] || 'Have a health concern?'}</p>
+              <p className="text-white/80 text-sm sm:text-base mt-1.5 font-medium leading-relaxed">{content['blogs_cta_subtext'] || 'Our team is ready to help you today.'}</p>
             </div>
           </div>
           <a href={`tel:+${content['contact_phone'] || ''}`}
-            className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2 text-xs font-bold text-[#4e66b3] hover:bg-gray-100 transition-colors shadow-sm">
-            {content['blogs_cta_btn'] || 'Call Us Now'}
+            className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-sm font-bold text-[#4e66b3] hover:bg-gray-50 transition-colors shadow-lg relative z-10 hover:scale-105 active:scale-95">
+            <PhoneCall className="h-4 sm:h-5 w-4 sm:w-5" /> {content['blogs_cta_btn'] || 'Call Us Now'}
           </a>
         </div>
       </div>
