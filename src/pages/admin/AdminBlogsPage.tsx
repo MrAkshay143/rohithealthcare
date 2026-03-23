@@ -89,7 +89,7 @@ export default function AdminBlogsPage() {
           {drafts > 0 && <span className="text-xs bg-amber-50 text-amber-600 px-2.5 py-1.5 rounded-full font-bold">{drafts} drafts</span>}
           <button
             onClick={() => { setFormOpen(!formOpen); if (editId) navigate('/admin/blogs'); }}
-            className="inline-flex items-center gap-1.5 bg-[#015851] text-white text-sm font-bold px-4 py-2 rounded-xl hover:bg-[#013f39] transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-4 py-2 rounded-xl hover:bg-[#3a4f99] transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden sm:inline">New Post</span>
@@ -118,7 +118,7 @@ export default function AdminBlogsPage() {
             <ChevronUp className="w-4 h-4 text-gray-400" />
           </button>
           <div className="px-5 py-4">
-            <BlogForm onSubmit={editBlog ? handleUpdate : handleAdd} editBlog={editBlog} key={editId ?? 'new'} />
+            <BlogForm onSubmit={editBlog ? handleUpdate : handleAdd} editBlog={editBlog} key={editId || 'new'} />
           </div>
         </div>
       )}
@@ -133,7 +133,7 @@ export default function AdminBlogsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by title or content..."
-              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/25 focus:border-[#015851] bg-white transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/25 focus:border-[#4e66b3] bg-white transition-colors"
             />
           </div>
           <div className="flex gap-1.5 shrink-0">
@@ -143,7 +143,7 @@ export default function AdminBlogsPage() {
                 onClick={() => setFilter(f)}
                 className={`px-3 py-2 text-xs font-semibold rounded-xl transition-colors ${
                   filter === f
-                    ? 'bg-[#015851] text-white'
+                    ? 'bg-[#4e66b3] text-white'
                     : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                 }`}
               >
@@ -164,7 +164,7 @@ export default function AdminBlogsPage() {
           <p className="text-xs text-gray-400 mt-1 max-w-xs mx-auto">Write your first blog post to engage visitors and improve your site's SEO.</p>
           <button
             onClick={() => setFormOpen(true)}
-            className="mt-4 inline-flex items-center gap-1.5 bg-[#015851] text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-[#013f39] transition-colors"
+            className="mt-4 inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-[#3a4f99] transition-colors"
           >
             <Plus className="w-4 h-4" /> Write First Post
           </button>
@@ -177,12 +177,12 @@ export default function AdminBlogsPage() {
       ) : (
         <div className="space-y-3">
           {filtered.map((blog) => (
-            <div key={blog.id} className={`group bg-white border rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden ${editId === blog.id ? 'border-[#015851] ring-2 ring-[#015851]/20' : 'border-gray-100'}`}>
+            <div key={blog.id} className={`group bg-white border rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden ${editId === blog.id ? 'border-[#4e66b3] ring-2 ring-[#4e66b3]/20' : 'border-gray-100'}`}>
               <div className="flex flex-col sm:flex-row">
                 {/* Image */}
                 {blog.imageUrl && (
                   <div className="sm:w-40 md:w-48 shrink-0 relative">
-                    <img src={blog.imageUrl} alt="" className="w-full h-32 sm:h-full object-cover" />
+                    <img loading="lazy" src={blog.imageUrl} alt="" className="w-full h-32 sm:h-full object-cover" />
                     {blog.videoUrl && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="bg-red-600 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">
@@ -221,7 +221,7 @@ export default function AdminBlogsPage() {
                       <p className="text-xs text-gray-500 line-clamp-2">{blog.content}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <Link to={`/admin/blogs?edit=${blog.id}`} className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-[#015851] px-2 py-1.5 rounded-lg hover:bg-[#015851]/10 transition-colors">
+                      <Link to={`/admin/blogs?edit=${blog.id}`} className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-[#4e66b3] px-2 py-1.5 rounded-lg hover:bg-[#4e66b3]/10 transition-colors">
                         <Pencil className="w-3 h-3" /> <span className="hidden md:inline">Edit</span>
                       </Link>
                       <ConfirmDeleteButton

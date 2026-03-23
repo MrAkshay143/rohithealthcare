@@ -8,15 +8,15 @@ const FOOTER_HREFS = ['/', '/doctors', '/gallery', '/blogs', '/about', '/service
 
 export function Footer() {
   const content = useContent();
-  const phone = content['contact_phone'] ?? '';
-  const phoneDisplay = content['contact_phone_display'] ?? '';
-  const whatsapp = content['contact_whatsapp'] ?? '';
-  const email = content['contact_email'] ?? '';
-  const addressShort = content['footer_address_short'] ?? '';
-  const hoursWeekday = content['contact_hours_weekday'] ?? '';
-  const hoursSunday = content['contact_hours_sunday'] ?? '';
-  const tagline = content['footer_tagline'] ?? content['site_tagline'] ?? '';
-  const customLogo = content['site_logo'] ?? '';
+  const phone = content['contact_phone'] || '';
+  const phoneDisplay = content['contact_phone_display'] || '';
+  const whatsapp = content['contact_whatsapp'] || '';
+  const email = content['contact_email'] || '';
+  const addressShort = content['footer_address_short'] || '';
+  const hoursWeekday = content['contact_hours_weekday'] || '';
+  const hoursSunday = content['contact_hours_sunday'] || '';
+  const tagline = content['footer_tagline'] || content['site_tagline'] || '';
+  const customLogo = content['site_logo'] || '';
 
   // Visibility flags
   const logoDesktop = isTrueValue(content['footer_logo_desktop']);
@@ -31,18 +31,18 @@ export function Footer() {
   const showPhone = isTrueValue(content['footer_social_phone']);
   const showYoutube = isTrueValue(content['footer_social_youtube']);
   const showFacebook = isTrueValue(content['footer_social_facebook']);
-  const youtubeUrl = content['youtube_url'] ?? '';
-  const facebookUrl = content['facebook_url'] ?? '';
+  const youtubeUrl = content['youtube_url'] || '';
+  const facebookUrl = content['facebook_url'] || '';
 
   // Labels from content
-  const qlHeading = content['footer_quicklinks_heading'] ?? '';
-  const contactHeading = content['footer_contact_heading'] ?? '';
-  const hoursHeading = content['footer_hours_heading'] ?? '';
-  const callLabel = content['footer_call_label'] ?? '';
-  const emailLabel = content['footer_email_label'] ?? '';
-  const locationLabel = content['footer_location_label'] ?? '';
-  const copyright = content['footer_copyright'] ?? '';
-  const credit = content['footer_credit'] ?? '';
+  const qlHeading = content['footer_quicklinks_heading'] || '';
+  const contactHeading = content['footer_contact_heading'] || '';
+  const hoursHeading = content['footer_hours_heading'] || '';
+  const callLabel = content['footer_call_label'] || '';
+  const emailLabel = content['footer_email_label'] || '';
+  const locationLabel = content['footer_location_label'] || '';
+  const copyright = content['footer_copyright'] || '';
+  const credit = content['footer_credit'] || '';
 
   const visClass = (d: boolean, m: boolean) =>
     d && m ? '' : d ? 'hidden sm:block' : m ? 'sm:hidden' : 'hidden';
@@ -99,14 +99,14 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className={`w-[45%] sm:w-auto flex-1 min-w-35 flex flex-col items-center sm:items-start ${visClass(qlDesktop, qlMobile)}`}>
+          <div className={`w-full sm:w-auto flex-1 min-w-35 flex flex-col items-center sm:items-start ${visClass(qlDesktop, qlMobile)}`}>
             <h3 className="text-white font-bold text-sm mb-3 sm:mb-4 flex items-center justify-center sm:justify-start gap-1.5 w-full sm:w-auto">
               <HeartPulse className="h-4 w-4 text-brand-green hidden sm:block" />
               {qlHeading}
             </h3>
             <ul className="space-y-2 flex flex-col items-center sm:items-start w-full sm:w-auto">
               {FOOTER_HREFS.map((href, i) => {
-                const label = content[`footer_link_${i + 1}_label`] ?? '';
+                const label = content[`footer_link_${i + 1}_label`] || '';
                 if (!label) return null;
                 return (
                   <li key={href}>
@@ -156,7 +156,7 @@ export function Footer() {
           </div>
 
           {/* Operating Hours - Centered naturally if wrapped */}
-          <div className={`w-full sm:w-auto flex-2 min-w-60 flex flex-col items-center sm:items-start pt-4 sm:pt-0 ${visClass(hoursDesktop, hoursMobile)}`}>
+          <div className={`w-[45%] sm:w-auto flex-1 sm:flex-2 min-w-0 sm:min-w-60 flex flex-col items-center sm:items-start ${visClass(hoursDesktop, hoursMobile)}`}>
             <h3 className="text-white font-bold text-sm mb-3 sm:mb-4">{hoursHeading}</h3>
             <div className="bg-gray-900/60 rounded-xl p-3 sm:p-4 border border-gray-800 inline-block w-auto max-w-sm sm:w-full">
               <ul className="space-y-2 text-center sm:text-left">

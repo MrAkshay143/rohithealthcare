@@ -4,14 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // AdminUser - exact data from SQLite
+        // AdminUser - seeded with hashed password
         DB::table('admin_users')->insertOrIgnore([
-            ['id' => 2, 'username' => 'admin', 'password' => 'Rohit@2025'],
+            ['id' => 2, 'username' => 'admin', 'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', 'ChangeMe@2025'))],
         ]);
 
         // Doctors - exact data from SQLite (IDs preserved)
@@ -245,8 +246,8 @@ class DatabaseSeeder extends Seeder
             ['key' => 'contact_whatsapp',      'value' => '919876543210'],
             ['key' => 'contact_email',         'value' => ''],
             ['key' => 'contact_address',       'value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State - PIN 110011'],
-            ['key' => 'contact_hours_weekday', 'value' => 'Mon–Sat: 7:00 AM – 9:00 PM'],
-            ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM – 2:00 PM'],
+            ['key' => 'contact_hours_weekday', 'value' => 'Mon - Sat: 7:00 AM - 9:00 PM'],
+            ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM - 2:00 PM'],
             // About Page
             ['key' => 'about_page_badge',       'value' => 'Our Story'],
             ['key' => 'about_page_heading',     'value' => 'Built on Trust, Driven by Accuracy'],

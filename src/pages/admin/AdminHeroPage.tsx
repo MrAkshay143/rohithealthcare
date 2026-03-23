@@ -75,7 +75,7 @@ export default function AdminHeroPage() {
         <h2 className="text-sm font-bold text-gray-800 mb-3">
           {editSlide ? '✏️ Editing Slide #' + (slides.indexOf(editSlide) + 1) : '+ Add Slide'}
         </h2>
-        <HeroForm onSubmit={editSlide ? handleUpdate : handleAdd} editSlide={editSlide} key={editId ?? 'new'} />
+        <HeroForm onSubmit={editSlide ? handleUpdate : handleAdd} editSlide={editSlide} key={editId || 'new'} />
       </div>
 
       {/* Slides grid */}
@@ -90,9 +90,9 @@ export default function AdminHeroPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {slides.map((slide, i) => (
-            <div key={slide.id} className={`bg-white border rounded-2xl overflow-hidden shadow-sm ${editId === slide.id ? 'border-[#015851] ring-2 ring-[#015851]/20' : 'border-gray-100'}`}>
+            <div key={slide.id} className={`bg-white border rounded-2xl overflow-hidden shadow-sm ${editId === slide.id ? 'border-[#4e66b3] ring-2 ring-[#4e66b3]/20' : 'border-gray-100'}`}>
               <div className="aspect-video relative overflow-hidden bg-gray-100">
-                <img
+                <img loading="lazy"
                   src={slide.imageUrl}
                   alt={slide.alt}
                   className="w-full h-full object-cover"
@@ -107,7 +107,7 @@ export default function AdminHeroPage() {
                   <p className="text-[11px] text-gray-400 truncate font-mono">{slide.imageUrl.slice(0, 45)}…</p>
                 </div>
                 <div className="flex gap-0.5 shrink-0">
-                  <Link to={`/admin/hero?edit=${slide.id}`} className="p-1.5 text-gray-300 hover:text-[#015851] hover:bg-[#015851]/10 rounded-lg transition-colors">
+                  <Link to={`/admin/hero?edit=${slide.id}`} className="p-1.5 text-gray-300 hover:text-[#4e66b3] hover:bg-[#4e66b3]/10 rounded-lg transition-colors">
                     <Pencil className="w-3.5 h-3.5" />
                   </Link>
                   <button

@@ -1,9 +1,9 @@
-﻿import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import {
   MessageSquare, Phone, MapPin, Clock, Globe, Monitor, Smartphone,
   Mail, Search, Send, Trash2, Eye,
   TrendingUp, Users, CheckCircle, AlertCircle, BarChart3,
-  ArrowLeft, ChevronRight, MailCheck, MailX, User, Zap, Timer, AlertTriangle,
+  ArrowLeft, ChevronRight, MailCheck, MailX, Timer, AlertTriangle,
 } from "lucide-react";
 import { api } from "@/services/api";
 
@@ -86,7 +86,7 @@ export default function AdminEnquiriesPage() {
     if (filter !== 'all' && e.status !== filter) return false;
     if (search.trim()) {
       const q = search.toLowerCase();
-      return e.name.toLowerCase().includes(q) || e.phone.includes(q) || (e.email ?? '').toLowerCase().includes(q) || e.message.toLowerCase().includes(q);
+      return e.name.toLowerCase().includes(q) || e.phone.includes(q) || (e.email || '').toLowerCase().includes(q) || e.message.toLowerCase().includes(q);
     }
     return true;
   });
@@ -98,7 +98,7 @@ export default function AdminEnquiriesPage() {
     try {
       const full = await api.get<Enquiry>(`/enquiries/${e.id}`);
       setSelectedEnquiry(full);
-      setMessages(full.messages ?? []);
+      setMessages(full.messages || []);
       // Update list status locally
       if (e.status === 'new') {
         setEnquiries(prev => prev.map(x => x.id === e.id ? { ...x, status: 'read' } : x));
@@ -159,7 +159,7 @@ export default function AdminEnquiriesPage() {
         </div>
         <button
           onClick={() => setShowStats(v => !v)}
-          className="text-xs font-semibold text-gray-500 hover:text-[#015851] flex items-center gap-1 transition-colors"
+          className="text-xs font-semibold text-gray-500 hover:text-[#4e66b3] flex items-center gap-1 transition-colors"
         >
           <BarChart3 className="w-3.5 h-3.5" />
           {showStats ? 'Hide Stats' : 'Show Stats'}
@@ -255,7 +255,7 @@ export default function AdminEnquiriesPage() {
                   key={f}
                   onClick={() => setFilter(f)}
                   className={`flex-1 py-1.5 rounded-md capitalize transition-all ${
-                    filter === f ? 'bg-white text-[#015851] shadow-sm' : 'text-gray-400 hover:text-gray-600'
+                    filter === f ? 'bg-white text-[#4e66b3] shadow-sm' : 'text-gray-400 hover:text-gray-600'
                   }`}
                 >
                   {f === 'all' ? `All` : f}
@@ -271,7 +271,7 @@ export default function AdminEnquiriesPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search name, phone, email..."
-                className="w-full pl-8 pr-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#015851]/20 focus:border-[#015851]"
+                className="w-full pl-8 pr-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/20 focus:border-[#4e66b3]"
               />
             </div>
           </div>
@@ -295,7 +295,7 @@ export default function AdminEnquiriesPage() {
                     key={e.id}
                     onClick={() => selectEnquiry(e)}
                     className={`w-full text-left px-3 py-3 border-b border-gray-50 transition-all hover:bg-gray-50 ${
-                      isActive ? 'bg-[#015851]/5 border-l-2 border-l-[#015851]' : ''
+                      isActive ? 'bg-[#4e66b3]/5 border-l-2 border-l-[#4e66b3]' : ''
                     } ${e.status === 'new' ? 'bg-blue-50/40' : ''}`}
                   >
                     <div className="flex items-start gap-2.5">
@@ -353,7 +353,7 @@ export default function AdminEnquiriesPage() {
             </div>
           ) : loadingConvo ? (
             <div className="flex-1 flex items-center justify-center">
-              <div className="animate-spin h-6 w-6 border-2 border-[#015851] border-t-transparent rounded-full" />
+              <div className="animate-spin h-6 w-6 border-2 border-[#4e66b3] border-t-transparent rounded-full" />
             </div>
           ) : selectedEnquiry && (
             <>
@@ -385,7 +385,7 @@ export default function AdminEnquiriesPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-3 mt-0.5 text-[11px] text-gray-400 flex-wrap">
-                      <a href={`tel:${selectedEnquiry.phone}`} className="flex items-center gap-1 hover:text-[#015851] transition-colors">
+                      <a href={`tel:${selectedEnquiry.phone}`} className="flex items-center gap-1 hover:text-[#4e66b3] transition-colors">
                         <Phone className="w-3 h-3" />{selectedEnquiry.phone}
                       </a>
                       {selectedEnquiry.email && (
@@ -468,7 +468,7 @@ export default function AdminEnquiriesPage() {
                     >
                       <div className={`max-w-[85%] sm:max-w-[70%] ${
                         msg.sender === 'admin'
-                          ? 'bg-[#015851] text-white rounded-2xl rounded-br-md'
+                          ? 'bg-[#4e66b3] text-white rounded-2xl rounded-br-md'
                           : 'bg-white text-gray-800 rounded-2xl rounded-bl-md border border-gray-100 shadow-sm'
                       } px-4 py-2.5`}>
                         <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.message}</p>
@@ -512,7 +512,7 @@ export default function AdminEnquiriesPage() {
                         <Mail className="w-3 h-3" />
                         {sendEmail ? 'Email will be sent' : 'Email off'}
                       </button>
-                      <span className="text-[10px] text-gray-400">→ {selectedEnquiry.email}</span>
+                      <span className="text-[10px] text-gray-400">? {selectedEnquiry.email}</span>
                     </div>
                     <div className="flex gap-2">
                       <textarea
@@ -521,12 +521,12 @@ export default function AdminEnquiriesPage() {
                         onKeyDown={ev => { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); handleSendMessage(); } }}
                         rows={2}
                         placeholder="Type your reply... (Enter to send, Shift+Enter for new line)"
-                        className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/25 focus:border-[#015851] bg-gray-50 resize-none"
+                        className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/25 focus:border-[#4e66b3] bg-gray-50 resize-none"
                       />
                       <button
                         onClick={handleSendMessage}
                         disabled={sending || !replyText.trim()}
-                        className="self-end w-10 h-10 rounded-xl bg-[#015851] text-white flex items-center justify-center hover:bg-[#013f39] transition-colors disabled:opacity-40 shrink-0"
+                        className="self-end w-10 h-10 rounded-xl bg-[#4e66b3] text-white flex items-center justify-center hover:bg-[#3a4f99] transition-colors disabled:opacity-40 shrink-0"
                       >
                         {sending
                           ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

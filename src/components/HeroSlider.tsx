@@ -36,7 +36,7 @@ export function HeroSlider({ slides }: { slides: Slide[] }) {
             i === current ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <img
+          <img loading={i === 0 ? "eager" : "lazy"}
             src={slide.imageUrl}
             alt={slide.alt}
             className="h-full w-full object-cover object-center"
@@ -44,7 +44,7 @@ export function HeroSlider({ slides }: { slides: Slide[] }) {
         </div>
       ))}
       {/* Optional subtle gradient on top to harmonize colors without creating a hard line */}
-      <div className="absolute inset-0 bg-linear-to-b from-[#014d43]/20 via-transparent to-[#014d43]/30" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#3d5099]/20 via-transparent to-[#3d5099]/30" />
       {imgs.length > 1 && (
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 pointer-events-auto">
           {imgs.map((_, i) => (

@@ -49,7 +49,7 @@ export function ImageUpload({
           value={url}
           onChange={(e) => handleUrlChange(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/25 focus:border-[#015851] bg-white transition-colors"
+          className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/25 focus:border-[#4e66b3] bg-white transition-colors"
         />
         <button
           type="button"
@@ -73,7 +73,7 @@ export function ImageUpload({
       </div>
       {preview && (
         <div className="relative inline-block">
-          <img
+          <img loading="lazy"
             src={preview}
             alt="Preview"
             className="h-20 w-auto rounded-lg border border-gray-200 object-cover"

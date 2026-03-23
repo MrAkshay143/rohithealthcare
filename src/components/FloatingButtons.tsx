@@ -19,11 +19,9 @@ export function FloatingButtons() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"
-        className="group relative flex items-center justify-end w-12 sm:w-28 h-12 rounded-full sm:bg-[#25D366]/20 transition-transform hover:-translate-y-1 pointer-events-auto sm:shadow-[0_4px_12px_rgba(37,211,102,0.15)]"
+        className="flex items-center justify-center w-12 h-12 rounded-full bg-[#25D366] text-white transition-transform hover:-translate-y-1 shadow-[0_4px_15px_rgba(37,211,102,0.6)]"
       >
-        <div className="absolute right-0 h-12 w-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_15px_rgba(37,211,102,0.6)]">
-          <MessageCircle className="h-5 w-5 text-white shrink-0" strokeWidth={2.5} />
-        </div>
+        <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.5} />
       </a>
       )}
 
@@ -31,11 +29,9 @@ export function FloatingButtons() {
       <a
         href={`tel:${phoneNumber}`}
         aria-label="Call"
-        className="group relative flex items-center justify-end w-12 sm:w-28 h-12 rounded-full sm:bg-[#10b981]/20 transition-transform hover:-translate-y-1 pointer-events-auto sm:shadow-[0_4px_12px_rgba(16,185,129,0.15)]"
+        className="flex items-center justify-center w-12 h-12 rounded-full bg-[#10b981] text-white transition-transform hover:-translate-y-1 shadow-[0_4px_15px_rgba(16,185,129,0.6)]"
       >
-        <div className="absolute right-0 h-12 w-12 rounded-full bg-[#10b981] flex items-center justify-center shadow-[0_4px_15px_rgba(16,185,129,0.6)]">
-          <Phone className="h-5 w-5 text-white shrink-0" strokeWidth={2.5} />
-        </div>
+        <Phone className="h-5 w-5 shrink-0" strokeWidth={2.5} />
       </a>
       )}
     </div>

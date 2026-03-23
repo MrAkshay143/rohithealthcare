@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play } from "lucide-react";
 import { api } from "@/services/api";
@@ -34,8 +34,8 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">{content['blogs_notfound'] ?? 'Post not found'}</h1>
-          <Link to="/blogs" className="text-[#015851] font-semibold hover:underline">{content['blogs_back_link'] ?? 'Back to News'}</Link>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{content['blogs_notfound'] || 'Post not found'}</h1>
+          <Link to="/blogs" className="text-[#4e66b3] font-semibold hover:underline">{content['blogs_back_link'] || 'Back to News'}</Link>
         </div>
       </div>
     );
@@ -44,27 +44,27 @@ export default function BlogPostPage() {
   if (!blog) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 border-4 border-[#015851] border-t-transparent rounded-full" />
+        <div className="animate-spin h-8 w-8 border-4 border-[#4e66b3] border-t-transparent rounded-full" />
       </div>
     );
   }
 
-  const wordCount = (blog.content ?? '').replace(/<[^>]+>/g, '').split(" ").length;
+  const wordCount = (blog.content || '').replace(/<[^>]+>/g, '').split(" ").length;
   const readMin = Math.max(1, Math.round(wordCount / 200));
-  const videoId = extractYoutubeId(blog.videoUrl ?? '')
+  const videoId = extractYoutubeId(blog.videoUrl || '')
 
   return (
     <div className="bg-[#f8f9fa] min-h-screen pb-20">
       {/* Compact hero header */}
-      <div className="relative isolate overflow-hidden bg-linear-to-br from-[#014d43] via-[#015851] to-[#017a6a] pt-8 pb-8 px-4">
+      <div className="relative isolate overflow-hidden bg-linear-to-br from-[#3d5099] via-[#4e66b3] to-[#6070c9] pt-8 pb-8 px-4">
         {blog.imageUrl && (
           <div className="absolute inset-0 opacity-10">
-            <img src={blog.imageUrl} alt="" className="w-full h-full object-cover" />
+            <img loading="lazy" src={blog.imageUrl} alt="" className="w-full h-full object-cover" />
           </div>
         )}
         <div className="relative max-w-3xl mx-auto">
           <Link to="/blogs" className="inline-flex items-center gap-1.5 text-white/60 hover:text-white mb-4 transition-colors text-xs font-medium uppercase tracking-wide">
-            <ArrowLeft className="w-3.5 h-3.5" /> {content['blogs_back_link'] ?? 'Back to News'}
+            <ArrowLeft className="w-3.5 h-3.5" /> {content['blogs_back_link'] || 'Back to News'}
           </Link>
           <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-snug mb-4">{blog.title}</h1>
           <div className="flex flex-wrap items-center gap-2">
@@ -108,7 +108,7 @@ export default function BlogPostPage() {
                     onClick={() => setPlaying(true)}
                     className="absolute inset-0 w-full h-full group cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy"
                         src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
                         alt={blog.title}
                         className="w-full h-full object-cover"
@@ -126,11 +126,10 @@ export default function BlogPostPage() {
             /* Featured image (only when no video) */
             blog.imageUrl && (
               <div className="w-full overflow-hidden">
-                <img
+                <img loading="eager"
                   src={blog.imageUrl}
                   alt={blog.title}
                   className="w-full max-h-80 object-cover"
-                  loading="eager"
                 />
               </div>
             )
@@ -160,9 +159,9 @@ export default function BlogPostPage() {
             <div className="mt-10 pt-6 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
               <Link
                 to="/blogs"
-                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-600 hover:border-[#015851] hover:text-[#015851] transition-colors"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-600 hover:border-[#4e66b3] hover:text-[#4e66b3] transition-colors"
               >
-                <ArrowLeft className="w-4 h-4" /> {content['blogs_all_link'] ?? 'All News'}
+                <ArrowLeft className="w-4 h-4" /> {content['blogs_all_link'] || 'All News'}
               </Link>
               <a
                 href={"https://wa.me/?text=" + encodeURIComponent(blog.title + ' ' + (videoId ? `https://www.youtube.com/watch?v=${videoId}` : ''))}
@@ -170,28 +169,28 @@ export default function BlogPostPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#1da851] transition-colors"
               >
-                <Share2 className="w-4 h-4" /> {content['blogs_share_btn'] ?? 'Share on WhatsApp'}
+                <Share2 className="w-4 h-4" /> {content['blogs_share_btn'] || 'Share on WhatsApp'}
               </a>
             </div>
           </div>
         </div>
 
         {/* CTA card */}
-        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#014d43] to-[#015851] p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#3d5099] to-[#4e66b3] p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-4">
             <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
               <HeartPulse className="w-6 h-6 text-white/70" />
             </div>
             <div>
-              <p className="font-bold text-white text-base">{content['blogs_cta_heading'] ?? 'Have a health concern?'}</p>
-              <p className="text-white/60 text-xs mt-0.5">{content['blogs_cta_subtext'] ?? 'Our team is ready to help you today.'}</p>
+              <p className="font-bold text-white text-base">{content['blogs_cta_heading'] || 'Have a health concern?'}</p>
+              <p className="text-white/60 text-xs mt-0.5">{content['blogs_cta_subtext'] || 'Our team is ready to help you today.'}</p>
             </div>
           </div>
           <a
-            href={`tel:+${content['contact_phone'] ?? ''}`}
-            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-[#015851] hover:bg-gray-100 transition-colors shadow-sm"
+            href={`tel:+${content['contact_phone'] || ''}`}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-[#4e66b3] hover:bg-gray-100 transition-colors shadow-sm"
           >
-            {content['blogs_cta_btn'] ?? 'Call Us Now'}
+            {content['blogs_cta_btn'] || 'Call Us Now'}
           </a>
         </div>
       </div>

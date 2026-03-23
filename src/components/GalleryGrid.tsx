@@ -35,11 +35,10 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
             className="group relative aspect-square overflow-hidden rounded-2xl bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5"
             onClick={() => setSelected(i)}
           >
-            <img
+            <img loading="lazy"
               src={photo.imageUrl}
               alt={photo.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
             />
             {/* Persistent bottom title overlay */}
             <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/75 via-black/35 to-transparent pt-8 pb-3 px-3 pointer-events-none">
@@ -90,7 +89,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
             className="relative max-w-5xl w-full mx-auto flex flex-col items-center"
             onClick={e => e.stopPropagation()}
           >
-            <img
+            <img loading="lazy"
               src={photos[selected].imageUrl}
               alt={photos[selected].title}
               className="max-h-[78vh] w-auto max-w-full object-contain rounded-xl shadow-2xl"

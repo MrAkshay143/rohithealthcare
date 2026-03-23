@@ -5,7 +5,7 @@ import {
   Heart, Brain, Bone, Baby, Pill, Syringe, Thermometer, Scan,
   Cross, ShieldPlus, Zap, Ear, Eye as EyeIcon,
   Dna, Radiation, Bandage, CircleDot, Sparkles, Waves,
-  Flame, Wind, Dot, Gauge, Beaker,
+  Flame, Wind, Gauge, Beaker,
   Briefcase,
 } from "lucide-react";
 import { api } from "@/services/api";
@@ -50,11 +50,11 @@ const HEALTH_ICONS: { name: string; Icon: any }[] = [
 ];
 
 function getIconComponent(name: string) {
-  return HEALTH_ICONS.find(i => i.name === name)?.Icon ?? Activity;
+  return HEALTH_ICONS.find(i => i.name === name)?.Icon || Activity;
 }
 
 const CARD_STYLES = [
-  { color: "text-[#015851]", bg: "bg-[#015851]/10" },
+  { color: "text-[#4e66b3]", bg: "bg-[#4e66b3]/10" },
   { color: "text-rose-600", bg: "bg-rose-50" },
   { color: "text-blue-600", bg: "bg-blue-50" },
   { color: "text-purple-600", bg: "bg-purple-50" },
@@ -155,7 +155,7 @@ export default function AdminServicesPage() {
     <div>
       {/* Header */}
       <div className="flex flex-wrap items-start gap-4 mb-6">
-        <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-[#015851] to-[#018a7e] flex items-center justify-center shrink-0 shadow-lg shadow-[#015851]/20">
+        <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-[#4e66b3] to-[#6878d4] flex items-center justify-center shrink-0 shadow-lg shadow-[#4e66b3]/20">
           <Briefcase className="w-6 h-6 text-white" />
         </div>
         <div className="flex-1 min-w-0">
@@ -163,10 +163,10 @@ export default function AdminServicesPage() {
           <p className="text-xs text-gray-500 mt-0.5">Manage diagnostic services displayed on the website.</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs bg-[#015851]/10 text-[#015851] px-2.5 py-1.5 rounded-full font-bold">{services.filter(s => s.visible).length} active</span>
+          <span className="text-xs bg-[#4e66b3]/10 text-[#4e66b3] px-2.5 py-1.5 rounded-full font-bold">{services.filter(s => s.visible).length} active</span>
           <button
             onClick={() => { if (formOpen && !editId) { resetForm(); } else { resetForm(); setFormOpen(true); } }}
-            className="inline-flex items-center gap-1.5 bg-[#015851] text-white text-sm font-bold px-4 py-2 rounded-xl hover:bg-[#013f39] transition-colors shadow-sm whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-4 py-2 rounded-xl hover:bg-[#3a4f99] transition-colors shadow-sm whitespace-nowrap"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden sm:inline">Add Service</span>
@@ -194,7 +194,7 @@ export default function AdminServicesPage() {
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                   placeholder="e.g. Clinical Pathology"
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/20 focus:border-[#015851]"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/20 focus:border-[#4e66b3]"
                   required
                 />
               </div>
@@ -204,9 +204,9 @@ export default function AdminServicesPage() {
                   <button
                     type="button"
                     onClick={() => setShowIconPicker(v => !v)}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-xl hover:border-[#015851] transition-colors"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-xl hover:border-[#4e66b3] transition-colors"
                   >
-                    <SelectedIcon className="w-4 h-4 text-[#015851]" />
+                    <SelectedIcon className="w-4 h-4 text-[#4e66b3]" />
                     <span className="text-gray-700">{icon}</span>
                   </button>
                   {showIconPicker && (
@@ -218,7 +218,7 @@ export default function AdminServicesPage() {
                             type="button"
                             onClick={() => { setIcon(name); setShowIconPicker(false); }}
                             className={`p-2 rounded-lg flex items-center justify-center transition-colors ${
-                              icon === name ? 'bg-[#015851] text-white' : 'hover:bg-gray-100 text-gray-600'
+                              icon === name ? 'bg-[#4e66b3] text-white' : 'hover:bg-gray-100 text-gray-600'
                             }`}
                             title={name}
                           >
@@ -238,7 +238,7 @@ export default function AdminServicesPage() {
                 onChange={e => setDescription(e.target.value)}
                 placeholder="Brief description of this service..."
                 rows={3}
-                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/20 focus:border-[#015851] resize-none"
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/20 focus:border-[#4e66b3] resize-none"
                 required
               />
             </div>
@@ -250,7 +250,7 @@ export default function AdminServicesPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="inline-flex items-center gap-1.5 bg-[#015851] text-white text-sm font-bold px-5 py-2 rounded-xl hover:bg-[#013f39] transition-colors disabled:opacity-50 whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-5 py-2 rounded-xl hover:bg-[#3a4f99] transition-colors disabled:opacity-50 whitespace-nowrap"
               >
                 <Save className="w-3.5 h-3.5" />
                 {saving ? 'Saving…' : editId ? 'Update' : 'Add Service'}
@@ -276,7 +276,7 @@ export default function AdminServicesPage() {
               <div
                 key={svc.id}
                 className={`bg-white rounded-xl border shadow-sm p-3 sm:p-4 flex items-center gap-3 transition-all ${
-                  isEditing ? 'border-[#015851] ring-2 ring-[#015851]/20' : 'border-gray-100'
+                  isEditing ? 'border-[#4e66b3] ring-2 ring-[#4e66b3]/20' : 'border-gray-100'
                 } ${!svc.visible ? 'opacity-50' : ''}`}
               >
                 {/* Reorder */}

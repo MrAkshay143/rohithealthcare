@@ -20,7 +20,7 @@ class BlogController extends Controller
 
         $allowed = ['id', 'title', 'createdAt', 'created_at', 'slug'];
         $orderBy = in_array($request->query('orderBy'), $allowed) ? $request->query('orderBy') : 'createdAt';
-        $orderDir = in_array(strtolower($request->query('orderDir', 'desc')), ['asc', 'desc']) ? $request->query('orderDir') : 'desc';
+        $orderDir = in_array($raw = strtolower($request->query('orderDir', 'desc')), ['asc', 'desc']) ? $raw : 'desc';
         $query->orderBy($orderBy, $orderDir);
 
         $take = $request->query('take');

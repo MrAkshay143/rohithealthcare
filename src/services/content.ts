@@ -1,4 +1,4 @@
-﻿import { api } from './api';
+import { api } from './api';
 
 export type FieldType = 'text' | 'toggle' | 'image' | 'pills';
 export type ContentFieldDef = { value: string; label: string; group: string; type?: FieldType };
@@ -9,7 +9,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   site_name:            { value: 'Rohit Health Care', label: 'Site / Brand Name', group: 'General' },
   site_tagline:         { value: 'Trusted diagnostics. Accurate results. Right at your doorstep.', label: 'Site Tagline', group: 'General' },
   site_logo:            { value: '', label: 'Custom Logo URL (leave empty for default)', group: 'General', type: 'image' },
-  years_experience:     { value: '10+', label: 'Years of Experience', group: 'General' },
+  years_experience:     { value: '5+', label: 'Years of Experience', group: 'General' },
   google_maps_url:      { value: 'https://maps.app.goo.gl/Znro1u9tvL1zYNuB9', label: 'Google Maps Directions URL', group: 'General' },
   google_maps_embed:    { value: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d839.8748787948425!2d86.21762830764052!3d23.09263661044418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5d9e094e2ca17%3A0x4a91deca3f7decf1!2sRohit%20Health%20Care!5e1!3m2!1sen!2sin!4v1774070592440!5m2!1sen!2sin', label: 'Google Maps Embed URL (iframe)', group: 'General' },
   youtube_url:          { value: 'http://www.youtube.com/@rohithealthcare', label: 'YouTube Channel URL', group: 'General' },
@@ -45,7 +45,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── Footer ────────────────────────────────────────────────
   footer_tagline:            { value: 'Your trusted partner for comprehensive medical services, diagnostics, and daycare.', label: 'Footer Tagline', group: 'Footer' },
-  footer_address_short:      { value: '123 Medical Hub Ave,\nDiagnostic Square, City, 110011', label: 'Footer Address (short)', group: 'Footer' },
+  footer_address_short:      { value: 'Masjid Road, Balarampur,\nWest Bengal, India', label: 'Footer Address (short)', group: 'Footer' },
   footer_logo_desktop:       { value: 'true', label: 'Show Logo - Desktop', group: 'Footer', type: 'toggle' },
   footer_logo_mobile:        { value: 'true', label: 'Show Logo - Mobile', group: 'Footer', type: 'toggle' },
   footer_quicklinks_heading: { value: 'Quick Links', label: 'Quick Links Section Title', group: 'Footer' },
@@ -91,18 +91,19 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   hero_badge:          { value: 'Associated with Apollo Diagnostics', label: 'Hero Badge Text', group: 'Hero Section' },
   hero_heading:        { value: 'Accurate Diagnostics.', label: 'Hero Main Heading', group: 'Hero Section' },
   hero_accent:         { value: 'Trusted Care.', label: 'Hero Accent (red) Text', group: 'Hero Section' },
-  hero_subtext:        { value: 'Your trusted partner for accurate diagnostics and home sample collection. Fast, reliable and right at your doorstep.', label: 'Hero Sub-text', group: 'Hero Section' },
+  hero_subtext:        { value: 'Your trusted partner for accurate diagnostics and home sample collection.\nFast, reliable and right at your doorstep.', label: 'Hero Sub-text', group: 'Hero Section' },
   hero_btn_call:       { value: 'Call Us Now', label: 'Hero Call Button Label', group: 'Hero Section' },
   hero_btn_directions: { value: 'Directions', label: 'Hero Directions Button Label', group: 'Hero Section' },
-  hero_pills:          { value: 'NABL Accredited, Same Day Reports, Home Collection, 10+ Years', label: 'Hero Trust Pills (comma-separated)', group: 'Hero Section', type: 'pills' },
+  hero_pills:          { value: 'NABL Accredited, Same Day Reports, Home Collection, 5+ Years', label: 'Hero Trust Pills (comma-separated)', group: 'Hero Section', type: 'pills' },
 
   // ─── Stats Strip ──────────────────────────────────────────
   stat_1_value: { value: '50,000+', label: 'Stat 1 - Number', group: 'Stats Strip' },
   stat_1_label: { value: 'Happy Patients', label: 'Stat 1 - Label', group: 'Stats Strip' },
   stat_2_value: { value: '3,000+', label: 'Stat 2 - Number', group: 'Stats Strip' },
   stat_2_label: { value: 'Diagnostic Tests', label: 'Stat 2 - Label', group: 'Stats Strip' },
+  stat_3_value: { value: '5+', label: 'Stat 3 - Number', group: 'Stats Strip' },
   stat_3_label: { value: 'Years of Service', label: 'Stat 3 - Label', group: 'Stats Strip' },
-  stat_4_value: { value: '100%', label: 'Stat 4 - Number', group: 'Stats Strip' },
+  stat_4_value: { value: '100+', label: 'Stat 4 - Number', group: 'Stats Strip' },
   stat_4_label: { value: 'Same-Day Reports', label: 'Stat 4 - Label', group: 'Stats Strip' },
 
   // ─── Home Services ────────────────────────────────────────
@@ -154,7 +155,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── About Page ───────────────────────────────────────────
   about_page_badge:       { value: 'Our Story', label: 'Hero Badge', group: 'About Page' },
   about_page_heading:     { value: 'Built on Trust, Driven by Accuracy', label: 'Hero Heading', group: 'About Page' },
-  about_page_subtext:     { value: 'Rohit Health Care is committed to delivering swift, accessible, and precise diagnostics to our community - with full NABL backing.', label: 'Hero Sub-text', group: 'About Page' },
+  about_page_subtext:     { value: 'Committed to care, accuracy, and trust.', label: 'Hero Sub-text', group: 'About Page' },
   about_excellence_badge: { value: 'Committed to Excellence', label: 'Content Section Badge', group: 'About Page' },
   about_section_heading:  { value: 'The Right Diagnosis Changes Everything', label: 'Content Heading', group: 'About Page' },
   about_body_1:           { value: 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.', label: 'Body Paragraph 1', group: 'About Page' },
@@ -185,7 +186,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Services Page ────────────────────────────────────────
   services_page_badge:   { value: 'Premium Diagnostics', label: 'Page Badge', group: 'Services Page' },
   services_page_heading: { value: 'Our Diagnostic Services', label: 'Page Heading', group: 'Services Page' },
-  services_page_subtext: { value: 'Advanced technology, trained professionals, and a top-tier NABL-accredited network - delivering accurate results on time, every time.', label: 'Page Sub-text', group: 'Services Page' },
+  services_page_subtext: { value: 'Precision testing you can rely on.', label: 'Page Sub-text', group: 'Services Page' },
 
   // ─── Services CTA ─────────────────────────────────────────
   services_cta_heading:      { value: 'Need a specific test?', label: 'CTA Heading', group: 'Services CTA' },
@@ -197,7 +198,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Doctors Page ─────────────────────────────────────────
   doctors_page_badge:       { value: 'Expert Professionals', label: 'Page Badge', group: 'Doctors Page' },
   doctors_page_heading:     { value: 'Our Medical Team', label: 'Page Heading', group: 'Doctors Page' },
-  doctors_page_subtext:     { value: 'Dedicated specialists committed to providing the highest standard of healthcare and accurate diagnostics.', label: 'Page Sub-text', group: 'Doctors Page' },
+  doctors_page_subtext:     { value: 'Experienced hands, compassionate care.', label: 'Page Sub-text', group: 'Doctors Page' },
   doctors_empty_text:       { value: 'No doctors found. Add some from the admin panel.', label: 'Empty State Text', group: 'Doctors Page' },
   doctors_cta_heading:      { value: 'Book a Consultation', label: 'CTA Heading', group: 'Doctors Page' },
   doctors_cta_subtext:      { value: 'Our team is available 7 days a week. Walk in or call us to schedule at your convenience.', label: 'CTA Sub-text', group: 'Doctors Page' },
@@ -309,5 +310,65 @@ export async function getSiteContent(): Promise<Record<string, string>> {
     }
   } catch { /* defaults already set */ }
   return merged;
+}
+
+// ─── Home Bundle ─────────────────────────────────────────────
+export interface HomeBundleData {
+  content: Record<string, string>;
+  doctors: any[];
+  blogs: any[];
+  heroSlides: { id: number; imageUrl: string; alt: string }[];
+  services: any[];
+}
+
+const HOME_BUNDLE_KEY = 'home_data';
+const HOME_BUNDLE_TTL = 3600_000; // 1 hour in ms
+
+export async function getHomeBundle(): Promise<HomeBundleData> {
+  // Check sessionStorage cache
+  try {
+    const cached = sessionStorage.getItem(HOME_BUNDLE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed._ts && Date.now() - parsed._ts < HOME_BUNDLE_TTL) {
+        return parsed.data;
+      }
+    }
+  } catch { /* ignore storage errors */ }
+
+  // Fetch from API
+  const raw = await api.get<any>('/home-bundle');
+
+  // Normalise array fields (PHP json_encode can emit {} for empty collections)
+  const bundle: HomeBundleData = {
+    content: raw.content ?? {},
+    doctors: Array.isArray(raw.doctors) ? raw.doctors : [],
+    blogs: Array.isArray(raw.blogs) ? raw.blogs : [],
+    heroSlides: Array.isArray(raw.heroSlides) ? raw.heroSlides : [],
+    services: Array.isArray(raw.services) ? raw.services : [],
+  };
+
+  // Build defaults-merged content
+  const merged: Record<string, string> = {};
+  for (const key of Object.keys(CONTENT_DEFAULTS)) {
+    merged[key] = CONTENT_DEFAULTS[key].value;
+  }
+  if (bundle.content) {
+    for (const [key, value] of Object.entries(bundle.content)) {
+      if (value !== undefined) merged[key] = value;
+    }
+  }
+  bundle.content = merged;
+
+  // Cache in sessionStorage
+  try {
+    sessionStorage.setItem(HOME_BUNDLE_KEY, JSON.stringify({ _ts: Date.now(), data: bundle }));
+  } catch { /* storage full or unavailable */ }
+
+  return bundle;
+}
+
+export function invalidateHomeBundleCache(): void {
+  try { sessionStorage.removeItem(HOME_BUNDLE_KEY); } catch { /* ignore */ }
 }
 

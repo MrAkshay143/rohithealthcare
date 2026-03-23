@@ -38,7 +38,7 @@ export function LogoUpload({
       <div className="flex items-center gap-4">
         {preview ? (
           <div className="relative">
-            <img src={preview} alt="Logo" className="h-14 w-auto bg-white rounded-lg border border-gray-200 p-1" onError={() => setPreview('')} />
+            <img loading="lazy" src={preview} alt="Logo" className="h-14 w-auto bg-white rounded-lg border border-gray-200 p-1" onError={() => setPreview('')} />
             <button type="button" onClick={() => { setUrl(''); setPreview(''); onChange?.('') }}
               className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600">
               <X className="w-3 h-3" />

@@ -3,7 +3,7 @@ import { Plus, Eye, EyeOff, Type, FileText, Loader2, Youtube, LinkIcon } from 'l
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const INPUT = 'w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/25 focus:border-[#015851] bg-white transition-colors'
+const INPUT = 'w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/25 focus:border-[#4e66b3] bg-white transition-colors'
 
 function extractYoutubeId(url: string): string | null {
   const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
@@ -17,9 +17,9 @@ export function BlogForm({
   onSubmit: (data: { title: string; content: string; imageUrl: string; videoUrl: string; draft: boolean; id?: number }) => void
   editBlog?: { id: number; title: string; content: string; imageUrl?: string; videoUrl?: string; draft?: boolean } | null
 }) {
-  const [draft, setDraft] = useState(editBlog?.draft ?? false)
-  const [imageUrl, setImageUrl] = useState(editBlog?.imageUrl ?? '')
-  const [videoUrl, setVideoUrl] = useState(editBlog?.videoUrl ?? '')
+  const [draft, setDraft] = useState(editBlog?.draft || false)
+  const [imageUrl, setImageUrl] = useState(editBlog?.imageUrl || '')
+  const [videoUrl, setVideoUrl] = useState(editBlog?.videoUrl || '')
   const [saving, setSaving] = useState(false)
 
   function handleVideoUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -55,7 +55,7 @@ export function BlogForm({
         <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
           <Type className="w-3.5 h-3.5 text-gray-400" /> Post Title
         </label>
-        <input name="title" defaultValue={editBlog?.title ?? ''} placeholder="Enter a compelling title..." required className={INPUT} />
+        <input name="title" defaultValue={editBlog?.title || ''} placeholder="Enter a compelling title..." required className={INPUT} />
       </div>
       <div>
         <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
@@ -84,7 +84,7 @@ export function BlogForm({
           <FileText className="w-3.5 h-3.5 text-gray-400" /> Content
           <span className="ml-1 text-[10px] font-normal normal-case text-gray-400">(short description)</span>
         </label>
-        <textarea name="content" defaultValue={editBlog?.content ?? ''} placeholder="Write a short description or summary..." required rows={4} className={INPUT + ' resize-none'} />
+        <textarea name="content" defaultValue={editBlog?.content || ''} placeholder="Write a short description or summary..." required rows={4} className={INPUT + ' resize-none'} />
       </div>
       <div>
         <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
@@ -106,7 +106,7 @@ export function BlogForm({
           {draft ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
           {draft ? 'Save as Draft' : 'Publish Immediately'}
         </button>
-        <button type="submit" disabled={saving} className="inline-flex items-center gap-1.5 bg-[#015851] text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-[#013f39] transition-colors disabled:opacity-50 shadow-sm">
+        <button type="submit" disabled={saving} className="inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-[#3a4f99] transition-colors disabled:opacity-50 shadow-sm">
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
           {editBlog ? (saving ? 'Updating…' : 'Update Post') : (saving ? 'Saving…' : (draft ? 'Save Draft' : 'Publish'))}
         </button>

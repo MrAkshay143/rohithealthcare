@@ -1,48 +1,47 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect, useState, useCallback } from 'react'
-import { getSiteContent } from '@/services/content'
-import { ContentContext } from '@/hooks/useContent'
+import { Routes, Route } from 'react-router-dom'
+import { useEffect, useState, useCallback, Suspense, lazy } from 'react'
+import { getHomeBundle, invalidateHomeBundleCache } from '@/services/content'
+import type { HomeBundleData } from '@/services/content'
+import { ContentContext, HomeBundleContext } from '@/hooks/useContent'
 import { PublicLayout } from '@/components/PublicLayout'
 import AdminLayout from '@/pages/admin/AdminLayout'
-import HomePage from '@/pages/HomePage'
-import AboutPage from '@/pages/AboutPage'
-import ServicesPage from '@/pages/ServicesPage'
-import DoctorsPage from '@/pages/DoctorsPage'
-import GalleryPage from '@/pages/GalleryPage'
-import BlogsPage from '@/pages/BlogsPage'
-import BlogPostPage from '@/pages/BlogPostPage'
-import ContactPage from '@/pages/ContactPage'
-import NotFoundPage from '@/pages/NotFoundPage'
-import AdminLogin from '@/pages/admin/AdminLoginPage'
-import AdminDashboard from '@/pages/admin/AdminDashboardPage'
-import AdminBlogs from '@/pages/admin/AdminBlogsPage'
-import AdminDoctors from '@/pages/admin/AdminDoctorsPage'
-import AdminGallery from '@/pages/admin/AdminGalleryPage'
-import AdminHero from '@/pages/admin/AdminHeroPage'
-import AdminContent from '@/pages/admin/AdminContentPage'
-import AdminSettings from '@/pages/admin/AdminSettingsPage'
-import AdminEnquiries from '@/pages/admin/AdminEnquiriesPage'
-import AdminServices from '@/pages/admin/AdminServicesPage'
 import { ToastContainer } from '@/components/Toast'
+
+const HomePage = lazy(() => import('@/pages/HomePage'))
+const AboutPage = lazy(() => import('@/pages/AboutPage'))
+const ServicesPage = lazy(() => import('@/pages/ServicesPage'))
+const DoctorsPage = lazy(() => import('@/pages/DoctorsPage'))
+const GalleryPage = lazy(() => import('@/pages/GalleryPage'))
+const BlogsPage = lazy(() => import('@/pages/BlogsPage'))
+const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'))
+const ContactPage = lazy(() => import('@/pages/ContactPage'))
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
+const AdminLogin = lazy(() => import('@/pages/admin/AdminLoginPage'))
+const AdminDashboard = lazy(() => import('@/pages/admin/AdminDashboardPage'))
+const AdminBlogs = lazy(() => import('@/pages/admin/AdminBlogsPage'))
+const AdminDoctors = lazy(() => import('@/pages/admin/AdminDoctorsPage'))
+const AdminGallery = lazy(() => import('@/pages/admin/AdminGalleryPage'))
+const AdminHero = lazy(() => import('@/pages/admin/AdminHeroPage'))
+const AdminContent = lazy(() => import('@/pages/admin/AdminContentPage'))
+const AdminSettings = lazy(() => import('@/pages/admin/AdminSettingsPage'))
+const AdminEnquiries = lazy(() => import('@/pages/admin/AdminEnquiriesPage'))
+const AdminServices = lazy(() => import('@/pages/admin/AdminServicesPage'))
 
 export default function App() {
   const [content, setContent] = useState<Record<string, string>>({})
+  const [bundle, setBundle] = useState<HomeBundleData | null>(null)
   const [loading, setLoading] = useState(true)
-  const location = useLocation()
 
   const refreshContent = useCallback(() => {
-    getSiteContent().then((c) => {
-      setContent(c)
+    invalidateHomeBundleCache()
+    getHomeBundle().then((b) => {
+      setContent(b.content)
+      setBundle(b)
       setLoading(false)
     })
   }, [])
 
   useEffect(() => { refreshContent() }, [refreshContent])
-
-  // Refresh content when navigating away from admin pages
-  useEffect(() => {
-    if (!location.pathname.startsWith('/admin')) refreshContent()
-  }, [location.pathname, refreshContent])
 
   // Listen for content-updated events from admin save
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function App() {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-14">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-4 w-24 rounded-full bg-[#015851]/10" />
+            <div className="h-4 w-24 rounded-full bg-[#4e66b3]/10" />
             <div className="h-8 w-72 rounded-lg bg-gray-200" />
             <div className="h-4 w-96 rounded-full bg-gray-100" />
           </div>
@@ -82,7 +81,14 @@ export default function App() {
 
   return (
     <ContentContext.Provider value={content}>
+    <HomeBundleContext.Provider value={bundle}>
       <ToastContainer />
+      <Suspense fallback={
+        <div className="min-h-screen bg-white animate-pulse flex flex-col justify-center items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-t-2 border-[#4e66b3] mb-4"></div>
+          <p className="text-gray-500 font-medium tracking-wide">Loading content...</p>
+        </div>
+      }>
         <Routes>
         {/* Public routes */}
         <Route element={<PublicLayout />}>
@@ -111,6 +117,8 @@ export default function App() {
           <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
+      </Suspense>
+    </HomeBundleContext.Provider>
     </ContentContext.Provider>
   )
 }

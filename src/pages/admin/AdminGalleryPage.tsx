@@ -67,19 +67,19 @@ export default function AdminGalleryPage() {
         <h2 className="text-sm font-bold text-gray-800 mb-3">
           {editPhoto ? '✏️ Editing: ' + editPhoto.title : '+ Add Photo'}
         </h2>
-        <GalleryForm onSubmit={editPhoto ? handleUpdate : handleAdd} editPhoto={editPhoto} key={editId ?? 'new'} />
+        <GalleryForm onSubmit={editPhoto ? handleUpdate : handleAdd} editPhoto={editPhoto} key={editId || 'new'} />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3">
         {photos.map((photo) => (
-          <div key={photo.id} className={`bg-white border rounded-xl overflow-hidden shadow-sm group ${editId === photo.id ? 'border-[#015851] ring-2 ring-[#015851]/20' : 'border-gray-100'}`}>
+          <div key={photo.id} className={`bg-white border rounded-xl overflow-hidden shadow-sm group ${editId === photo.id ? 'border-[#4e66b3] ring-2 ring-[#4e66b3]/20' : 'border-gray-100'}`}>
             <div className="aspect-square relative overflow-hidden bg-gray-100">
-              <img src={photo.imageUrl} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" />
+              <img loading="lazy" src={photo.imageUrl} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" />
             </div>
             <div className="p-2 flex items-center justify-between gap-1">
               <p className="text-xs font-medium truncate text-gray-700">{photo.title}</p>
               <div className="flex gap-0.5 shrink-0">
-                <Link to={`/admin/gallery?edit=${photo.id}`} className="p-1 text-gray-300 hover:text-[#015851] hover:bg-[#015851]/10 rounded-lg transition-colors">
+                <Link to={`/admin/gallery?edit=${photo.id}`} className="p-1 text-gray-300 hover:text-[#4e66b3] hover:bg-[#4e66b3]/10 rounded-lg transition-colors">
                   <Pencil className="w-3.5 h-3.5" />
                 </Link>
                 <ConfirmDeleteButton

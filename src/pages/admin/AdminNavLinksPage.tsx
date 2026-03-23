@@ -1,13 +1,13 @@
-﻿import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import {
   Plus, Pencil, Trash2, GripVertical, Eye, EyeOff,
   ExternalLink, Monitor, Smartphone, ChevronUp, ChevronDown,
-  X, Check, Link2, Save, AlertTriangle, RefreshCw,
+  X, Check, Link2, Save, RefreshCw,
 } from 'lucide-react'
 import { api } from '@/services/api'
 import { toast as globalToast } from '@/components/Toast'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// --- Types --------------------------------------------------------------------
 
 export interface NavLink {
   id: number
@@ -41,7 +41,7 @@ const EMPTY_FORM: LinkForm = {
   mobile_visible: true,
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// --- Helpers ------------------------------------------------------------------
 
 function Toggle({
   checked,
@@ -74,7 +74,7 @@ function Toggle({
   )
 }
 
-// ─── Delete Confirm Inline ─────────────────────────────────────────────────
+// --- Delete Confirm Inline -------------------------------------------------
 
 function DeleteConfirm({ onConfirm }: { onConfirm: () => void }) {
   const [asked, setAsked] = useState(false)
@@ -110,7 +110,7 @@ function DeleteConfirm({ onConfirm }: { onConfirm: () => void }) {
   )
 }
 
-// ─── Main Page ─────────────────────────────────────────────────────────────────
+// --- Main Page -----------------------------------------------------------------
 
 export default function AdminNavLinksPage() {
   const [tab, setTab] = useState<TabType>('navbar')
@@ -125,7 +125,7 @@ export default function AdminNavLinksPage() {
   const dragItem = useRef<number | null>(null)
   const formRef = useRef<HTMLDivElement>(null)
 
-  // ── Data ──────────────────────────────────────────────────────────────────
+  // -- Data ------------------------------------------------------------------
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -146,13 +146,13 @@ export default function AdminNavLinksPage() {
     else globalToast.error(msg)
   }
 
-  // ── Derived ───────────────────────────────────────────────────────────────
+  // -- Derived ---------------------------------------------------------------
 
   const navbarLinks = links.filter(l => l.type === 'navbar').sort((a, b) => a.order - b.order || a.id - b.id)
   const footerLinks = links.filter(l => l.type === 'footer').sort((a, b) => a.order - b.order || a.id - b.id)
   const sorted = tab === 'navbar' ? navbarLinks : footerLinks
 
-  // ── Form helpers ─────────────────────────────────────────────────────────
+  // -- Form helpers ---------------------------------------------------------
 
   const openAdd = () => {
     setEditingId(null)
@@ -214,7 +214,7 @@ export default function AdminNavLinksPage() {
     }
   }
 
-  // ── Link actions ─────────────────────────────────────────────────────────
+  // -- Link actions ---------------------------------------------------------
 
   const handleDelete = async (id: number) => {
     try {
@@ -236,7 +236,7 @@ export default function AdminNavLinksPage() {
     }
   }
 
-  // ── Reorder helpers ──────────────────────────────────────────────────────
+  // -- Reorder helpers ------------------------------------------------------
 
   const sendReorder = async (items: NavLink[]) => {
     const payload = items.map((l, i) => ({ id: l.id, order: i + 1 }))
@@ -261,7 +261,7 @@ export default function AdminNavLinksPage() {
     }
   }
 
-  // ── Drag & Drop ──────────────────────────────────────────────────────────
+  // -- Drag & Drop ----------------------------------------------------------
 
   const handleDragStart = (e: React.DragEvent, idx: number) => {
     dragItem.current = idx
@@ -295,7 +295,7 @@ export default function AdminNavLinksPage() {
   const handleDragLeave = () => setDragOver(null)
   const handleDragEnd = () => { dragItem.current = null; setDragOver(null) }
 
-  // ─── Render ───────────────────────────────────────────────────────────────
+  // --- Render ---------------------------------------------------------------
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
@@ -338,7 +338,7 @@ export default function AdminNavLinksPage() {
               tab === t ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            {t === 'navbar' ? '🔗 Navbar' : '📋 Footer'}
+            {t === 'navbar' ? '?? Navbar' : '?? Footer'}
             <span className={`text-xs px-1.5 py-0.5 rounded-full ${
               tab === t ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-200 text-gray-500'
             }`}>
@@ -352,7 +352,7 @@ export default function AdminNavLinksPage() {
       <div className={`rounded-xl border px-4 py-3 text-xs text-gray-600 flex items-start gap-2.5 ${
         tab === 'navbar' ? 'bg-blue-50 border-blue-100' : 'bg-purple-50 border-purple-100'
       }`}>
-        <span className="text-lg leading-none mt-0.5">{tab === 'navbar' ? '🖥️' : '📌'}</span>
+        <span className="text-lg leading-none mt-0.5">{tab === 'navbar' ? '???' : '??'}</span>
         {tab === 'navbar' ? (
           <span>
             Navbar links support <strong>Desktop</strong> and <strong>Mobile</strong> visibility toggles.
@@ -619,7 +619,7 @@ export default function AdminNavLinksPage() {
                 ) : (
                   <Save className="w-4 h-4" />
                 )}
-                {saving ? 'Saving…' : editingId !== null ? 'Save Changes' : 'Add Link'}
+                {saving ? 'Saving�' : editingId !== null ? 'Save Changes' : 'Add Link'}
               </button>
             </div>
           </form>
@@ -631,20 +631,20 @@ export default function AdminNavLinksPage() {
         <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Tips</p>
         <ul className="space-y-1.5 text-xs text-gray-500">
           <li className="flex items-start gap-2">
-            <span className="text-emerald-500 mt-px">•</span>
+            <span className="text-emerald-500 mt-px">�</span>
             Use internal paths like <code className="bg-gray-200 px-1 rounded">/about</code> or full URLs like <code className="bg-gray-200 px-1 rounded">https://example.com</code>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-emerald-500 mt-px">•</span>
-            Drag rows or use the <strong>↑↓ arrows</strong> to change the order in which links appear
+            <span className="text-emerald-500 mt-px">�</span>
+            Drag rows or use the <strong>?? arrows</strong> to change the order in which links appear
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-emerald-500 mt-px">•</span>
+            <span className="text-emerald-500 mt-px">�</span>
             Click the <Eye className="w-3 h-3 inline" /> eye icon to quickly show/hide a link without deleting it
           </li>
           {tab === 'navbar' && (
             <li className="flex items-start gap-2">
-              <span className="text-emerald-500 mt-px">•</span>
+              <span className="text-emerald-500 mt-px">�</span>
               Per-link <Monitor className="w-3 h-3 inline" /> desktop and <Smartphone className="w-3 h-3 inline" /> mobile toggles let you control where each link is shown
             </li>
           )}

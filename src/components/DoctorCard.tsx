@@ -24,15 +24,14 @@ export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
       <div className="shrink-0 flex justify-center pt-5 pb-4 bg-linear-to-b from-gray-50/50 to-white relative">
         {doc.imageUrl ? (
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-sm ring-1 ring-gray-100">
-            <img
+            <img loading="lazy"
               src={doc.imageUrl}
               alt={doc.name}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
             />
           </div>
         ) : (
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-50 flex items-center justify-center shadow-sm ring-1 ring-gray-100 text-[#015851]">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-50 flex items-center justify-center shadow-sm ring-1 ring-gray-100 text-[#4e66b3]">
             <span className="text-xl sm:text-2xl font-bold tracking-wide">{initials}</span>
           </div>
         )}
@@ -46,7 +45,7 @@ export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
         </h3>
         
         {/* Degree / Qualifications - Critical Fix: Single Line */}
-        <p className="text-[13px] sm:text-sm font-semibold text-[#015851] truncate w-full mb-1" title={doc.qualifications}>
+        <p className="text-[13px] sm:text-sm font-semibold text-[#4e66b3] truncate w-full mb-1" title={doc.qualifications}>
           {doc.qualifications || content['doctor_default_qual'] || 'MBBS'}
         </p>
 
@@ -64,7 +63,7 @@ export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="text-[10px] sm:text-[11px] tracking-wide font-semibold text-emerald-600 uppercase">
-              {content['doctor_availability'] ?? 'Available'}
+              {content['doctor_availability'] || 'Available'}
             </span>
           </div>
         </div>

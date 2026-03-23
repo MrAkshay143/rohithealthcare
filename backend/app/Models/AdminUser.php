@@ -9,7 +9,7 @@ class AdminUser extends Model
     protected $table = 'admin_users';
     public $timestamps = false;
 
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['username', 'password', 'session_token'];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'session_token'];
 }

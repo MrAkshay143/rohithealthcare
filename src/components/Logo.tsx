@@ -1,7 +1,7 @@
 export function Logo({ className = "", customLogo = "" }: { className?: string; customLogo?: string }) {
   if (customLogo) {
     return (
-      <img src={customLogo} alt="Logo" className={`h-10 w-auto ${className}`} />
+      <img loading="lazy" src={customLogo} alt="Logo" className={`h-10 w-auto ${className}`} />
     )
   }
 
@@ -10,13 +10,13 @@ export function Logo({ className = "", customLogo = "" }: { className?: string; 
       <div className="relative leading-none">
         <div className="flex items-end leading-none">
           <span
-            className="text-[#015851] font-black tracking-wider"
+            className="text-[#4e66b3] font-black tracking-wider"
             style={{ lineHeight: 1, fontFamily: '"Arial Black",Arial,sans-serif' }}
           >
             ROH
           </span>
           <span
-            className="relative text-[#015851] font-black tracking-wider"
+            className="relative text-[#4e66b3] font-black tracking-wider"
             style={{ lineHeight: 1, fontFamily: '"Arial Black",Arial,sans-serif' }}
           >
             <svg
@@ -31,14 +31,14 @@ export function Logo({ className = "", customLogo = "" }: { className?: string; 
             I
           </span>
           <span
-            className="text-[#015851] font-black tracking-wider"
+            className="text-[#4e66b3] font-black tracking-wider"
             style={{ lineHeight: 1, fontFamily: '"Arial Black",Arial,sans-serif' }}
           >
             T
           </span>
         </div>
         <svg
-          className="w-full fill-[#015851]"
+          className="w-full fill-[#4e66b3]"
           style={{ height: "0.22em", display: "block", marginTop: "0.04em" }}
           viewBox="0 0 220 10"
           preserveAspectRatio="none"

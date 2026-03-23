@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left brand panel */}
-      <div className="hidden lg:flex flex-col justify-between bg-linear-to-br from-[#014d43] via-[#015851] to-[#017a6a] p-12">
+      <div className="hidden lg:flex flex-col justify-between bg-linear-to-br from-[#3d5099] via-[#4e66b3] to-[#6070c9] p-12">
         <div>
           <h2 className="text-2xl font-black text-white tracking-tight">{siteName}</h2>
           <p className="text-white/60 text-sm mt-1">Admin Control Panel</p>
@@ -65,7 +65,7 @@ export default function AdminLoginPage() {
         <div className="w-full max-w-sm">
           {/* Logo mark */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
-            <div className="h-10 w-10 rounded-xl bg-[#015851] flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-[#4e66b3] flex items-center justify-center">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -91,7 +91,7 @@ export default function AdminLoginPage() {
                 type="text"
                 required
                 autoComplete="username"
-                className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/30 focus:border-[#015851] bg-white transition-colors"
+                className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/30 focus:border-[#4e66b3] bg-white transition-colors"
                 placeholder="Enter username"
               />
             </div>
@@ -102,14 +102,14 @@ export default function AdminLoginPage() {
                 type="password"
                 required
                 autoComplete="current-password"
-                className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#015851]/30 focus:border-[#015851] bg-white transition-colors"
+                className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/30 focus:border-[#4e66b3] bg-white transition-colors"
                 placeholder="Enter password"
               />
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-[#015851] text-white py-3 rounded-xl font-bold hover:bg-[#013f39] transition-colors text-sm mt-2 disabled:opacity-60"
+              className="w-full bg-[#4e66b3] text-white py-3 rounded-xl font-bold hover:bg-[#3a4f99] transition-colors text-sm mt-2 disabled:opacity-60"
             >
               {submitting ? "Signing in…" : "Sign In"}
             </button>

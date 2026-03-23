@@ -9,9 +9,9 @@ const NAV_HREFS = ['/', '/about', '/doctors', '/services', '/gallery', '/blogs',
 
 export function Navbar() {
   const content = useContent();
-  const phone = content['contact_phone'] ?? '';
-  const ctaLabel = content['navbar_cta_label'] ?? 'Call Now';
-  const customLogo = content['site_logo'] ?? '';
+  const phone = content['contact_phone'] || '';
+  const ctaLabel = content['navbar_cta_label'] || 'Call Now';
+  const customLogo = content['site_logo'] || '';
   const ctaDesktop = isTrueValue(content['navbar_cta_desktop']);
   const ctaMobile = isTrueValue(content['navbar_cta_mobile']);
   const logoDesktop = isTrueValue(content['navbar_logo_desktop']);
@@ -19,7 +19,7 @@ export function Navbar() {
 
   // Build nav links from content labels
   const navLinks = NAV_HREFS.map((href, i) => ({
-    name: content[`navbar_link_${i + 1}_label`] ?? '',
+    name: content[`navbar_link_${i + 1}_label`] || '',
     href,
     desktop: isTrueValue(content[`navbar_link_${i + 1}_desktop`]),
     mobile: isTrueValue(content[`navbar_link_${i + 1}_mobile`]),
@@ -43,11 +43,11 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link to="/" className={`block ${logoDesktop ? '' : 'md:hidden'} ${logoMobile ? '' : 'hidden md:block'} ${!logoDesktop && !logoMobile ? 'hidden!' : ''}`}>
+          <Link to="/" className={`block ${logoDesktop ? '' : 'lg:hidden'} ${logoMobile ? '' : 'hidden lg:block'} ${!logoDesktop && !logoMobile ? 'hidden!' : ''}`}>
             <Logo className="text-[1.0rem] sm:text-[1.1rem]" customLogo={customLogo} />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             {navLinks.filter(l => l.desktop && l.name).map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -75,7 +75,7 @@ export function Navbar() {
             {ctaDesktop && (
               <a
                 href={`tel:+${phone}`}
-                className="hidden md:flex items-center justify-center gap-2 rounded-full bg-brand-green px-5 lg:px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-green/20 hover:bg-brand-green-dark transition-all hover:scale-105"
+                className="hidden lg:flex items-center justify-center gap-2 rounded-full bg-brand-green px-5 lg:px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-green/20 hover:bg-brand-green-dark transition-all hover:scale-105"
               >
                 <PhoneCall className="h-4 w-4" />
                 {ctaLabel}
@@ -84,7 +84,7 @@ export function Navbar() {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 -mr-2 text-gray-600 hover:text-brand-green focus:outline-none transition-colors"
+              className="lg:hidden p-2 -mr-2 text-gray-600 hover:text-brand-green focus:outline-none transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -94,7 +94,7 @@ export function Navbar() {
       </div>
 
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "max-h-screen opacity-100 border-t border-gray-100" : "max-h-0 opacity-0"
         } bg-white`}
       >

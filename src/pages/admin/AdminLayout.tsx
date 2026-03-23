@@ -28,7 +28,7 @@ export default function AdminLayout() {
   if (!checked) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f4f6f9]">
-        <div className="animate-spin h-8 w-8 border-4 border-[#015851] border-t-transparent rounded-full" />
+        <div className="animate-spin h-8 w-8 border-4 border-[#4e66b3] border-t-transparent rounded-full" />
       </div>
     );
   }

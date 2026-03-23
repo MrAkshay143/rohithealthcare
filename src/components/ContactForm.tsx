@@ -8,7 +8,7 @@ import { api } from "@/services/api";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  phone: z.string().min(10, { message: "Please enter a valid 10-digit phone number." }),
+  phone: z.string().min(10, { message: "Please enter a valid 10-digit phone number." }).regex(/^[0-9\s\-+()]+$/, { message: "Phone number can only contain digits, spaces, and +-." }),
   email: z.string().email({ message: "Please enter a valid email address." }).optional().or(z.literal('')),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
@@ -78,12 +78,12 @@ export function ContactForm() {
         <div className="h-16 w-16 rounded-full bg-brand-green-light flex items-center justify-center">
           <CheckCircle2 className="h-8 w-8 text-brand-green" />
         </div>
-        <h3 className="text-xl font-bold text-gray-900">{content['form_success_title'] ?? 'Message Received!'}</h3>
+        <h3 className="text-xl font-bold text-gray-900">{content['form_success_title'] || 'Message Received!'}</h3>
         <p className="text-sm text-gray-500 max-w-xs">
-          {content['form_success_text'] ?? 'Thank you for reaching out. Our team will get back to you shortly via phone or WhatsApp.'}
+          {content['form_success_text'] || 'Thank you for reaching out. Our team will get back to you shortly via phone or WhatsApp.'}
         </p>
         <button onClick={() => setSubmitSuccess(false)} className="mt-2 text-xs text-brand-green font-semibold hover:text-brand-green-dark transition-colors">
-          {content['form_success_again'] ?? 'Send another message →'}
+          {content['form_success_again'] || 'Send another message →'}
         </button>
       </div>
     );
@@ -96,64 +96,64 @@ export function ContactForm() {
           <MessageSquare className="h-5 w-5 text-brand-green" />
         </div>
         <div>
-          <p className="font-semibold text-gray-900 text-sm leading-tight">{content['form_heading'] ?? 'Send an Inquiry'}</p>
-          <p className="text-xs text-gray-500">{content['form_subtext'] ?? 'We typically respond within a few hours'}</p>
+          <p className="font-semibold text-gray-900 text-sm leading-tight">{content['form_heading'] || 'Send an Inquiry'}</p>
+          <p className="text-xs text-gray-500">{content['form_subtext'] || 'We typically respond within a few hours'}</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-7 space-y-5">
         <div>
           <label htmlFor="name" className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">
-            {content['form_name_label'] ?? 'Full Name'} <span className="text-red-400">*</span>
+            {content['form_name_label'] || 'Full Name'} <span className="text-red-400">*</span>
           </label>
           <input
             {...register("name")}
             type="text"
             id="name"
             className={inputBase}
-            placeholder={content['form_name_placeholder'] ?? 'e.g. Rahul Sharma'}
+            placeholder={content['form_name_placeholder'] || 'e.g. Rahul Sharma'}
           />
           {errors.name && <p className="mt-1.5 text-xs text-red-500">{errors.name.message}</p>}
         </div>
 
         <div>
           <label htmlFor="phone" className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">
-            {content['form_phone_label'] ?? 'Phone Number'} <span className="text-red-400">*</span>
+            {content['form_phone_label'] || 'Phone Number'} <span className="text-red-400">*</span>
           </label>
           <input
             {...register("phone")}
             type="tel"
             id="phone"
             className={inputBase}
-            placeholder={content['form_phone_placeholder'] ?? '+91 98765 43210'}
+            placeholder={content['form_phone_placeholder'] || '+91 98765 43210'}
           />
           {errors.phone && <p className="mt-1.5 text-xs text-red-500">{errors.phone.message}</p>}
         </div>
 
         <div>
           <label htmlFor="email" className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">
-            {content['form_email_label'] ?? 'Email'} <span className="text-gray-300">(optional)</span>
+            {content['form_email_label'] || 'Email'} <span className="text-gray-300">(optional)</span>
           </label>
           <input
             {...register("email")}
             type="email"
             id="email"
             className={inputBase}
-            placeholder={content['form_email_placeholder'] ?? 'your@email.com'}
+            placeholder={content['form_email_placeholder'] || 'your@email.com'}
           />
           {errors.email && <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>}
         </div>
 
         <div>
           <label htmlFor="message" className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">
-            {content['form_message_label'] ?? 'Message or Query'} <span className="text-red-400">*</span>
+            {content['form_message_label'] || 'Message or Query'} <span className="text-red-400">*</span>
           </label>
           <textarea
             {...register("message")}
             id="message"
             rows={5}
             className={`${inputBase} resize-none`}
-            placeholder={content['form_message_placeholder'] ?? 'I would like to know more about…'}
+            placeholder={content['form_message_placeholder'] || 'I would like to know more about…'}
           />
           {errors.message && <p className="mt-1.5 text-xs text-red-500">{errors.message.message}</p>}
         </div>
@@ -168,11 +168,11 @@ export function ContactForm() {
           ) : (
             <Send className="h-4 w-4" />
           )}
-          {isSubmitting ? "Sending…" : (content['form_submit_label'] ?? 'Send Message')}
+          {isSubmitting ? "Sending…" : (content['form_submit_label'] || 'Send Message')}
         </button>
 
         <p className="text-center text-xs text-gray-400">
-          {content['form_consent_text'] ?? 'By submitting you agree to be contacted via phone or WhatsApp.'}
+          {content['form_consent_text'] || 'By submitting you agree to be contacted via phone or WhatsApp.'}
         </p>
 
         {submitError && (

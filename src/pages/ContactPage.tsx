@@ -8,18 +8,18 @@ export default function ContactPage() {
   const content = useContent();
   useSEO('contact');
   const reveal = useScrollReveal();
-  const phone = content['contact_phone'] ?? '';
-  const phoneDisplay = content['contact_phone_display'] ?? '';
-  const whatsapp = content['contact_whatsapp'] ?? '';
-  const email = content['contact_email'] ?? '';
-  const address = content['contact_address'] ?? '';
-  const hoursWeekday = content['contact_hours_weekday'] ?? '';
-  const hoursSunday = content['contact_hours_sunday'] ?? '';
+  const phone = content['contact_phone'] || '';
+  const phoneDisplay = content['contact_phone_display'] || '';
+  const whatsapp = content['contact_whatsapp'] || '';
+  const email = content['contact_email'] || '';
+  const address = content['contact_address'] || '';
+  const hoursWeekday = content['contact_hours_weekday'] || '';
+  const hoursSunday = content['contact_hours_sunday'] || '';
 
   return (
-    <div className="bg-gray-50 pb-16">
+    <div className="bg-gray-50 pb-10 sm:pb-16">
       {/* Header */}
-      <div className="relative isolate overflow-hidden bg-brand-green py-8 sm:py-12 text-center px-4">
+      <div className="relative isolate overflow-hidden bg-brand-green py-3 sm:py-5 lg:py-6 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80')] bg-cover bg-center" />
         <div ref={reveal()} className="relative">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
@@ -34,7 +34,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Left info column (2/5) */}
           <div className="lg:col-span-2 space-y-5">
@@ -45,7 +45,7 @@ export default function ContactPage() {
                 className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-brand-green p-4 text-white hover:bg-brand-green-dark transition-colors shadow-lg shadow-brand-green/20"
               >
                 <Phone className="h-5 w-5" />
-                <span className="text-sm font-bold">{content['contact_btn_call'] ?? 'Call Now'}</span>
+                <span className="text-sm font-bold">{content['contact_btn_call'] || 'Call Now'}</span>
                 <span className="text-xs opacity-80">{phoneDisplay}</span>
               </a>
               <a
@@ -55,8 +55,8 @@ export default function ContactPage() {
                 className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-[#25D366] p-4 text-white hover:bg-[#1da851] transition-colors shadow-lg shadow-green-500/20"
               >
                 <MessageCircle className="h-5 w-5" />
-                <span className="text-sm font-bold">{content['contact_btn_whatsapp'] ?? 'WhatsApp'}</span>
-                <span className="text-xs opacity-80">{content['contact_whatsapp_sub'] ?? 'Chat instantly'}</span>
+                <span className="text-sm font-bold">{content['contact_btn_whatsapp'] || 'WhatsApp'}</span>
+                <span className="text-xs opacity-80">{content['contact_whatsapp_sub'] || 'Chat instantly'}</span>
               </a>
             </div>
 
@@ -67,7 +67,7 @@ export default function ContactPage() {
                   <MapPin className="h-4 w-4 text-blue-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{content['contact_visit_label'] ?? 'Visit Our Clinic'}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{content['contact_visit_label'] || 'Visit Our Clinic'}</p>
                   <p className="mt-1 text-xs text-gray-500 leading-relaxed">{address}</p>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function ContactPage() {
                   <Mail className="h-4 w-4 text-brand-green" />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{content['contact_email_label'] ?? 'Email Us'}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{content['contact_email_label'] || 'Email Us'}</p>
                   <a href={`mailto:${email}`} className="mt-1 block text-xs text-brand-green hover:text-brand-green-dark">
                     {email}
                   </a>
@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <Clock className="h-4 w-4 text-purple-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{content['contact_hours_label'] ?? 'Operating Hours'}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{content['contact_hours_label'] || 'Operating Hours'}</p>
                   <div className="mt-1 text-xs text-gray-500 space-y-0.5">
                     <p>{hoursWeekday}</p>
                     <p>{hoursSunday}</p>
@@ -99,7 +99,7 @@ export default function ContactPage() {
             {/* Map */}
             <div ref={reveal(200)} className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-48 sm:h-56">
               <iframe
-                src={content['google_maps_embed'] ?? ''}
+                src={content['google_maps_embed'] || ''}
                 className="w-full h-full border-0"
                 allowFullScreen={false}
                 loading="lazy"

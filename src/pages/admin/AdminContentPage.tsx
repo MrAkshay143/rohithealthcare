@@ -1,19 +1,19 @@
-﻿import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   Save, Settings2, LayoutTemplate, MessageSquare,
   Phone, Info, Users, Briefcase, FileText, CheckCircle2,
   Globe, TrendingUp, Monitor, Smartphone, Upload, Check,
   Navigation, PanelBottom, MousePointerClick, BookOpen, Camera,
-  Stethoscope, AlertCircle, Eye, EyeOff, RotateCcw, AlertTriangle
+  Stethoscope, AlertCircle, RotateCcw, AlertTriangle
 } from "lucide-react";
 import { api } from "@/services/api";
 import { CONTENT_DEFAULTS, isToggleField } from "@/services/content";
 import { toast as globalToast } from "@/components/Toast";
 
-/* ── Types ─────────────────────────────────────────────────── */
+/* -- Types --------------------------------------------------- */
 type PageKey = 'General' | 'Home' | 'About' | 'Services' | 'Doctors' | 'Contact' | 'Blogs' | 'Gallery' | 'NotFound';
 
-/* ── Config ─────────────────────────────────────────────────── */
+/* -- Config --------------------------------------------------- */
 const PAGE_CONFIG: Record<PageKey, { label: string; sections: string[] }> = {
   General:  { label: 'General',     sections: ['General', 'Navbar', 'Footer', 'Floating Buttons'] },
   Home:     { label: 'Home Page',   sections: ['Hero Section', 'Stats Strip', 'Home Services', 'Home Why Us', 'Home Team', 'Home Blog', 'CTA Section'] },
@@ -32,7 +32,7 @@ function getPageIcon(key: PageKey) {
     General: Globe, Home: LayoutTemplate, About: Info, Services: Briefcase,
     Doctors: Users, Contact: Phone, Blogs: BookOpen, Gallery: Camera, NotFound: AlertTriangle,
   };
-  return map[key] ?? FileText;
+  return map[key] || FileText;
 }
 function getSectionIcon(name: string) {
   if (name === 'General') return Settings2;
@@ -52,14 +52,12 @@ function getSectionIcon(name: string) {
   if (name.includes('404')) return AlertCircle;
   return FileText;
 }
-function sectionId(name: string) {
-  return 'sec-' + name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-}
+
 const isPillField = (key: string, label: string) =>
   CONTENT_DEFAULTS[key]?.type === 'pills' || key.toLowerCase().includes('pill') || label.toLowerCase().includes('comma-separated');
 const isImageField = (key: string) => CONTENT_DEFAULTS[key]?.type === 'image';
 
-/* ── Icon Checkbox (Desktop / Mobile) ──────────────────────── */
+/* -- Icon Checkbox (Desktop / Mobile) ------------------------ */
 function IconCheckbox({ checked, onChange, icon }: { checked: boolean; onChange: (v: boolean) => void; icon: React.ReactNode }) {
   return (
     <button
@@ -82,7 +80,7 @@ function IconCheckbox({ checked, onChange, icon }: { checked: boolean; onChange:
   );
 }
 
-/* ── Pill Preview ───────────────────────────────────────────── */
+/* -- Pill Preview --------------------------------------------- */
 function PillsPreview({ value }: { value: string }) {
   const pills = value.split(',').map(p => p.trim()).filter(Boolean);
   if (!pills.length) return null;
@@ -97,7 +95,7 @@ function PillsPreview({ value }: { value: string }) {
   );
 }
 
-/* ── Image Field with URL + Upload ──────────────────────────── */
+/* -- Image Field with URL + Upload ---------------------------- */
 function ImageField({ fieldKey, currentValue, onUploaded }: { fieldKey: string; currentValue: string; onUploaded: (key: string, url: string) => void }) {
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(currentValue);
@@ -146,12 +144,12 @@ function ImageField({ fieldKey, currentValue, onUploaded }: { fieldKey: string; 
           {uploading
             ? <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             : <Upload className="w-3 h-3" />}
-          {uploading ? 'Uploading…' : 'Upload'}
+          {uploading ? 'Uploading�' : 'Upload'}
         </button>
       </div>
       {previewUrl && (
         <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50 max-h-24">
-          <img src={previewUrl} alt="Preview" className="w-full h-24 object-cover" loading="lazy"
+          <img loading="lazy" src={previewUrl} alt="Preview" className="w-full h-24 object-cover"
             onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
         </div>
       )}
@@ -159,7 +157,7 @@ function ImageField({ fieldKey, currentValue, onUploaded }: { fieldKey: string; 
   );
 }
 
-/* ── Main Page ──────────────────────────────────────────────── */
+/* -- Main Page ------------------------------------------------ */
 export default function AdminContentPage() {
   const [dbMap, setDbMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
@@ -211,7 +209,7 @@ export default function AdminContentPage() {
     const acc: Record<string, Array<{ key: string; label: string; currentValue: string; isTextarea: boolean; isToggle: boolean; isImage: boolean; isPills: boolean }>> = {};
     for (const [key, meta] of Object.entries(CONTENT_DEFAULTS)) {
       if (!acc[meta.group]) acc[meta.group] = [];
-      const currentValue = dbMap[key] ?? meta.value;
+      const currentValue = dbMap[key] || meta.value;
       const toggle = isToggleField(key);
       acc[meta.group].push({
         key, label: meta.label, currentValue,
@@ -280,7 +278,7 @@ export default function AdminContentPage() {
     setUploadedImages(prev => ({ ...prev, [key]: url }));
   }, []);
 
-  // ── Save ALL changed fields at once ─────────────────────────
+  // -- Save ALL changed fields at once -------------------------
   async function handleSaveAll() {
     setSaving(true);
     try {
@@ -294,7 +292,7 @@ export default function AdminContentPage() {
           if (isImageField(key)) continue; // handled separately
           const formVal = formData.get(key) as string | null;
           if (formVal === null) continue;
-          const currentDb = dbMap[key] ?? meta.value;
+          const currentDb = dbMap[key] || meta.value;
           if (formVal !== currentDb) {
             changedItems.push({ key, value: formVal });
           }
@@ -303,7 +301,7 @@ export default function AdminContentPage() {
 
       // Collect toggle changes
       for (const [key, val] of Object.entries(toggleValues)) {
-        const currentDb = dbMap[key] ?? CONTENT_DEFAULTS[key]?.value;
+        const currentDb = dbMap[key] || CONTENT_DEFAULTS[key]?.value;
         const newVal = String(val);
         if (newVal !== currentDb) {
           changedItems.push({ key, value: newVal });
@@ -312,7 +310,7 @@ export default function AdminContentPage() {
 
       // Collect uploaded image changes
       for (const [key, url] of Object.entries(uploadedImages)) {
-        const currentDb = dbMap[key] ?? CONTENT_DEFAULTS[key]?.value;
+        const currentDb = dbMap[key] || CONTENT_DEFAULTS[key]?.value;
         if (url !== currentDb) {
           changedItems.push({ key, value: url });
         }
@@ -326,7 +324,7 @@ export default function AdminContentPage() {
           if (uploadedImages[key]) continue; // already handled
           const formVal = formData.get(key) as string | null;
           if (formVal === null) continue;
-          const currentDb = dbMap[key] ?? CONTENT_DEFAULTS[key].value;
+          const currentDb = dbMap[key] || CONTENT_DEFAULTS[key].value;
           if (formVal !== currentDb) {
             changedItems.push({ key, value: formVal });
           }
@@ -349,7 +347,7 @@ export default function AdminContentPage() {
     setSaving(false);
   }
 
-  // ── Reset ALL content to defaults ───────────────────────────
+  // -- Reset ALL content to defaults ---------------------------
   async function handleResetAll() {
     setShowResetDialog(false);
     setResetting(true);
@@ -391,7 +389,7 @@ export default function AdminContentPage() {
               {resetting
                 ? <div className="w-3.5 h-3.5 border-2 border-red-300 border-t-red-600 rounded-full animate-spin" />
                 : <RotateCcw className="w-3.5 h-3.5" />}
-              {resetting ? 'Resetting…' : 'Reset All'}
+              {resetting ? 'Resetting�' : 'Reset All'}
             </button>
             {showResetDialog && (
               <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-2xl border border-red-100 shadow-xl shadow-red-500/10 z-50 p-4">
@@ -426,12 +424,12 @@ export default function AdminContentPage() {
               type="button"
               onClick={handleSaveAll}
               disabled={saving || resetting}
-              className="inline-flex items-center gap-1.5 bg-[#015851] hover:bg-[#013f39] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm transition-all disabled:opacity-50 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 bg-[#4e66b3] hover:bg-[#3a4f99] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm transition-all disabled:opacity-50 whitespace-nowrap"
             >
               {saving
                 ? <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 : <Save className="w-3.5 h-3.5" />}
-              {saving ? 'Saving…' : 'Save Changes'}
+              {saving ? 'Saving�' : 'Save Changes'}
             </button>
           </div>
         </div>
@@ -616,8 +614,8 @@ export default function AdminContentPage() {
                             // Single toggle - show as desktop+mobile auto
                             const checked = toggleValues[item.key] !== undefined ? toggleValues[item.key] : item.currentValue !== 'false';
                             const autoDK = base + '_desktop', autoMK = base + '_mobile';
-                            const autoDVal = toggleValues[autoDK] !== undefined ? toggleValues[autoDK] : (dbMap[autoDK] ?? (checked ? 'true' : 'false')) !== 'false';
-                            const autoMVal = toggleValues[autoMK] !== undefined ? toggleValues[autoMK] : (dbMap[autoMK] ?? (checked ? 'true' : 'false')) !== 'false';
+                            const autoDVal = toggleValues[autoDK] !== undefined ? toggleValues[autoDK] : (dbMap[autoDK] || (checked ? 'true' : 'false')) !== 'false';
+                            const autoMVal = toggleValues[autoMK] !== undefined ? toggleValues[autoMK] : (dbMap[autoMK] || (checked ? 'true' : 'false')) !== 'false';
                             const cleanLabel = item.label.replace(/Show\s*/i, '').replace(/\s*Visible$/i, '');
                             return (
                               <div key={item.key} className="bg-gray-50/70 border border-gray-100 hover:border-brand-green/25 hover:bg-white p-3 rounded-xl transition-all flex items-center gap-2">
@@ -636,7 +634,6 @@ export default function AdminContentPage() {
                           rendered.add(item.key);
                           const isPill = item.isPills;
                           const assoc = toggleAssoc.get(item.key);
-                          const hasAnyToggle = assoc?.desktopKey || assoc?.mobileKey || assoc?.visibleKey;
 
                           // Resolve inline toggle values
                           let inlineDVal: boolean | undefined, inlineMVal: boolean | undefined, inlineVis: boolean | undefined;
@@ -661,8 +658,8 @@ export default function AdminContentPage() {
                           if (needsAuto) {
                             // If there's a visibleKey, use its value as default for auto desktop/mobile when no DB value exists
                             const visFallback = assoc?.visibleKey ? (inlineVis ? 'true' : 'false') : 'true';
-                            autoDVal = toggleValues[autoDK] !== undefined ? toggleValues[autoDK] : (dbMap[autoDK] ?? visFallback) !== 'false';
-                            autoMVal = toggleValues[autoMK] !== undefined ? toggleValues[autoMK] : (dbMap[autoMK] ?? visFallback) !== 'false';
+                            autoDVal = toggleValues[autoDK] !== undefined ? toggleValues[autoDK] : (dbMap[autoDK] || visFallback) !== 'false';
+                            autoMVal = toggleValues[autoMK] !== undefined ? toggleValues[autoMK] : (dbMap[autoMK] || visFallback) !== 'false';
                           }
 
                           // Sync handler: when toggling auto checkboxes, also update _visible key if present
@@ -699,17 +696,17 @@ export default function AdminContentPage() {
                               ) : item.isTextarea ? (
                                 <textarea id={item.key} name={item.key} defaultValue={item.currentValue} rows={3}
                                   className="w-full px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green transition-all resize-y"
-                                  placeholder={`Enter ${item.label.toLowerCase()}…`} />
+                                  placeholder={`Enter ${item.label.toLowerCase()}�`} />
                               ) : (
                                 <>
                                   <input id={item.key} name={item.key} type="text" defaultValue={item.currentValue}
                                     onChange={isPill ? e => setPillValues(v => ({ ...v, [item.key]: e.target.value })) : undefined}
                                     className="w-full px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green transition-all"
-                                    placeholder={isPill ? 'Item 1, Item 2, Item 3' : `Enter ${item.label.toLowerCase()}…`} />
+                                    placeholder={isPill ? 'Item 1, Item 2, Item 3' : `Enter ${item.label.toLowerCase()}�`} />
                                   {isPill && (
                                     <>
                                       <p className="text-[10px] text-gray-400 mt-1">Separate each item with a comma</p>
-                                      <PillsPreview value={pillValues[item.key] ?? item.currentValue} />
+                                      <PillsPreview value={pillValues[item.key] || item.currentValue} />
                                     </>
                                   )}
                                 </>

@@ -12,8 +12,8 @@ export default function AdminDashboardPage() {
     document.title = 'Dashboard | Admin';
     api.get('/admin/stats').then(setStats).catch(() => {});
     api.get('/enquiries/stats').then((s: any) => {
-      setEnquiryCount(s.total ?? 0);
-      setNewLeads(s.new ?? 0);
+      setEnquiryCount(s.total || 0);
+      setNewLeads(s.new || 0);
     }).catch(() => {});
   }, []);
 
@@ -30,7 +30,7 @@ export default function AdminDashboardPage() {
   return (
     <div>
       <div className="flex flex-wrap items-center gap-4 mb-6">
-        <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-[#015851] to-[#018a7e] flex items-center justify-center shrink-0 shadow-lg shadow-[#015851]/20">
+        <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-[#4e66b3] to-[#6878d4] flex items-center justify-center shrink-0 shadow-lg shadow-[#4e66b3]/20">
           <LayoutDashboard className="w-6 h-6 text-white" />
         </div>
         <div className="flex-1 min-w-0">
@@ -66,7 +66,7 @@ export default function AdminDashboardPage() {
             { href: '/admin/settings', label: 'Change password & settings' },
           ].map(({ href, label }) => (
             <Link key={href} to={href}
-              className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-gray-50 hover:bg-[#015851]/5 hover:text-[#015851] transition-colors text-sm font-medium text-gray-700 group">
+              className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-gray-50 hover:bg-[#4e66b3]/5 hover:text-[#4e66b3] transition-colors text-sm font-medium text-gray-700 group">
               {label}
               <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-40 group-hover:opacity-100" />
             </Link>

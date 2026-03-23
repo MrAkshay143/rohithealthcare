@@ -12,7 +12,7 @@ class DoctorController extends Controller
     {
         $allowed = ['id', 'name', 'specialty', 'order', 'created_at'];
         $orderBy = in_array($request->query('orderBy'), $allowed) ? $request->query('orderBy') : 'order';
-        $orderDir = in_array(strtolower($request->query('orderDir', 'asc')), ['asc', 'desc']) ? $request->query('orderDir') : 'asc';
+        $orderDir = in_array($raw = strtolower($request->query('orderDir', 'asc')), ['asc', 'desc']) ? $raw : 'asc';
         $take = $request->query('take');
 
         $query = Doctor::orderBy($orderBy, $orderDir);

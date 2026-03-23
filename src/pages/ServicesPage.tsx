@@ -21,7 +21,7 @@ const ICON_MAP: Record<string, any> = {
 };
 
 const SVC_STYLES = [
-  { color: "text-[#015851]",  bg: "bg-[#015851]/10",  hoverBg: "group-hover:bg-[#015851]" },
+  { color: "text-[#4e66b3]",  bg: "bg-[#4e66b3]/10",  hoverBg: "group-hover:bg-[#4e66b3]" },
   { color: "text-rose-600",   bg: "bg-rose-50",       hoverBg: "group-hover:bg-rose-600" },
   { color: "text-blue-600",   bg: "bg-blue-50",       hoverBg: "group-hover:bg-blue-600" },
   { color: "text-purple-600", bg: "bg-purple-50",     hoverBg: "group-hover:bg-purple-600" },
@@ -35,18 +35,19 @@ export default function ServicesPage() {
   const content = useContent();
   useSEO('services');
   const reveal = useScrollReveal();
-  const phone = content['contact_phone'] ?? '';
-  const whatsapp = content['contact_whatsapp'] ?? '';
+  const phone = content['contact_phone'] || '';
+  const whatsapp = content['contact_whatsapp'] || '';
   const [apiServices, setApiServices] = useState<ServiceData[]>([]);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
-    api.get<ServiceData[]>('/services').then(setApiServices).catch(() => {});
+    api.get<ServiceData[]>('/services').then(setApiServices).catch(() => setLoadError(true));
   }, []);
 
   const services = useMemo(() =>
     apiServices.map((svc, i) => ({
       ...SVC_STYLES[i % SVC_STYLES.length],
-      icon: ICON_MAP[svc.icon] ?? Activity,
+      icon: ICON_MAP[svc.icon] || Activity,
       title: svc.title,
       desc: svc.description,
     }))
@@ -55,7 +56,7 @@ export default function ServicesPage() {
   return (
     <div className="bg-gray-50">
       {/* Header */}
-      <div className="relative isolate overflow-hidden bg-brand-green py-8 sm:py-12 text-center px-4">
+      <div className="relative isolate overflow-hidden bg-brand-green py-3 sm:py-5 lg:py-6 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80')] bg-cover bg-center" />
         <div ref={reveal()} className="relative max-w-3xl mx-auto">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-red mb-2">
@@ -71,7 +72,10 @@ export default function ServicesPage() {
       </div>
 
       {/* Services grid */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        {loadError ? (
+          <p className="text-center text-red-500 py-16">Something went wrong loading services. Please try again later.</p>
+        ) : (
         <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5">
           {services.map((svc, i) => {
             const Icon = svc.icon;
@@ -89,6 +93,7 @@ export default function ServicesPage() {
             );
           })}
         </div>
+        )}
 
         {/* CTA */}
         <div ref={reveal()} className="mt-8 sm:mt-14 rounded-2xl bg-gray-900 p-5 sm:p-8 text-center">
@@ -103,7 +108,7 @@ export default function ServicesPage() {
               href={`tel:+${phone}`}
               className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white hover:bg-brand-red-dark transition-colors"
             >
-              <PhoneCall className="h-4 w-4" /> {content['services_cta_btn_call'] ?? 'Call Now'}
+              <PhoneCall className="h-4 w-4" /> {content['services_cta_btn_call'] || 'Call Now'}
             </a>
             <a
               href={`https://wa.me/${whatsapp}`}
@@ -111,13 +116,13 @@ export default function ServicesPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white hover:bg-[#1da851] transition-colors"
             >
-              <MessageCircle className="h-4 w-4" /> {content['services_cta_btn_whatsapp'] ?? 'WhatsApp'}
+              <MessageCircle className="h-4 w-4" /> {content['services_cta_btn_whatsapp'] || 'WhatsApp'}
             </a>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
-              {content['services_cta_btn_book'] ?? 'Book Appointment'} <ArrowRight className="h-4 w-4" />
+              {content['services_cta_btn_book'] || 'Book Appointment'} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

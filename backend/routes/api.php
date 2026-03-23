@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\EnquiryController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\NavLinkController;
+use App\Http\Controllers\Api\HomeBundleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,11 @@ use App\Http\Controllers\Api\NavLinkController;
 |--------------------------------------------------------------------------
 */
 
+// Bundled homepage data (single request for all homepage data)
+Route::get('/home-bundle', [HomeBundleController::class, 'index']);
+
 // Auth
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/auth/check', [AuthController::class, 'check']);
 
@@ -48,7 +52,7 @@ Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/nav-links', [NavLinkController::class, 'index']);
 
 // Public enquiry submission
-Route::post('/enquiries', [EnquiryController::class, 'store']);
+Route::post('/enquiries', [EnquiryController::class, 'store'])->middleware('throttle:enquiry');
 
 /*
 |--------------------------------------------------------------------------
@@ -90,8 +94,6 @@ Route::middleware(\App\Http\Middleware\AdminAuth::class)->group(function () {
     // Settings
     Route::post('/settings', [SettingController::class, 'upsert']);
     Route::post('/settings/logo', [SettingController::class, 'saveLogo']);
-    Route::get('/settings/database', [SettingController::class, 'databaseConfig']);
-    Route::post('/settings/database', [SettingController::class, 'updateDatabaseConfig']);
 
     // Password
     Route::post('/auth/change-password', [AuthController::class, 'changePassword']);
