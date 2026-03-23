@@ -26,7 +26,18 @@ export default function BlogPostPage() {
   }, [slug]);
 
   useEffect(() => {
-    if (blog) document.title = blog.title + ' | Rohit Health Care';
+    if (blog) {
+      document.title = blog.title + ' | Rohit Health Care';
+      // Set OG meta tags per blog post
+      const setMeta = (prop: string, content: string) => {
+        let el = document.querySelector(`meta[property="${prop}"]`) as HTMLMetaElement;
+        if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+        el.setAttribute('content', content);
+      };
+      setMeta('og:title', blog.title + ' | Rohit Health Care');
+      setMeta('og:description', (blog.content || '').replace(/<[^>]+>/g, '').slice(0, 160));
+      if (blog.imageUrl) setMeta('og:image', blog.imageUrl);
+    }
     return () => { document.title = 'Rohit Health Care'; };
   }, [blog]);
 
@@ -176,20 +187,18 @@ export default function BlogPostPage() {
         </div>
 
         {/* CTA card */}
-        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#3d5099] to-[#4e66b3] p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div className="flex items-center gap-4">
-            <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-              <HeartPulse className="w-6 h-6 text-white/70" />
+        <div ref={reveal(100)} className="mt-6 rounded-2xl bg-linear-to-br from-[#3d5099] to-[#4e66b3] px-5 py-4 sm:px-7 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+              <HeartPulse className="w-5 h-5 text-white/70" />
             </div>
             <div>
-              <p className="font-bold text-white text-base">{content['blogs_cta_heading'] || 'Have a health concern?'}</p>
+              <p className="font-bold text-white text-sm">{content['blogs_cta_heading'] || 'Have a health concern?'}</p>
               <p className="text-white/60 text-xs mt-0.5">{content['blogs_cta_subtext'] || 'Our team is ready to help you today.'}</p>
             </div>
           </div>
-          <a
-            href={`tel:+${content['contact_phone'] || ''}`}
-            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-[#4e66b3] hover:bg-gray-100 transition-colors shadow-sm"
-          >
+          <a href={`tel:+${content['contact_phone'] || ''}`}
+            className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2 text-xs font-bold text-[#4e66b3] hover:bg-gray-100 transition-colors shadow-sm">
             {content['blogs_cta_btn'] || 'Call Us Now'}
           </a>
         </div>

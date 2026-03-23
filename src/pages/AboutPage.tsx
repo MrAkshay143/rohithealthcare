@@ -114,13 +114,13 @@ export default function AboutPage() {
       </div>
 
       {/* ── MAIN CONTENT ─────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-14">
-        <div className="grid lg:grid-cols-[5fr_6fr] gap-4 sm:gap-8 lg:gap-14 items-start">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-7 lg:py-10">
+        <div className="grid lg:grid-cols-[5fr_6fr] gap-3 sm:gap-6 lg:gap-10 items-start">
 
           {/* LEFT — building image */}
           <div ref={reveal()} className="order-1 lg:sticky lg:top-24">
             {/* Mobile/Tablet: image — no bg, edges fade on left, right, bottom */}
-            <div className="lg:hidden w-full pb-4 sm:pb-6"
+            <div className="lg:hidden w-full pb-3 sm:pb-4"
                  style={{ 
                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)',
                    maskImage: 'linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)'
@@ -134,14 +134,14 @@ export default function AboutPage() {
                   src="/uploads/clinic_building_transparent.png"
                   alt="Rohit Health Care Clinic Building"
                   className="w-full h-auto block object-contain object-bottom"
-                  style={{ maxHeight: '350px' }}
+                  style={{ maxHeight: '250px' }}
                 />
               </div>
             </div>
 
             {/* Desktop: no bg container, edges fade on left, right, bottom */}
             <div className="hidden lg:flex relative flex-col items-center justify-end pb-0"
-              style={{ minHeight: '480px' }}>
+              style={{ minHeight: '380px' }}>
               <div className="w-full flex-1 flex items-end justify-center"
                  style={{ 
                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)',
@@ -156,7 +156,7 @@ export default function AboutPage() {
                     src="/uploads/clinic_building_transparent.png"
                     alt="Rohit Health Care Clinic Building"
                     className="w-full block max-w-sm sm:max-w-md lg:max-w-lg mx-auto object-contain object-bottom"
-                    style={{ maxHeight: '520px', height: '100%' }}
+                    style={{ maxHeight: '400px', height: '100%' }}
                   />
                 </div>
               </div>

@@ -89,7 +89,7 @@ export default function HomePage() {
   const stats = [
     { label: content['stat_1_label'], value: content['stat_1_value'] },
     { label: content['stat_2_label'], value: content['stat_2_value'] },
-    { label: content['stat_3_label'], value: content['years_experience'] || '10+' },
+    { label: content['stat_3_label'], value: content['stat_3_value'] || content['years_experience'] || '5+' },
     { label: content['stat_4_label'], value: content['stat_4_value'] },
   ];
 
@@ -258,7 +258,7 @@ export default function HomePage() {
                 {content['home_team_link'] || 'Meet All Doctors'} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 justify-items-center">
               {doctors.slice(0, 4).map((doc, i) => (
                 <div key={doc.id} ref={reveal(i * 100)} className={`w-full max-w-80 ${i === 0 ? 'block' : i === 1 ? 'block' : i === 2 ? 'hidden md:block' : 'hidden lg:block'}`}>
                   <DoctorCard doc={doc} index={i} />
@@ -326,20 +326,24 @@ export default function HomePage() {
 
       {/* =========== CTA =========== */}
       {isTrueValue(content['cta_visible']) && (
-      <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-6 sm:py-8 lg:py-12">
+      <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-4 sm:py-5">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=40&w=1400')] bg-cover bg-center opacity-10" />
-        <div ref={reveal()} className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white mb-2 sm:mb-3 leading-tight">{content['cta_title']}</h2>
-          <p className="text-white/80 mb-4 sm:mb-6 text-xs sm:text-sm">{content['cta_subtitle']}</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-            <a href={`tel:+${content['contact_phone'] || ''}`}
-              className="inline-flex items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-white px-4 sm:px-8 py-2 sm:py-3.5 text-xs sm:text-sm font-bold text-[#A62B2B] hover:bg-gray-100 transition-colors shadow-lg">
-              <PhoneCall className="h-3.5 sm:h-4 w-3.5 sm:w-4" /> {content['cta_btn_call']}
-            </a>
-            <Link to="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-white/15 border border-white/30 backdrop-blur-sm px-4 sm:px-8 py-2 sm:py-3.5 text-xs sm:text-sm font-bold text-white hover:bg-white/25 transition-colors">
-              {content['cta_btn_inquiry'] || 'Send an Inquiry'}
-            </Link>
+        <div ref={reveal()} className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="text-center sm:text-left">
+              <h2 className="text-base sm:text-lg font-extrabold text-white leading-tight">{content['cta_title']}</h2>
+              <p className="text-white/70 text-xs mt-0.5">{content['cta_subtitle']}</p>
+            </div>
+            <div className="flex flex-wrap justify-center sm:justify-end gap-2 shrink-0">
+              <a href={`tel:+${content['contact_phone'] || ''}`}
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#A62B2B] hover:bg-gray-100 transition-colors shadow">
+                <PhoneCall className="h-3.5 w-3.5" /> {content['cta_btn_call']}
+              </a>
+              <Link to="/contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-white/15 border border-white/30 px-4 py-2 text-xs font-bold text-white hover:bg-white/25 transition-colors">
+                {content['cta_btn_inquiry'] || 'Send an Inquiry'}
+              </Link>
+            </div>
           </div>
         </div>
       </section>

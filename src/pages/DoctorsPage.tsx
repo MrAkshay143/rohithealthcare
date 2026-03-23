@@ -56,34 +56,24 @@ api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() 
         )}
 
         {/* CTA */}
-        <div ref={reveal()} className="mt-10 rounded-2xl bg-gray-900 p-7 sm:p-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">
-            {content['doctors_cta_heading']}
-          </h2>
-          <p className="text-gray-400 mb-5 text-sm max-w-xl mx-auto">
-            {content['doctors_cta_subtext']}
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <a
-              href={`tel:+${phone}`}
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-6 py-3 text-sm font-bold text-white hover:bg-brand-red-dark transition-colors"
-            >
-              <PhoneCall className="h-4 w-4" /> {content['doctors_cta_btn_call'] || 'Call Now'}
-            </a>
-            <a
-              href={`https://wa.me/${whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white hover:bg-[#1da851] transition-colors"
-            >
-              <MessageCircle className="h-4 w-4" /> {content['doctors_cta_btn_whatsapp'] || 'WhatsApp'}
-            </a>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
-            >
-              {content['doctors_cta_btn_message'] || 'Send a Message'} <ArrowRight className="h-4 w-4" />
-            </Link>
+        <div ref={reveal()} className="mt-8 rounded-2xl bg-gray-900 px-5 py-4 sm:px-8 sm:py-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h2 className="text-base sm:text-lg font-extrabold text-white">{content['doctors_cta_heading']}</h2>
+              <p className="text-gray-400 text-xs mt-0.5 max-w-sm">{content['doctors_cta_subtext']}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              <a href={`tel:+${phone}`} className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-4 py-2 text-xs font-bold text-white hover:bg-brand-red-dark transition-colors">
+                <PhoneCall className="h-3.5 w-3.5" /> {content['doctors_cta_btn_call'] || 'Call Now'}
+              </a>
+              <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2 text-xs font-bold text-white hover:bg-[#1da851] transition-colors">
+                <MessageCircle className="h-3.5 w-3.5" /> {content['doctors_cta_btn_whatsapp'] || 'WhatsApp'}
+              </a>
+              <Link to="/contact" className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
+                {content['doctors_cta_btn_message'] || 'Send a Message'} <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

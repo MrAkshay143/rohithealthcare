@@ -39,24 +39,22 @@ export default function ContactPage() {
           {/* Left info column (2/5) */}
           <div className="lg:col-span-2 space-y-5">
             {/* Quick action buttons */}
-            <div ref={reveal()} className="grid grid-cols-2 gap-4">
-              <a
-                href={`tel:+${phone}`}
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-brand-green p-4 text-white hover:bg-brand-green-dark transition-colors shadow-lg shadow-brand-green/20"
-              >
-                <Phone className="h-5 w-5" />
-                <span className="text-sm font-bold">{content['contact_btn_call'] || 'Call Now'}</span>
-                <span className="text-xs opacity-80">{phoneDisplay}</span>
+            <div ref={reveal()} className="grid grid-cols-2 gap-3">
+              <a href={`tel:+${phone}`}
+                className="flex items-center gap-2.5 rounded-xl bg-brand-green px-3 py-2.5 text-white hover:bg-brand-green-dark transition-colors shadow-md shadow-brand-green/20">
+                <Phone className="h-4 w-4 shrink-0" />
+                <div className="min-w-0">
+                  <span className="text-xs font-bold block">{content['contact_btn_call'] || 'Call Now'}</span>
+                  <span className="text-[10px] opacity-80 truncate block">{phoneDisplay}</span>
+                </div>
               </a>
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-[#25D366] p-4 text-white hover:bg-[#1da851] transition-colors shadow-lg shadow-green-500/20"
-              >
-                <MessageCircle className="h-5 w-5" />
-                <span className="text-sm font-bold">{content['contact_btn_whatsapp'] || 'WhatsApp'}</span>
-                <span className="text-xs opacity-80">{content['contact_whatsapp_sub'] || 'Chat instantly'}</span>
+              <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2.5 rounded-xl bg-[#25D366] px-3 py-2.5 text-white hover:bg-[#1da851] transition-colors shadow-md shadow-green-500/20">
+                <MessageCircle className="h-4 w-4 shrink-0" />
+                <div className="min-w-0">
+                  <span className="text-xs font-bold block">{content['contact_btn_whatsapp'] || 'WhatsApp'}</span>
+                  <span className="text-[10px] opacity-80 truncate block">{content['contact_whatsapp_sub'] || 'Chat instantly'}</span>
+                </div>
               </a>
             </div>
 

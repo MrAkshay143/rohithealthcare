@@ -12,15 +12,19 @@ export default function BlogsPage() {
   const reveal = useScrollReveal();
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loadError, setLoadError] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(9);
 
   useEffect(() => {
     api.get<any[]>('/blogs?orderBy=createdAt&orderDir=desc').then(setBlogs).catch(() => setLoadError(true));
   }, []);
 
+  const visibleBlogs = blogs.slice(0, visibleCount);
+  const hasMore = visibleCount < blogs.length;
+
   return (
     <div className="bg-gray-50 min-h-screen pb-10 sm:pb-20">
       {/* Header */}
-      <div className="relative isolate overflow-hidden bg-linear-to-br from-[#3d5099] via-[#4e66b3] to-[#6070c9] py-3 sm:py-6 lg:py-8 text-center px-4">
+      <div className="relative isolate overflow-hidden bg-brand-green py-3 sm:py-5 lg:py-6 text-center px-4">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=60')] bg-cover bg-center" />
         <div ref={reveal()} className="relative">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-3">{content['blogs_page_badge'] || 'Stay Informed'}</span>
@@ -45,8 +49,9 @@ export default function BlogsPage() {
             <p className="text-gray-500 text-sm">{content['blogs_empty_subtext'] || 'Check back soon for news and health camp announcements.'}</p>
           </div>
         ) : (
+          <>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 sm:gap-6">
-            {blogs.map((blog, i) => {
+            {visibleBlogs.map((blog, i) => {
               const wordCount = (blog.content || '').replace(/<[^>]+>/g, '').split(" ").length;
               const readMin = Math.max(1, Math.round(wordCount / 200));
               const href = "/blogs/" + (blog.slug || blog.id);
@@ -109,6 +114,16 @@ export default function BlogsPage() {
               );
             })}
           </div>
+          {hasMore && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setVisibleCount(v => v + 9)}
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-[#4e66b3] px-6 py-2.5 text-sm font-bold text-[#4e66b3] hover:bg-[#4e66b3] hover:text-white transition-all">
+                Load More <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          )}
+          </>
         )}
       </div>
     </div>

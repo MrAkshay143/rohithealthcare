@@ -1,6 +1,16 @@
 import { Stethoscope } from "lucide-react";
 import { useContent } from "@/hooks/useContent";
 
+const BACKEND_ORIGIN = import.meta.env.VITE_BACKEND_ORIGIN ?? '';
+
+function resolveImageUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  // If already absolute, use as-is
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  // Relative path — prepend backend origin
+  return `${BACKEND_ORIGIN}${url}`;
+}
+
 type Doctor = {
   id: number;
   name: string;
@@ -11,6 +21,7 @@ type Doctor = {
 
 export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
   const content = useContent();
+  const imageUrl = resolveImageUrl(doc.imageUrl);
   const initials = doc.name
     .split(" ")
     .map((w) => w[0])
@@ -18,14 +29,15 @@ export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
     .slice(0, 2)
     .toUpperCase();
 
+
   return (
     <div className="group flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 h-full overflow-hidden">
       {/* Top Section - Image or Initials */}
       <div className="shrink-0 flex justify-center pt-5 pb-4 bg-linear-to-b from-gray-50/50 to-white relative">
-        {doc.imageUrl ? (
+        {imageUrl ? (
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-sm ring-1 ring-gray-100">
             <img loading="lazy"
-              src={doc.imageUrl}
+              src={imageUrl}
               alt={doc.name}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
             />
