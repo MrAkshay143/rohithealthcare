@@ -87,13 +87,14 @@ export default function AdminSettingsPage() {
         model: chatbotForm.chatbot_model,
         endpoint_url: chatbotForm.chatbot_endpoint_url,
       });
-      if (res.data.success) {
-        toast.success(`Success! Bot replied: "${res.data.reply}"`);
+      // The api client returns JSON directly, not wrapped in .data
+      if (res && res.success) {
+        toast.success(`Success! Bot replied: "${res.reply}"`);
       } else {
-        toast.error('Failed: ' + res.data.error);
+        toast.error('Failed: ' + (res?.error || 'Unknown error'));
       }
     } catch (e: any) {
-      toast.error(e.response?.data?.error || 'Failed to connect to AI Provider');
+      toast.error(e.message || 'Failed to connect to AI Provider');
     }
     setTestingAi(false);
   }
