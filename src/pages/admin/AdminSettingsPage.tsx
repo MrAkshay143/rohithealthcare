@@ -552,7 +552,7 @@ export default function AdminSettingsPage() {
                   <div className="mt-2 pt-4 border-t border-gray-100">
                     <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Search Result Preview</p>
                     <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 max-w-lg">
-                      <p className="text-[11px] text-green-700 truncate">{generalForm.site_domain || 'https://yoursite.com'} ï¿½ {seoPage === 'home' ? '' : seoPage}</p>
+                      <p className="text-[11px] text-green-700 truncate">{generalForm.site_domain || 'https://yoursite.com'} › {seoPage === 'home' ? '' : seoPage}</p>
                       <p className="text-base font-medium text-blue-700 truncate mt-0.5">
                         {seoForm[getSeoKey(seoPage, 'title')] || `${SEO_PAGES.find(p => p.key === seoPage)?.label} | ${generalForm.site_name || 'Site'}`}
                       </p>
@@ -766,7 +766,7 @@ export default function AdminSettingsPage() {
                   type={showApiKey ? 'text' : 'password'}
                   value={chatbotForm.chatbot_api_key}
                   onChange={e => setChatbotForm(f => ({ ...f, chatbot_api_key: e.target.value }))}
-                  placeholder={chatbotForm.chatbot_provider === 'huggingface' ? 'hf_...' : 'Paste your API key here\u2026'}
+                  placeholder={chatbotForm.chatbot_provider === 'huggingface' ? 'hf_...' : 'Paste your API key here...'}
                   className={INPUT + ' pr-10'}
                 />
                 <button type="button" onClick={() => setShowApiKey(v => !v)}
@@ -830,7 +830,7 @@ export default function AdminSettingsPage() {
               <input type="text"
                 value={chatbotForm.chatbot_placeholder}
                 onChange={e => setChatbotForm(f => ({ ...f, chatbot_placeholder: e.target.value }))}
-                placeholder="Ask about our services\u2026"
+                placeholder="Ask about our services..."
                 className={INPUT}
               />
             </div>

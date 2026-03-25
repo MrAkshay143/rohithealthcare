@@ -144,7 +144,7 @@ function ImageField({ fieldKey, currentValue, onUploaded }: { fieldKey: string; 
           {uploading
             ? <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             : <Upload className="w-3 h-3" />}
-          {uploading ? 'Uploading�' : 'Upload'}
+          {uploading ? 'Uploading...' : 'Upload'}
         </button>
       </div>
       {previewUrl && (
@@ -389,7 +389,7 @@ export default function AdminContentPage() {
               {resetting
                 ? <div className="w-3.5 h-3.5 border-2 border-red-300 border-t-red-600 rounded-full animate-spin" />
                 : <RotateCcw className="w-3.5 h-3.5" />}
-              {resetting ? 'Resetting�' : 'Reset All'}
+              {resetting ? 'Resetting...' : 'Reset All'}
             </button>
             {showResetDialog && (
               <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-2xl border border-red-100 shadow-xl shadow-red-500/10 z-50 p-4">
@@ -429,7 +429,7 @@ export default function AdminContentPage() {
               {saving
                 ? <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 : <Save className="w-3.5 h-3.5" />}
-              {saving ? 'Saving�' : 'Save Changes'}
+              {saving ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
         </div>
@@ -595,8 +595,8 @@ export default function AdminContentPage() {
                               // Paired - render both together
                               rendered.add(dKey); rendered.add(mKey);
                               const dItem = items.find(i => i.key === dKey)!, mItem = items.find(i => i.key === mKey)!;
-                              const dVal = toggleValues[dKey] !== undefined ? toggleValues[dKey] : dItem.currentValue !== 'false';
-                              const mVal = toggleValues[mKey] !== undefined ? toggleValues[mKey] : mItem.currentValue !== 'false';
+                              const dVal = toggleValues[dKey] !== undefined ? toggleValues[dKey] : dItem ? dItem.currentValue !== 'false' : true;
+                              const mVal = toggleValues[mKey] !== undefined ? toggleValues[mKey] : mItem ? mItem.currentValue !== 'false' : true;
                               const pairLabel = dItem.label.replace(/\s*-\s*Desktop$/i, '').replace(/Show\s*/i, '');
                               return (
                                 <div key={base} className="bg-gray-50/70 border border-gray-100 hover:border-brand-green/25 hover:bg-white p-3 rounded-xl transition-all flex items-center gap-2">
@@ -696,13 +696,13 @@ export default function AdminContentPage() {
                               ) : item.isTextarea ? (
                                 <textarea id={item.key} name={item.key} defaultValue={item.currentValue} rows={3}
                                   className="w-full px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green transition-all resize-y"
-                                  placeholder={`Enter ${item.label.toLowerCase()}�`} />
+                                  placeholder={`Enter ${item.label.toLowerCase()}...`} />
                               ) : (
                                 <>
                                   <input id={item.key} name={item.key} type="text" defaultValue={item.currentValue}
                                     onChange={isPill ? e => setPillValues(v => ({ ...v, [item.key]: e.target.value })) : undefined}
                                     className="w-full px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green transition-all"
-                                    placeholder={isPill ? 'Item 1, Item 2, Item 3' : `Enter ${item.label.toLowerCase()}�`} />
+                                    placeholder={isPill ? 'Item 1, Item 2, Item 3' : `Enter ${item.label.toLowerCase()}...`} />
                                   {isPill && (
                                     <>
                                       <p className="text-[10px] text-gray-400 mt-1">Separate each item with a comma</p>
