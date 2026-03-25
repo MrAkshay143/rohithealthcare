@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { ShieldCheck } from "lucide-react";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
 
@@ -72,6 +72,13 @@ export default function AdminLoginPage() {
               <p className="font-black text-gray-900 leading-none">{siteName}</p>
               <p className="text-xs text-gray-500">Admin Panel</p>
             </div>
+          </div>
+
+          <div className="mb-8">
+            <Link to="/" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold text-[#4e66b3] bg-[#4e66b3]/5 hover:bg-[#4e66b3]/10 transition-colors group">
+              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+              Back to Home
+            </Link>
           </div>
 
           <h1 className="text-2xl font-extrabold text-gray-900 mb-1">Welcome back</h1>
