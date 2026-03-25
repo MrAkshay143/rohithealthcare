@@ -149,16 +149,15 @@ function renderMessage(content: string, brand: string) {
     const mapMatch = line.match(/\[MAP:(.+?)\]/);
     if (mapMatch) {
       const address = mapMatch[1];
+      const isDirectUrl = address.startsWith("http");
       flushList(String(idx));
       elements.push(
-        <div key={`map-${idx}`} className="my-2 overflow-hidden rounded-xl border border-gray-200 shadow-sm transition-opacity hover:opacity-95">
+        <div key={`map-${idx}`} className="my-2 overflow-hidden rounded-xl border border-gray-200 shadow-sm transition-opacity hover:opacity-95 h-48 sm:h-56">
           <iframe
-            width="100%"
-            height="180"
-            style={{ border: 0 }}
+            className="w-full h-full border-0"
             loading="lazy"
             allowFullScreen
-            src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+            src={isDirectUrl ? address : `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
           />
         </div>
       );
