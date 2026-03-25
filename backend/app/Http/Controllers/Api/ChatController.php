@@ -161,7 +161,7 @@ class ChatController extends Controller
         $address    = $settings['contact_address']       ?? '';
         $hoursWD    = $settings['contact_hours_weekday'] ?? 'Mon–Sat: 7:00 AM – 9:00 PM';
         $hoursSun   = $settings['contact_hours_sunday']  ?? 'Sunday: 7:00 AM – 2:00 PM';
-        $domain     = $settings['site_domain']           ?? '';
+        $domain     = $settings['site_domain']           ?? request()->getSchemeAndHttpHost();
 
         // Load DB content
         try {
@@ -211,46 +211,36 @@ class ChatController extends Controller
         } catch (\Exception $e) {}
 
         // Website navigation
-        $navLinks = "- Home: {$domain}/\n"
-            . "- About: {$domain}/about\n"
-            . "- Services: {$domain}/services\n"
-            . "- Our Team: {$domain}/team\n"
-            . "- Gallery: {$domain}/gallery\n"
-            . "- News & Camps: {$domain}/blogs\n"
-            . "- Contact: {$domain}/contact\n";
+        $navLinks = "- [Home]({$domain}/)\n"
+            . "- [About Our Clinic]({$domain}/about)\n"
+            . "- [Our Services]({$domain}/services)\n"
+            . "- [Medical Team]({$domain}/team)\n"
+            . "- [Clinic Gallery]({$domain}/gallery)\n"
+            . "- [Health News & Camps]({$domain}/blogs)\n"
+            . "- [Contact Us]({$domain}/contact)\n";
 
         $basePrompt = $customPrompt ?: <<<PROMPT
 You are a professional and friendly AI assistant for {$siteName}. Help patients and visitors with services, appointments, contact info, and general health enquiries.
 
 ## Tone & Style
-- Warm, empathetic, concise, and professional.
-- Use simple language. Avoid heavy medical jargon.
-- Keep replies brief (2–4 sentences). Expand only when detail is genuinely needed.
-- Use markdown formatting:
-  - **Bold** for names, key info, and headings.
-  - Bullet points for lists.
-  - Phone: always format as a clickable markdown link: [+91 XXXXX XXXXX](tel:+91XXXXXXXXXX)
-  - WhatsApp: format as [WhatsApp us](https://wa.me/91XXXXXXXXXX)
-  - Email: format as [email@example.com](mailto:email@example.com)
-  - Page links: format as [Page Name](URL)
+- Warm, empathetic, and professional. Use minimalist language.
+- Keep replies brief (2–4 sentences).
+- ## Link Formatting (MANDATORY)
+  - You MUST strictly use markdown: `[Link Title](URL)`
+  - NEVER show raw URLs or paths directly to the user.
+  - Show ONLY the title in the message.
+  - WhatsApp: format as [WhatsApp us](https://wa.me/{$whatsapp})
+  - Phone: format as [+{$phone}](tel:+{$phone})
+  - Email: format as [Email us](mailto:{$email})
+  - Page links: Use the descriptive titles from 'Website Pages' below.
 
 ## Core Capabilities
-1. Answer questions about available services, tests, and diagnostics.
-2. Provide clinic contact details, address, and operating hours.
-3. Guide users to the correct page or section of the website.
-4. Help users book appointments or submit enquiries.
-5. Assist with general health FAQs.
-6. Detect intent (consultation, pricing, emergency) and respond accordingly.
+1. Answer questions about services, tests, and contact info.
+2. Guide users to specific website sections using the links provided.
+3. Help book appointments by directing to WhatsApp or Phone.
 
 ## Lead Generation
-- If a user asks about appointments or pricing, naturally suggest: "You can reach us via [WhatsApp](https://wa.me/{$whatsapp}) or call [+{$phone}](tel:+{$phone}) to book."
-- For urgent symptoms, immediately say: "Please call emergency services (112) or contact us at [+{$phone}](tel:+{$phone}) right away."
-
-## Scope & Limitations
-- Only answer questions relevant to the clinic and its services.
-- If out of scope: "I can best help with questions about {$siteName}."
-- Never give diagnoses or prescribe medication.
-- Never fabricate prices or medical facts.
+- Suggest WhatsApp [WhatsApp us](https://wa.me/{$whatsapp}) or Phone [+{$phone}](tel:+{$phone}) for scheduling.
 PROMPT;
 
         return <<<SYSTEM
@@ -283,7 +273,7 @@ SYSTEM;
         $payload = json_encode([
             'model'       => $model ?: 'gpt-4o-mini',
             'messages'    => $messages,
-            'max_tokens'  => 500,
+            'max_tokens'  => 2000,
             'temperature' => 0.65,
         ]);
 
@@ -302,7 +292,7 @@ SYSTEM;
         $payload = json_encode([
             'model'     => $model ?: 'stepfun/step-3.5-flash:free',
             'messages'  => $messages,
-            'max_tokens'  => 500,
+            'max_tokens'  => 2000,
             'temperature' => 0.65,
             'reasoning'   => ['enabled' => true],
         ]);
@@ -312,7 +302,7 @@ SYSTEM;
             [
                 'Authorization: Bearer ' . $apiKey,
                 'Content-Type: application/json',
-                'HTTP-Referer: https://rhc.imakshay.in',
+                'HTTP-Referer: ' . request()->getSchemeAndHttpHost(),
                 'X-Title: Rohit Health Care'
             ],
             $payload,
@@ -325,7 +315,7 @@ SYSTEM;
         $payload = json_encode([
             'model'       => $model ?: 'llama-3.1-8b-instant',
             'messages'    => $messages,
-            'max_tokens'  => 500,
+            'max_tokens'  => 2000,
             'temperature' => 0.65,
         ]);
 
@@ -355,7 +345,7 @@ SYSTEM;
         $payload = json_encode([
             'systemInstruction' => ['parts' => [['text' => $systemText]]],
             'contents'          => $contents,
-            'generationConfig'  => ['maxOutputTokens' => 500, 'temperature' => 0.65],
+            'generationConfig'  => ['maxOutputTokens' => 2000, 'temperature' => 0.65],
         ]);
 
         $url = "https://generativelanguage.googleapis.com/v1beta/models/{$geminiModel}:generateContent?key={$apiKey}";
@@ -376,7 +366,7 @@ SYSTEM;
         $payload = json_encode([
             'model'       => $model,
             'messages'    => $messages,
-            'max_tokens'  => 500,
+            'max_tokens'  => 2000,
             'temperature' => 0.65,
         ]);
 
@@ -397,7 +387,7 @@ SYSTEM;
         $payload = json_encode([
             'model'       => $model ?: 'default',
             'messages'    => $messages,
-            'max_tokens'  => 500,
+            'max_tokens'  => 2000,
             'temperature' => 0.65,
         ]);
 

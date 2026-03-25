@@ -6,7 +6,7 @@ use App\Models\SiteSetting;
 
 // ── robots.txt ──────────────────────────────────────────────────────────────
 Route::get('/robots.txt', function () {
-    $domain = SiteSetting::where('key', 'site_domain')->value('value') ?? 'rhc.imakshay.in';
+    $domain = SiteSetting::where('key', 'site_domain')->value('value') ?: request()->getSchemeAndHttpHost();
     if (!str_starts_with($domain, 'http')) $domain = 'https://' . $domain;
     $content = "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /backend/\nSitemap: {$domain}/sitemap.xml\n";
     return response($content, 200, ['Content-Type' => 'text/plain']);
@@ -14,7 +14,7 @@ Route::get('/robots.txt', function () {
 
 // ── sitemap.xml ─────────────────────────────────────────────────────────────
 Route::get('/sitemap.xml', function () {
-    $domain = SiteSetting::where('key', 'site_domain')->value('value') ?? 'rhc.imakshay.in';
+    $domain = SiteSetting::where('key', 'site_domain')->value('value') ?: request()->getSchemeAndHttpHost();
     if (!str_starts_with($domain, 'http')) $domain = 'https://' . $domain;
     $domain = rtrim($domain, '/');
 
@@ -38,18 +38,16 @@ Route::get('/sitemap.xml', function () {
 // ── Fallback: redirect any /backend/* hit to frontend home ──────────────────
 Route::fallback(function () {
     try {
-        $domain = \App\Models\SiteSetting::where('key', 'site_domain')->value('value');
-        if ($domain) {
-            // Ensure it has a scheme — bare domain like "rhc.imakshay.in" needs https://
-            if (!str_starts_with($domain, 'http')) {
-                $domain = 'https://' . $domain;
-            }
-            return redirect(rtrim($domain, '/'));
+        $domain = \App\Models\SiteSetting::where('key', 'site_domain')->value('value') ?: request()->getSchemeAndHttpHost();
+        // Ensure it has a scheme — bare domain like "rohithealthcare.com" needs https://
+        if (!str_starts_with($domain, 'http')) {
+            $domain = 'https://' . $domain;
         }
+        return redirect(rtrim($domain, '/'));
     } catch (\Exception $e) {
         // DB might not be ready
     }
 
-    return redirect(env('FRONTEND_URL', 'https://rhc.imakshay.in'));
+    return redirect(env('FRONTEND_URL', request()->getSchemeAndHttpHost()));
 });
 

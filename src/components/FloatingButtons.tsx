@@ -27,8 +27,11 @@ const QUICK_CHIPS = [
 /* ─── Component ─────────────────────────────────────────── */
 export function FloatingButtons() {
   const content = useContent();
-  const phoneNumber   = `+${content["floating_phone_number"] || content["contact_phone"] || ""}`;
-  const whatsappNumber = content["floating_whatsapp_number"] || content["contact_whatsapp"] || "";
+  const rawPhone = (content["floating_phone_number"] || content["contact_phone"] || "").toString().replace(/\D/g, "");
+  const phoneNumber = rawPhone.length === 10 ? `+91${rawPhone}` : `+${rawPhone}`;
+
+  const rawWa = (content["floating_whatsapp_number"] || content["contact_whatsapp"] || "").toString().replace(/\D/g, "");
+  const whatsappNumber = rawWa.length === 10 ? `91${rawWa}` : rawWa;
   const showWhatsapp  = isTrueValue(content["floating_whatsapp_visible"]);
   const showPhone     = isTrueValue(content["floating_phone_visible"]);
 
@@ -98,7 +101,95 @@ export function FloatingButtons() {
   };
 
   const showChatbot = botConfig?.enabled === true;
-  const brand = botConfig?.primary_color || "#4e66b3";
+const brand = botConfig?.primary_color || "#4e66b3";
+
+/* ─── Markdown Rendering Helpers ─── */
+function renderMessage(content: string, brand: string) {
+  const lines = content.split("\n");
+  const elements: React.ReactNode[] = [];
+  let listItems: string[] = [];
+
+  const flushList = (key: string) => {
+    if (listItems.length === 0) return;
+    elements.push(
+      <ul key={`list-${key}`} className="mt-1 mb-1 space-y-1.5 pl-3">
+        {listItems.map((item, i) => (
+          <li key={i} className="flex gap-2 text-sm leading-relaxed text-gray-700">
+            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-current opacity-40" />
+            <span className="flex-1">{inlineRender(item, brand)}</span>
+          </li>
+        ))}
+      </ul>
+    );
+    listItems = [];
+  };
+
+  lines.forEach((line, idx) => {
+    const trimmed = line.trim();
+    if (!trimmed) { flushList(String(idx)); return; }
+    
+    const bulletMatch = line.match(/^\s*([-*•])\s+(.+)$/);
+    if (bulletMatch) { listItems.push(bulletMatch[2]); return; }
+
+    const numMatch = line.match(/^\s*(\d+[\.)])\s+(.+)$/);
+    if (numMatch) { listItems.push(numMatch[2]); return; }
+
+    flushList(String(idx));
+    
+    const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (headerMatch) {
+      const level = headerMatch[1].length;
+      elements.push(
+        <div key={idx} className={`font-bold text-gray-900 mt-2 mb-1 ${level === 1 ? "text-lg" : "text-base"}`}>
+          {inlineRender(headerMatch[2], brand)}
+        </div>
+      );
+      return;
+    }
+
+    elements.push(
+      <div key={idx} className="text-sm leading-relaxed text-gray-700">
+        {inlineRender(line, brand)}
+      </div>
+    );
+  });
+  flushList("end");
+  return <div className="space-y-1.5">{elements}</div>;
+}
+
+function inlineRender(text: string, brand: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((tel:[^\s)]+|mailto:[^\s)]+|https?:\/\/[^\s)]+)\))/g;
+  let last = 0; let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    
+    if (match[0].startsWith("**")) {
+      parts.push(<strong key={match.index} className="font-bold text-gray-900">{match[2]}</strong>);
+    } else if (match[0].startsWith("*")) {
+      parts.push(<em key={match.index} className="italic text-gray-800">{match[3]}</em>);
+    } else {
+      const label = match[4];
+      const href  = match[5];
+      const isPhone = href.startsWith("tel:");
+      const isWa    = href.includes("wa.me");
+      const isMail  = href.startsWith("mailto:");
+
+      parts.push(
+        <a key={match.index} href={href} target={isPhone || isMail ? undefined : "_blank"}
+          rel={isPhone || isMail ? undefined : "noreferrer noopener"}
+          className="inline font-bold underline underline-offset-4 decoration-2 transition-opacity hover:opacity-75"
+          style={{ color: brand }}>
+          {label}
+        </a>
+      );
+    }
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
 
   if (!showWhatsapp && !showPhone && !showChatbot) return null;
 
@@ -223,7 +314,10 @@ export function FloatingButtons() {
                   }`}
                   style={msg.role === "user" ? { backgroundColor: brand } : {}}
                 >
-                  {msg.content}
+                  {msg.role === "assistant"
+                    ? renderMessage(msg.content, brand)
+                    : msg.content
+                  }
                 </div>
               </div>
             ))}
@@ -252,8 +346,10 @@ export function FloatingButtons() {
                 <div className="max-w-[82%] px-3.5 py-2.5 rounded-2xl rounded-bl-md bg-red-50 text-red-700 text-sm border border-red-100 shadow-sm">
                   {error}
                   {content["contact_phone"] && (
-                    <a href={`tel:+${content["contact_phone"]}`}
-                      className="flex items-center gap-1 mt-1.5 font-semibold underline underline-offset-2">
+                    <a 
+                      href={`tel:${((content["contact_phone"] || "").toString().replace(/\D/g, "").length === 10) ? '+91' : '+'}${content["contact_phone"].toString().replace(/\D/g, "")}`}
+                      className="flex items-center gap-1 mt-1.5 font-semibold underline underline-offset-2"
+                    >
                       <PhoneCall className="h-3.5 w-3.5" /> Call us directly
                     </a>
                   )}

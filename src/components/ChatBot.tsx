@@ -55,11 +55,11 @@ function renderMessage(content: string, brand: string) {
   const flushList = (key: string) => {
     if (listItems.length === 0) return;
     elements.push(
-      <ul key={`list-${key}`} className="mt-1 mb-1 space-y-0.5 pl-3">
+      <ul key={`list-${key}`} className="mt-1 mb-1 space-y-1.5 pl-3">
         {listItems.map((item, i) => (
-          <li key={i} className="flex gap-1.5 text-sm leading-relaxed">
-            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-current opacity-50" />
-            <span>{inlineRender(item, brand)}</span>
+          <li key={i} className="flex gap-2 text-sm leading-relaxed text-gray-700">
+            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-current opacity-40" />
+            <span className="flex-1">{inlineRender(item, brand)}</span>
           </li>
         ))}
       </ul>
@@ -73,32 +73,53 @@ function renderMessage(content: string, brand: string) {
       flushList(String(idx));
       return;
     }
-    // Bullet list: - or * or •
-    if (/^[-*•]\s+/.test(trimmed)) {
-      listItems.push(trimmed.replace(/^[-*•]\s+/, ''));
+    
+    // Bullet list: - or * or • (must be at start of line)
+    const bulletMatch = line.match(/^\s*([-*•])\s+(.+)$/);
+    if (bulletMatch) {
+      listItems.push(bulletMatch[2]);
       return;
     }
-    // Numbered list
-    if (/^\d+\.\s+/.test(trimmed)) {
-      listItems.push(trimmed.replace(/^\d+\.\s+/, ''));
+
+    // Numbered list: 1. or 1)
+    const numMatch = line.match(/^\s*(\d+[\.)])\s+(.+)$/);
+    if (numMatch) {
+      listItems.push(numMatch[2]);
       return;
     }
+
     flushList(String(idx));
+    
+    // Header check: ### Title
+    const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (headerMatch) {
+      const level = headerMatch[1].length;
+      elements.push(
+        <div key={idx} className={`font-bold text-gray-900 mt-2 mb-1 ${level === 1 ? 'text-lg' : 'text-base'}`}>
+          {inlineRender(headerMatch[2], brand)}
+        </div>
+      );
+      return;
+    }
+
     elements.push(
-      <p key={idx} className="text-sm leading-relaxed">
-        {inlineRender(trimmed, brand)}
-      </p>
+      <div key={idx} className="text-sm leading-relaxed text-gray-700">
+        {inlineRender(line, brand)}
+      </div>
     );
   });
   flushList('end');
 
-  return <div className="space-y-1">{elements}</div>;
+  return <div className="space-y-1.5">{elements}</div>;
 }
 
 function inlineRender(text: string, brand: string): React.ReactNode[] {
-  // Patterns: **bold**, [text](url)
+  // Patterns: 
+  // 1. **bold**
+  // 2. *italic*
+  // 3. [text](url)
   const parts: React.ReactNode[] = [];
-  const regex = /(\*\*(.+?)\*\*|\[(.+?)\]\((tel:[^\s)]+|mailto:[^\s)]+|https?:\/\/[^\s)]+)\))/g;
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((tel:[^\s)]+|mailto:[^\s)]+|https?:\/\/[^\s)]+)\))/g;
   let last = 0;
   let match;
 
@@ -106,16 +127,32 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
     if (match.index > last) {
       parts.push(text.slice(last, match.index));
     }
+    
     if (match[0].startsWith('**')) {
-      // Bold
-      parts.push(<strong key={match.index}>{match[2]}</strong>);
+      // Bold: **text**
+      parts.push(<strong key={match.index} className="font-bold text-gray-900">{match[2]}</strong>);
+    } else if (match[0].startsWith('*')) {
+      // Italic: *text* (match[3] because of the regex capture groups)
+      parts.push(<em key={match.index} className="italic text-gray-800">{match[3]}</em>);
     } else {
-      // Link
-      const label = match[3];
-      const href  = match[4];
+      // Link: [text](url) (match[4]=label, match[5]=url)
+      // wait, group index might be different now
+      // Group 1: full match
+      // Group 2: bold content
+      // Group 3: italic content
+      // Group 4: link label
+      // Group 5: link URL
+      const label = match[4];
+      const href  = match[5];
       const isPhone = href.startsWith('tel:');
       const isWa    = href.includes('wa.me');
       const isMail  = href.startsWith('mailto:');
+
+      // Shorten label if it's just a long URL
+      let displayLabel = label;
+      if (label.startsWith("http") && label.length > 25) {
+        try { displayLabel = new URL(label).hostname + "..."; } catch { displayLabel = label.slice(0, 25) + "..."; }
+      }
 
       parts.push(
         <a
@@ -123,12 +160,10 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
           href={href}
           target={isPhone || isMail ? undefined : '_blank'}
           rel={isPhone || isMail ? undefined : 'noreferrer noopener'}
-          className="inline-flex items-center gap-1 font-semibold underline underline-offset-2 rounded px-1 py-0.5 text-white transition-opacity hover:opacity-80"
-          style={{ backgroundColor: isPhone ? '#22c55e' : isWa ? '#25d366' : isMail ? '#6366f1' : brand }}
+          className="inline font-bold underline underline-offset-4 decoration-2 transition-opacity hover:opacity-75"
+          style={{ color: brand }}
         >
-          {isPhone && <PhoneCall className="w-3 h-3 shrink-0" />}
-          {isWa && <span className="text-[11px] font-black">WA</span>}
-          {label}
+          {displayLabel}
         </a>
       );
     }
