@@ -162,7 +162,7 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
       // Group 3: italic content
       // Group 4: link label
       // Group 5: link URL
-      const label = match[4];
+      const label = (match[4] || "").replace(/\*\*|\*/g, ""); // Strip markdown from title
       const href  = match[5];
       const isPhone = href.startsWith('tel:');
       const isMail  = href.startsWith('mailto:');
@@ -259,12 +259,7 @@ export function ChatBot() {
     }
   }, [input, loading, messages, open]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  };
+
 
   const resetChat = () => {
     abortRef.current?.abort();
@@ -447,7 +442,9 @@ export function ChatBot() {
 
         {/* Input Area */}
         <div className="shrink-0 border-t border-gray-100 bg-white px-3 py-3">
-          <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 focus-within:border-[color:var(--brand)] focus-within:ring-2 transition-all"
+          <form
+            onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
+            className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 focus-within:border-[color:var(--brand)] focus-within:ring-2 transition-all"
             style={{ '--brand': brand } as React.CSSProperties}
           >
             <input
@@ -455,14 +452,13 @@ export function ChatBot() {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
               placeholder={config.placeholder}
               maxLength={800}
               disabled={loading}
               className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 focus:outline-none min-w-0 disabled:opacity-60"
             />
             <button
-              onClick={() => sendMessage()}
+              type="submit"
               disabled={!input.trim() || loading}
               className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
               style={{ backgroundColor: brand }}
@@ -473,7 +469,7 @@ export function ChatBot() {
                 : <Send className="h-3.5 w-3.5 text-white" />
               }
             </button>
-          </div>
+          </form>
           <p className="text-center text-[10px] text-gray-400 mt-1.5">
             Powered by AI · Not a substitute for professional medical advice
           </p>
