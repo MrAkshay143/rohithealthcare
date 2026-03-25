@@ -89,7 +89,7 @@ export default function AdminSettingsPage() {
       });
       // The api client returns JSON directly, not wrapped in .data
       if (res && res.success) {
-        toast.success(`Success! Bot replied: "${res.reply}"`);
+        toast.success("Connection Successful!");
       } else {
         toast.error('Failed: ' + (res?.error || 'Unknown error'));
       }

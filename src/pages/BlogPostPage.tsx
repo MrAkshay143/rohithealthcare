@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft, Share2, HeartPulse, Youtube, Play, PhoneCall } from "lucide-react";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
+import { useSEO } from "@/hooks/useSEO";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 function extractYoutubeId(url: string): string | null {
@@ -25,22 +26,12 @@ export default function BlogPostPage() {
       .catch(() => setNotFound(true));
   }, [slug]);
 
-  useEffect(() => {
-    if (blog) {
-      const siteName = content['site_name'] || 'Clinic';
-      document.title = `${blog.title} | ${siteName}`;
-      // Set OG meta tags per blog post
-      const setMeta = (prop: string, metaContent: string) => {
-        let el = document.querySelector(`meta[property="${prop}"]`) as HTMLMetaElement;
-        if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
-        el.setAttribute('content', metaContent);
-      };
-      setMeta('og:title', `${blog.title} | ${siteName}`);
-      setMeta('og:description', (blog.content || '').replace(/<[^>]+>/g, '').slice(0, 160));
-      if (blog.imageUrl) setMeta('og:image', blog.imageUrl);
-    }
-    return () => { document.title = content['site_name'] || 'Clinic'; };
-  }, [blog, content]);
+  useSEO('custom', {
+    title: blog?.title,
+    description: (blog?.content || '').replace(/<[^>]+>/g, '').slice(0, 160),
+    image: blog?.imageUrl,
+    url: blog?.slug ? `${content.site_domain || ''}/blogs/${blog.slug}` : undefined
+  });
 
   if (notFound) {
     return (

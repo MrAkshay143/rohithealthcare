@@ -52,7 +52,12 @@ export function ToastContainer() {
     _addToast = (type, message) => {
       const id = ++counter.current;
       playSound(type);
-      setToasts((prev) => [...prev.slice(-4), { id, type, message }]);
+      setToasts((prev) => {
+        // Remove any existing toast with the same message (standardizes behavior)
+        const filtered = prev.filter(t => t.message !== message);
+        // Add new one, keeping only the last 3 most recent
+        return [...filtered.slice(-2), { id, type, message }];
+      });
       setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), DURATION);
     };
     return () => { _addToast = null; };

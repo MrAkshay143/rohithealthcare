@@ -5,11 +5,14 @@ import { AdminSidebar } from "@/components/AdminSidebar";
 import { AdminMobileNav } from "@/components/AdminMobileNav";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
   const content = useContent();
   const [checked, setChecked] = useState(false);
+
+  useSEO('home', { title: `Admin Dashboard | ${content.site_name || 'Clinic'}`, description: 'Admin Control Panel' });
 
   useEffect(() => {
     api.get('/auth/check')

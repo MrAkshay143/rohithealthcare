@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { api } from "@/services/api";
 import { useContent } from "@/hooks/useContent";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function AdminLoginPage() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function AdminLoginPage() {
   const siteName = content['site_name'] || 'Admin';
   const error = searchParams.get("error");
 
-  useEffect(() => { document.title = `Login | ${siteName}`; }, [siteName]);
+  useSEO('home', { title: `Login | ${siteName}`, description: 'Admin Login - Secure Access' });
   const [submitting, setSubmitting] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
 
