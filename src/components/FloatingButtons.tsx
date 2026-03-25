@@ -177,7 +177,7 @@ function renderMessage(content: string, brand: string) {
 
 function inlineRender(text: string, brand: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
-  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((tel:[^\s)]+|mailto:[^\s)]+|https?:\/\/[^\s)]+)\))/g;
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[([^\]]+)\]\(([^)]+)\))/g;
   let last = 0; let match;
 
   while ((match = regex.exec(text)) !== null) {
@@ -188,10 +188,10 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
     } else if (match[0].startsWith("*")) {
       parts.push(<em key={match.index} className="italic text-gray-800">{match[3]}</em>);
     } else {
-      const label = (match[4] || "").replace(/\*\*|\*/g, ""); // Strip markdown from title
-      const href  = match[5];
-      const isPhone = href.startsWith("tel:");
-      const isMail  = href.startsWith("mailto:");
+      const label = (match[4] || "").replace(/\*\*|\*/g, ""); 
+      const href  = (match[5] || "").trim();
+      const isPhone = href.startsWith('tel:');
+      const isMail  = href.startsWith('mailto:');
 
       parts.push(
         <a key={match.index} href={href} target={isPhone || isMail ? undefined : "_blank"}

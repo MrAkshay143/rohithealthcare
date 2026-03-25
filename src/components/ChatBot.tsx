@@ -139,7 +139,7 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
   // 2. *italic*
   // 3. [text](url)
   const parts: React.ReactNode[] = [];
-  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((tel:[^\s)]+|mailto:[^\s)]+|https?:\/\/[^\s)]+)\))/g;
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|\[([^\]]+)\]\(([^)]+)\))/g;
   let last = 0;
   let match;
 
@@ -162,8 +162,8 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
       // Group 3: italic content
       // Group 4: link label
       // Group 5: link URL
-      const label = (match[4] || "").replace(/\*\*|\*/g, ""); // Strip markdown from title
-      const href  = match[5];
+      const label = (match[4] || "").replace(/\*\*|\*/g, ""); 
+      const href  = (match[5] || "").trim();
       const isPhone = href.startsWith('tel:');
       const isMail  = href.startsWith('mailto:');
 
