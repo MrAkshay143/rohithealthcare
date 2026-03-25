@@ -147,6 +147,26 @@ function renderMessage(content: string, brand: string) {
       return;
     }
 
+    // Map embed: [MAP:address]
+    const mapMatch = line.match(/\[MAP:(.+?)\]/);
+    if (mapMatch) {
+      const address = mapMatch[1];
+      flushList(String(idx));
+      elements.push(
+        <div key={`map-${idx}`} className="my-2 overflow-hidden rounded-xl border border-gray-200 shadow-sm transition-opacity hover:opacity-95">
+          <iframe
+            width="100%"
+            height="180"
+            style={{ border: 0 }}
+            loading="lazy"
+            allowFullScreen
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+          />
+        </div>
+      );
+      return;
+    }
+
     elements.push(
       <div key={idx} className="text-sm leading-relaxed text-gray-700">
         {inlineRender(line, brand)}
@@ -173,7 +193,6 @@ function inlineRender(text: string, brand: string): React.ReactNode[] {
       const label = match[4];
       const href  = match[5];
       const isPhone = href.startsWith("tel:");
-      const isWa    = href.includes("wa.me");
       const isMail  = href.startsWith("mailto:");
 
       parts.push(
