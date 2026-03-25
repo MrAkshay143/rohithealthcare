@@ -66,14 +66,14 @@ export function ToastContainer() {
   if (!toasts.length) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-9999 flex flex-col gap-2 pointer-events-none">
+    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-9999 flex flex-col items-center gap-1.5 pointer-events-none w-full max-w-xs">
       {toasts.map((t) => (
         <div
           key={t.id}
-          className={`pointer-events-auto flex items-center gap-2.5 pl-3.5 pr-2 py-2.5 rounded-xl shadow-lg text-sm font-medium animate-slide-in-right min-w-56 max-w-80 ${
+          className={`pointer-events-auto flex items-center gap-2.5 pl-3.5 pr-2 py-2.5 rounded-xl shadow-lg border text-sm font-medium animate-slide-in-top min-w-56 max-w-full ${
             t.type === "success"
-              ? "bg-white border border-emerald-200 text-emerald-800"
-              : "bg-white border border-red-200 text-red-800"
+              ? "bg-white border-emerald-200 text-emerald-800"
+              : "bg-white border-red-200 text-red-800"
           }`}
         >
           {t.type === "success" ? (
