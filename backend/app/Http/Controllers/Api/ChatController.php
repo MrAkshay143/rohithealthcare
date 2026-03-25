@@ -163,6 +163,7 @@ class ChatController extends Controller
         $hoursSun   = $settings['contact_hours_sunday']  ?? 'Sunday: 7:00 AM – 2:00 PM';
         $domain     = $settings['site_domain']           ?? request()->getSchemeAndHttpHost();
         $mapEmbed   = $settings['google_maps_embed']     ?? '';
+        $mapUrl     = $settings['google_maps_url']       ?? '';
 
         // Load DB content
         try {
@@ -173,6 +174,7 @@ class ChatController extends Controller
             if (!$hoursWD)     $hoursWD    = $contentMap['contact_hours_weekday'] ?? $hoursWD;
             if (!$hoursSun)    $hoursSun   = $contentMap['contact_hours_sunday'] ?? $hoursSun;
             if (!$mapEmbed)    $mapEmbed   = $contentMap['google_maps_embed'] ?? $mapEmbed;
+            if (!$mapUrl)      $mapUrl     = $contentMap['google_maps_url']   ?? $mapUrl;
         } catch (\Exception $e) {}
 
         // Load services
@@ -237,16 +239,17 @@ You are a professional and friendly AI assistant for {$siteName}. Help patients 
   - Email: format as [Email us](mailto:{$email})
   - Page links: Use the descriptive titles from 'Website Pages' below.
   - ## Clinic Location (MANDATORY)
-    - If a user asks for the clinic's location or a map, ONLY show it using this tag: `[MAP:{$mapEmbed}]`
-    - Do NOT show raw Google Maps links, search results, or coordinate data.
-    - Path must be exactly what is provided in the source.
+    - To show the clinic's location:
+      1. ALWAYS show the interactive map using: `[MAP:{$mapEmbed}]`
+      2. ALSO provide the direct link: `[Open in Google Maps]({$mapUrl})`
+    - Do NOT show coordinate numbers or raw system paths.
     - NEVER provide `<iframe>` or `html` code blocks.
 
 ## Core Capabilities
 1. Answer questions about services, tests, and contact info in a helpful way.
 2. Guide users to specific website sections using minimalist links.
 3. Help book appointments by directing to WhatsApp or Phone.
-4. Show the clinic location only via the `[MAP:link]` tag.
+4. Show the clinic location only via the `[MAP:link]` and `[title](url)` formats.
 
 ## STRICT PROHIBITIONS
 - NEVER show HTML, CSS, or any source code to patients.

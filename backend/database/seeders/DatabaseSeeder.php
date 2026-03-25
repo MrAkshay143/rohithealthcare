@@ -107,8 +107,8 @@ class DatabaseSeeder extends Seeder
             ['key' => 'site_tagline',         'value' => 'Trusted diagnostics. Accurate results. Right at your doorstep.'],
             ['key' => 'site_logo',            'value' => ''],
             ['key' => 'years_experience',     'value' => '10+'],
-            ['key' => 'google_maps_url',      'value' => 'https://maps.google.com'],
-            ['key' => 'google_maps_embed',    'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115228.468765432!2d77.1024901!3d28.7040592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1611111111111!5m2!1sen!2sin'],
+            ['key' => 'google_maps_url',      'value' => 'https://maps.app.goo.gl/N5KrFWzKUspjw1YD6'],
+            ['key' => 'google_maps_embed',    'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14647.23432717014!2d86.2215444!3d23.1027786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f697446700c25d%3A0xe67c1e550c608bfa!2sBalarampur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1711111111111!5m2!1sen!2sin'],
             // Navbar
             ['key' => 'navbar_logo_desktop',   'value' => 'true'],
             ['key' => 'navbar_logo_mobile',    'value' => 'true'],
@@ -373,9 +373,9 @@ class DatabaseSeeder extends Seeder
         $siteSettings = [
             // General settings (shown in Admin > Settings > General tab)
             ['key' => 'site_name',         'value' => 'Rohit Health Care'],
-            ['key' => 'site_domain',       'value' => 'https://rohithealthcare.com'],
+            ['key' => 'google_maps_url',       'value' => 'https://maps.app.goo.gl/N5KrFWzKUspjw1YD6'],
             ['key' => 'allowed_domains',   'value' => 'rohithealthcare.com,rohithealthcare.in,localhost:5173'],
-            ['key' => 'google_maps_embed', 'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115228.468765432!2d77.1024901!3d28.7040592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1611111111111!5m2!1sen!2sin'],
+            ['key' => 'google_maps_embed', 'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14647.23432717014!2d86.2215444!3d23.1027786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f697446700c25d%3A0xe67c1e550c608bfa!2sBalarampur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1711111111111!5m2!1sen!2sin'],
             ['key' => 'site_logo',         'value' => ''],
             // SEO - Home page
             ['key' => 'seo_home_title',       'value' => 'Rohit Health Care | Accurate Diagnostics & Home Sample Collection'],

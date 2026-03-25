@@ -49,7 +49,7 @@ export default function AdminSettingsPage() {
   const resetAreaRef = useRef<HTMLDivElement>(null);
 
   // General form
-  const [generalForm, setGeneralForm] = useState({ site_name: '', site_domain: '', allowed_domains: '', google_maps_embed: '' });
+  const [generalForm, setGeneralForm] = useState({ site_name: '', site_domain: '', allowed_domains: '', google_maps_embed: '', google_maps_url: '' });
   const [logoUrl, setLogoUrl] = useState('');
   const [logoSaving, setLogoSaving] = useState(false);
   const [pwSaving, setPwSaving] = useState(false);
@@ -103,7 +103,13 @@ export default function AdminSettingsPage() {
       const map: Record<string, string> = {};
       items.forEach(item => { map[item.key] = item.value; });
       setSavedSettings(map);
-      setGeneralForm({ site_name: map['site_name'] || '', site_domain: map['site_domain'] || '', allowed_domains: map['allowed_domains'] || '', google_maps_embed: map['google_maps_embed'] || '' });
+      setGeneralForm({ 
+        site_name: map['site_name'] || '', 
+        site_domain: map['site_domain'] || '', 
+        allowed_domains: map['allowed_domains'] || '', 
+        google_maps_embed: map['google_maps_embed'] || '',
+        google_maps_url: map['google_maps_url'] || ''
+      });
       setEmailForm({ smtp_host: map['smtp_host'] || '', smtp_port: map['smtp_port'] || '', smtp_user: map['smtp_user'] || '', smtp_pass: map['smtp_pass'] || '', smtp_from: map['smtp_from'] || '' });
       // Build per-page SEO form from settings
       const seo: Record<string, string> = { seo_og_image: map['seo_og_image'] || '', google_analytics_id: map['google_analytics_id'] || '' };
@@ -187,7 +193,13 @@ export default function AdminSettingsPage() {
   function handleReset() {
     setResetDialogOpen(false);
     if (activeTab === 'general') {
-      setGeneralForm({ site_name: savedSettings['site_name'] || '', site_domain: savedSettings['site_domain'] || '', allowed_domains: savedSettings['allowed_domains'] || '', google_maps_embed: savedSettings['google_maps_embed'] || '' });
+      setGeneralForm({ 
+        site_name: savedSettings['site_name'] || '', 
+        site_domain: savedSettings['site_domain'] || '', 
+        allowed_domains: savedSettings['allowed_domains'] || '', 
+        google_maps_embed: savedSettings['google_maps_embed'] || '',
+        google_maps_url: savedSettings['google_maps_url'] || '' 
+      });
     } else if (activeTab === 'email') {
       setEmailForm({ smtp_host: savedSettings['smtp_host'] || '', smtp_port: savedSettings['smtp_port'] || '', smtp_user: savedSettings['smtp_user'] || '', smtp_pass: savedSettings['smtp_pass'] || '', smtp_from: savedSettings['smtp_from'] || '' });
     } else if (activeTab === 'seo') {
@@ -261,7 +273,7 @@ export default function AdminSettingsPage() {
             className="inline-flex items-center gap-1.5 bg-[#4e66b3] text-white text-sm font-bold px-5 py-2 rounded-xl hover:bg-[#3a4f99] transition-colors disabled:opacity-50 shadow-sm whitespace-nowrap"
           >
             {isSaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-            {isSaving ? 'Savingï¿½' : 'Save'}
+            {isSaving ? 'Saving...' : 'Save'}
           </button>
         </div>
       </div>
@@ -330,7 +342,14 @@ export default function AdminSettingsPage() {
                     <MapPin className="w-3.5 h-3.5 text-gray-400" /> Google Maps Embed URL
                   </label>
                   <input type="text" value={generalForm.google_maps_embed} onChange={e => setGeneralForm(f => ({ ...f, google_maps_embed: e.target.value }))} placeholder="https://www.google.com/maps/embed?pb=..." className={INPUT} />
-                  <p className="text-[11px] text-gray-400 mt-1">Embed URL for the contact page map</p>
+                  <p className="text-[11px] text-gray-400 mt-1">Embed URL (from "Embed a map")</p>
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
+                    <Globe className="w-3.5 h-3.5 text-gray-400" /> Google Maps Sharing URL
+                  </label>
+                  <input type="text" value={generalForm.google_maps_url} onChange={e => setGeneralForm(f => ({ ...f, google_maps_url: e.target.value }))} placeholder="https://maps.app.goo.gl/..." className={INPUT} />
+                  <p className="text-[11px] text-gray-400 mt-1">Short link (from "Share" &gt; "Send a link")</p>
                 </div>
               </div>
             </div>
@@ -351,7 +370,7 @@ export default function AdminSettingsPage() {
               <LogoUpload name="logo_url" defaultValue={savedSettings['site_logo'] || ''} onChange={url => setLogoUrl(url)} />
               <button type="submit" disabled={logoSaving} className="mt-4 inline-flex items-center gap-2 bg-[#4e66b3] text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-[#3a4f99] transition-colors disabled:opacity-50">
                 {logoSaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-                {logoSaving ? 'Savingï¿½' : 'Save Logo'}
+                {logoSaving ? 'Saving...' : 'Save Logo'}
               </button>
             </form>
           </div>
@@ -384,7 +403,7 @@ export default function AdminSettingsPage() {
               </div>
               <button type="submit" disabled={pwSaving} className="mt-4 inline-flex items-center gap-2 bg-[#4e66b3] text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-[#3a4f99] transition-colors disabled:opacity-50">
                 {pwSaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
-                {pwSaving ? 'Updatingï¿½' : 'Update Password'}
+                {pwSaving ? 'Updating...' : 'Update Password'}
               </button>
             </form>
           </div>
