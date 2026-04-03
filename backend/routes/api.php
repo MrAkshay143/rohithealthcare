@@ -106,6 +106,7 @@ Route::middleware(\App\Http\Middleware\AdminAuth::class)->group(function () {
 
     // Upload
     Route::post('/upload', [UploadController::class, 'store']);
+    Route::post('/upload/from-url', [UploadController::class, 'fromUrl']);
 
     // Enquiries management
     Route::get('/enquiries', [EnquiryController::class, 'index']);
