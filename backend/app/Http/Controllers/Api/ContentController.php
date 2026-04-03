@@ -152,11 +152,11 @@ class ContentController extends Controller
             'cta_btn_call' => ['value' => 'Call Now', 'label' => 'CTA Call Button Label', 'group' => 'CTA Section'],
             'cta_btn_inquiry' => ['value' => 'Send an Inquiry', 'label' => 'CTA Inquiry Button Label', 'group' => 'CTA Section'],
 
-            'contact_phone' => ['value' => '9876543210', 'label' => 'Phone (digits only, no +91)', 'group' => 'Contact Info'],
-            'contact_phone_display' => ['value' => '+91 98765 43210', 'label' => 'Phone Display Text', 'group' => 'Contact Info'],
-            'contact_whatsapp' => ['value' => '919876543210', 'label' => 'WhatsApp (with country code)', 'group' => 'Contact Info'],
-            'contact_email' => ['value' => '', 'label' => 'Email Address', 'group' => 'Contact Info'],
-            'contact_address' => ['value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State - PIN 110011', 'label' => 'Clinic Address', 'group' => 'Contact Info'],
+            'contact_phone' => ['value' => '918597215824', 'label' => 'Phone (with country code 91)', 'group' => 'Contact Info'],
+            'contact_phone_display' => ['value' => '+91 8597215824', 'label' => 'Phone Display Text', 'group' => 'Contact Info'],
+            'contact_whatsapp' => ['value' => '918597215824', 'label' => 'WhatsApp (with country code)', 'group' => 'Contact Info'],
+            'contact_email' => ['value' => 'rohithealthcare1@gmail.com', 'label' => 'Email Address', 'group' => 'Contact Info'],
+            'contact_address' => ['value' => 'Masjid Road, Balarampur, West Bengal, India', 'label' => 'Clinic Address', 'group' => 'Contact Info'],
             'contact_hours_weekday' => ['value' => 'Mon–Sat: 7:00 AM – 9:00 PM', 'label' => 'Weekday Hours', 'group' => 'Contact Info'],
             'contact_hours_sunday' => ['value' => 'Sunday: 7:00 AM – 2:00 PM', 'label' => 'Sunday Hours', 'group' => 'Contact Info'],
 

@@ -241,10 +241,10 @@ class DatabaseSeeder extends Seeder
             ['key' => 'contact_phone',         'value' => '918597215824'],
             ['key' => 'contact_phone_display', 'value' => '+91 8597215824'],
             ['key' => 'contact_whatsapp',      'value' => '918597215824'],
-            ['key' => 'contact_email',         'value' => ''],
+            ['key' => 'contact_email',         'value' => 'rohithealthcare1@gmail.com'],
             ['key' => 'contact_address',       'value' => 'Masjid Road, Balarampur, West Bengal, India'],
-            ['key' => 'contact_hours_weekday', 'value' => 'Mon - Sat: 7:00 AM - 9:00 PM'],
-            ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM - 2:00 PM'],
+            ['key' => 'contact_hours_weekday', 'value' => 'Mon–Sat: 7:00 AM – 9:00 PM'],
+            ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM – 2:00 PM'],
             // About Page
             ['key' => 'about_page_badge',       'value' => 'Our Story'],
             ['key' => 'about_page_heading',     'value' => 'Built on Trust, Driven by Accuracy'],
