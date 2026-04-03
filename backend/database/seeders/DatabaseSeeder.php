@@ -395,6 +395,17 @@ class DatabaseSeeder extends Seeder
             // SEO - Global
             ['key' => 'seo_og_image',         'value' => ''],
             ['key' => 'google_analytics_id',  'value' => ''],
+            // SEO - Structured Data & Local SEO
+            ['key' => 'seo_robots',         'value' => 'index, follow'],
+            ['key' => 'seo_twitter_handle', 'value' => ''],
+            ['key' => 'seo_geo_region',     'value' => 'IN-WB'],
+            ['key' => 'seo_geo_lat',        'value' => '23.092637'],
+            ['key' => 'seo_geo_lng',        'value' => '86.217628'],
+            ['key' => 'seo_local_street',   'value' => 'Masjid Road'],
+            ['key' => 'seo_local_city',     'value' => 'Balarampur'],
+            ['key' => 'seo_local_state',    'value' => 'West Bengal'],
+            ['key' => 'seo_local_postal',   'value' => '723153'],
+            ['key' => 'seo_local_country',  'value' => 'IN'],
 
             // AI Chatbot Info
             ['key' => 'chatbot_enabled',       'value' => 'true'],

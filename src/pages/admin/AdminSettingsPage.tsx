@@ -113,7 +113,20 @@ export default function AdminSettingsPage() {
       });
       setEmailForm({ smtp_host: map['smtp_host'] || '', smtp_port: map['smtp_port'] || '', smtp_user: map['smtp_user'] || '', smtp_pass: map['smtp_pass'] || '', smtp_from: map['smtp_from'] || '' });
       // Build per-page SEO form from settings
-      const seo: Record<string, string> = { seo_og_image: map['seo_og_image'] || '', google_analytics_id: map['google_analytics_id'] || '' };
+      const seo: Record<string, string> = {
+        seo_og_image: map['seo_og_image'] || '',
+        google_analytics_id: map['google_analytics_id'] || '',
+        seo_robots: map['seo_robots'] || 'index, follow',
+        seo_twitter_handle: map['seo_twitter_handle'] || '',
+        seo_geo_region: map['seo_geo_region'] || 'IN-WB',
+        seo_geo_lat: map['seo_geo_lat'] || '',
+        seo_geo_lng: map['seo_geo_lng'] || '',
+        seo_local_street: map['seo_local_street'] || '',
+        seo_local_city: map['seo_local_city'] || '',
+        seo_local_state: map['seo_local_state'] || '',
+        seo_local_postal: map['seo_local_postal'] || '',
+        seo_local_country: map['seo_local_country'] || 'IN',
+      };
       for (const p of SEO_PAGES) {
         seo[getSeoKey(p.key, 'title')] = map[getSeoKey(p.key, 'title')] || '';
         seo[getSeoKey(p.key, 'description')] = map[getSeoKey(p.key, 'description')] || '';
@@ -204,7 +217,20 @@ export default function AdminSettingsPage() {
     } else if (activeTab === 'email') {
       setEmailForm({ smtp_host: savedSettings['smtp_host'] || '', smtp_port: savedSettings['smtp_port'] || '', smtp_user: savedSettings['smtp_user'] || '', smtp_pass: savedSettings['smtp_pass'] || '', smtp_from: savedSettings['smtp_from'] || '' });
     } else if (activeTab === 'seo') {
-      const seo: Record<string, string> = { seo_og_image: savedSettings['seo_og_image'] || '', google_analytics_id: savedSettings['google_analytics_id'] || '' };
+      const seo: Record<string, string> = {
+        seo_og_image: savedSettings['seo_og_image'] || '',
+        google_analytics_id: savedSettings['google_analytics_id'] || '',
+        seo_robots: savedSettings['seo_robots'] || 'index, follow',
+        seo_twitter_handle: savedSettings['seo_twitter_handle'] || '',
+        seo_geo_region: savedSettings['seo_geo_region'] || 'IN-WB',
+        seo_geo_lat: savedSettings['seo_geo_lat'] || '',
+        seo_geo_lng: savedSettings['seo_geo_lng'] || '',
+        seo_local_street: savedSettings['seo_local_street'] || '',
+        seo_local_city: savedSettings['seo_local_city'] || '',
+        seo_local_state: savedSettings['seo_local_state'] || '',
+        seo_local_postal: savedSettings['seo_local_postal'] || '',
+        seo_local_country: savedSettings['seo_local_country'] || 'IN',
+      };
       for (const p of SEO_PAGES) {
         seo[getSeoKey(p.key, 'title')] = savedSettings[getSeoKey(p.key, 'title')] || '';
         seo[getSeoKey(p.key, 'description')] = savedSettings[getSeoKey(p.key, 'description')] || '';
@@ -563,7 +589,8 @@ export default function AdminSettingsPage() {
               </div>
             ) : (
               /* Global SEO settings */
-              <div className="grid grid-cols-1 gap-y-4 max-w-2xl">
+              <div className="grid grid-cols-1 gap-y-6 max-w-2xl">
+                {/* OG Image */}
                 <div>
                   <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
                     <ImageIcon className="w-3.5 h-3.5 text-gray-400" /> Social Share Image (OG Image)
@@ -576,6 +603,7 @@ export default function AdminSettingsPage() {
                   />
                   <p className="text-[11px] text-gray-400 mt-1">Shown when shared on WhatsApp, Facebook, Twitter (1200×630px recommended)</p>
                 </div>
+                {/* Analytics */}
                 <div>
                   <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
                     <BarChart2 className="w-3.5 h-3.5 text-gray-400" /> Google Analytics ID
@@ -587,6 +615,74 @@ export default function AdminSettingsPage() {
                     className={INPUT}
                   />
                   <p className="text-[11px] text-gray-400 mt-1">Your GA4 Measurement ID (starts with G-)</p>
+                </div>
+                {/* Robots */}
+                <div>
+                  <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
+                    <Eye className="w-3.5 h-3.5 text-gray-400" /> Crawling &amp; Indexing
+                  </label>
+                  <select value={seoForm.seo_robots || 'index, follow'} onChange={e => setSeoForm(f => ({ ...f, seo_robots: e.target.value }))} className={INPUT}>
+                    <option value="index, follow">Index + Follow (recommended)</option>
+                    <option value="noindex, follow">No Index + Follow</option>
+                    <option value="noindex, nofollow">No Index + No Follow (block all)</option>
+                    <option value="noarchive, follow">No Archive + Follow</option>
+                  </select>
+                  <p className="text-[11px] text-gray-400 mt-1">Controls how search engines crawl and index your site</p>
+                </div>
+                {/* Twitter */}
+                <div>
+                  <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
+                    <Globe className="w-3.5 h-3.5 text-gray-400" /> Twitter / X Handle
+                  </label>
+                  <input type="text"
+                    value={seoForm.seo_twitter_handle || ''}
+                    onChange={e => setSeoForm(f => ({ ...f, seo_twitter_handle: e.target.value }))}
+                    placeholder="@rohithealthcare"
+                    className={INPUT}
+                  />
+                  <p className="text-[11px] text-gray-400 mt-1">Used in Twitter Card meta tag (optional)</p>
+                </div>
+                {/* Local Business / Structured Data */}
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold text-gray-700 mb-1 uppercase tracking-wider flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#4e66b3]" /> Local SEO &amp; Structured Data (JSON-LD)
+                  </p>
+                  <p className="text-[11px] text-gray-400 mb-4">Injected as schema.org/MedicalBusiness markup. Helps local Google ranking and Google Maps integration.</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">Street Address</label>
+                      <input type="text" value={seoForm.seo_local_street || ''} onChange={e => setSeoForm(f => ({ ...f, seo_local_street: e.target.value }))} placeholder="Masjid Road" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">City</label>
+                      <input type="text" value={seoForm.seo_local_city || ''} onChange={e => setSeoForm(f => ({ ...f, seo_local_city: e.target.value }))} placeholder="Balarampur" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">State</label>
+                      <input type="text" value={seoForm.seo_local_state || ''} onChange={e => setSeoForm(f => ({ ...f, seo_local_state: e.target.value }))} placeholder="West Bengal" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">PIN Code</label>
+                      <input type="text" value={seoForm.seo_local_postal || ''} onChange={e => setSeoForm(f => ({ ...f, seo_local_postal: e.target.value }))} placeholder="723153" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">Country Code</label>
+                      <input type="text" value={seoForm.seo_local_country || ''} onChange={e => setSeoForm(f => ({ ...f, seo_local_country: e.target.value }))} placeholder="IN" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">Geo Region</label>
+                      <input type="text" value={seoForm.seo_geo_region || ''} onChange={e => setSeoForm(f => ({ ...f, seo_geo_region: e.target.value }))} placeholder="IN-WB" className={INPUT} />
+                      <p className="text-[10px] text-gray-400 mt-1">ISO format e.g. IN-WB for West Bengal</p>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">Latitude</label>
+                      <input type="text" value={seoForm.seo_geo_lat || ''} onChange={e => setSeoForm(f => ({ ...f, seo_geo_lat: e.target.value }))} placeholder="23.092637" className={INPUT} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">Longitude</label>
+                      <input type="text" value={seoForm.seo_geo_lng || ''} onChange={e => setSeoForm(f => ({ ...f, seo_geo_lng: e.target.value }))} placeholder="86.217628" className={INPUT} />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
