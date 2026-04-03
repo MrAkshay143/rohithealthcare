@@ -74,18 +74,8 @@ class DatabaseSeeder extends Seeder
             DB::table('blogs')->insertOrIgnore($blog);
         }
 
-        // Gallery - exact data from SQLite (IDs preserved)
-        $gallery = [
-            ['id' => 1, 'title' => 'Our Laboratory', 'imageUrl' => 'https://images.unsplash.com/photo-1581093196278-a29c46f5fc6c?auto=format&fit=crop&q=80&w=800'],
-            ['id' => 2, 'title' => 'Sample Collection', 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=800'],
-            ['id' => 3, 'title' => 'Diagnostic Equipment', 'imageUrl' => 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&q=80&w=800'],
-            ['id' => 4, 'title' => 'Patient Care', 'imageUrl' => 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=800'],
-            ['id' => 5, 'title' => 'Health Camp', 'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'],
-            ['id' => 6, 'title' => 'Modern Reception', 'imageUrl' => 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800'],
-        ];
-        foreach ($gallery as $photo) {
-            DB::table('galleries')->insertOrIgnore($photo);
-        }
+        // Gallery - no dummy photos (users can upload from admin panel)
+        // Keeping table empty for user-uploaded content
 
         // HeroSlides - exact data from SQLite (IDs preserved)
         $heroSlides = [
