@@ -9,5 +9,5 @@ class Gallery extends Model
     protected $table = 'galleries';
     public $timestamps = false;
 
-    protected $fillable = ['title', 'imageUrl'];
+    protected $fillable = ['title', 'imageUrl', 'order'];
 }

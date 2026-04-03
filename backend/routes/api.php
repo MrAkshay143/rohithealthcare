@@ -81,6 +81,7 @@ Route::middleware(\App\Http\Middleware\AdminAuth::class)->group(function () {
     Route::delete('/blogs/{id}', [BlogController::class, 'destroy']);
 
     // Gallery CRUD
+    Route::post('/gallery/reorder', [GalleryController::class, 'reorder']);
     Route::post('/gallery', [GalleryController::class, 'store']);
     Route::put('/gallery/{id}', [GalleryController::class, 'update']);
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);

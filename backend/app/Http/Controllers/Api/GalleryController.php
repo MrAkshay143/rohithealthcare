@@ -10,7 +10,7 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        $photos = Gallery::orderBy('id', 'desc')->get();
+        $photos = Gallery::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
         return response()->json($photos);
     }
 
@@ -20,6 +20,9 @@ class GalleryController extends Controller
             'title' => 'required|string|max:255',
             'imageUrl' => 'required|string|max:500',
         ]);
+
+        $maxOrder = Gallery::max('order') ?? 0;
+        $validated['order'] = $maxOrder + 1;
 
         $photo = Gallery::create($validated);
         return response()->json($photo, 201);
@@ -49,6 +52,15 @@ class GalleryController extends Controller
         $photo = Gallery::findOrFail($id);
         $photo->delete();
         return response()->json(['success' => 'Photo deleted']);
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate(['ids' => 'required|array']);
+        foreach ($request->ids as $pos => $id) {
+            Gallery::where('id', $id)->update(['order' => $pos + 1]);
+        }
+        return response()->json(['success' => true]);
     }
 
     public function count()
