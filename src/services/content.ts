@@ -123,7 +123,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   home_whyus_items:      { value: 'NABL Accredited Laboratory, Same-day reports delivered via WhatsApp, Trained and experienced staff, Clean and hygienic environment, Complete patient data confidentiality', label: 'Checklist Items (comma-separated)', group: 'Home Why Us', type: 'pills' },
   home_whyus_btn1_label: { value: 'About Us', label: 'Button 1 Label', group: 'Home Why Us' },
   home_whyus_btn2_label: { value: 'Our Services', label: 'Button 2 Label', group: 'Home Why Us' },
-  home_whyus_image:      { value: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000', label: 'Section Image URL', group: 'Home Why Us', type: 'image' },
+  home_whyus_image:      { value: '/images/bg-lab.jpg', label: 'Section Image URL', group: 'Home Why Us', type: 'image' },
 
   // ─── Home Team ────────────────────────────────────────────
   home_team_visible: { value: 'true', label: 'Show Section', group: 'Home Team', type: 'toggle' },

@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'free-health-checkup-camp-april-2026',
                 'title' => 'Free Health Check-up Camp – 15th April 2026',
                 'content' => 'Rohit Health Care is organising a free health check-up camp on 15th April 2026. Services include blood pressure monitoring, blood sugar screening, eye check-up, and BMI assessment. All residents are welcome. No prior appointment needed. Camp will be held from 9 AM to 2 PM at our main centre.',
-                'imageUrl' => 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=800',
+                'imageUrl' => '/images/bg-medical.jpg',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'world-blood-donor-day-awareness',
                 'title' => 'World Blood Donor Day – Awareness & Drive',
                 'content' => 'On the occasion of World Blood Donor Day, our team organised a community awareness drive and blood donation camp. Over 120 units of blood were collected, benefiting patients across the region. We thank all volunteers and donors for their selfless contribution.',
-                'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=800',
+                'imageUrl' => '/images/bg-blood-donation.jpg',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'home-sample-collection-24x7',
                 'title' => 'New: Home Sample Collection Now Available 24×7',
                 'content' => 'We are delighted to announce that our home sample collection service is now available round-the-clock, 7 days a week. Our trained phlebotomists will arrive at your doorstep at a time of your choosing. Book via WhatsApp or call us directly. Same-day results guaranteed for most tests.',
-                'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
+                'imageUrl' => '/images/bg-diagnostic.jpg',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'thyroid-awareness-month',
                 'title' => 'Thyroid Awareness Month – Get Tested',
                 'content' => 'January is Thyroid Awareness Month. Did you know that over 42 million people in India suffer from thyroid disorders? We are offering a 30% discount on TSH, T3, and T4 tests throughout this month. Early detection leads to better outcomes. Book your test today.',
-                'imageUrl' => 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&q=80&w=800',
+                'imageUrl' => '/images/bg-thyroid.jpg',
                 'draft' => false,
                 'createdAt' => '2026-03-17 00:00:00',
             ],
@@ -79,9 +79,9 @@ class DatabaseSeeder extends Seeder
 
         // HeroSlides - exact data from SQLite (IDs preserved)
         $heroSlides = [
-            ['id' => 1, 'imageUrl' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200', 'alt' => 'Healthcare professionals at work', 'order' => 1, 'createdAt' => '2026-03-17 00:00:00'],
-            ['id' => 2, 'imageUrl' => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=1200', 'alt' => 'Modern diagnostic laboratory', 'order' => 2, 'createdAt' => '2026-03-17 00:00:00'],
-            ['id' => 3, 'imageUrl' => 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=1200', 'alt' => 'Patient care and consultation', 'order' => 3, 'createdAt' => '2026-03-17 00:00:00'],
+            ['id' => 1, 'imageUrl' => '/images/bg-diagnostic.jpg', 'alt' => 'Healthcare professionals at work', 'order' => 1, 'createdAt' => '2026-03-17 00:00:00'],
+            ['id' => 2, 'imageUrl' => '/images/bg-blood-donation.jpg', 'alt' => 'Modern diagnostic laboratory', 'order' => 2, 'createdAt' => '2026-03-17 00:00:00'],
+            ['id' => 3, 'imageUrl' => '/images/bg-medical.jpg', 'alt' => 'Patient care and consultation', 'order' => 3, 'createdAt' => '2026-03-17 00:00:00'],
         ];
         foreach ($heroSlides as $slide) {
             DB::table('hero_slides')->insertOrIgnore($slide);
@@ -209,7 +209,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'home_whyus_items',      'value' => 'NABL Accredited Laboratory, Same-day digital reports via WhatsApp, Experienced & trained phlebotomists, Hygienic safe and clean environment, Confidential patient data always'],
             ['key' => 'home_whyus_btn1_label', 'value' => 'About Us'],
             ['key' => 'home_whyus_btn2_label', 'value' => 'Our Services'],
-            ['key' => 'home_whyus_image',      'value' => 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000'],
+            ['key' => 'home_whyus_image',      'value' => '/images/bg-lab.jpg'],
             // Home Team
             ['key' => 'home_team_visible', 'value' => 'true'],
             ['key' => 'home_team_badge',   'value' => 'Our Healthcare Team'],

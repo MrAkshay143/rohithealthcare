@@ -180,7 +180,7 @@ export default function BlogPostPage() {
 
         {/* CTA card */}
         <div ref={reveal(100)} className="mt-6 sm:mt-10 lg:mt-12 rounded-2xl sm:rounded-[1.5rem] bg-linear-to-br from-[#3d5099] to-[#4e66b3] px-4 py-5 sm:px-8 sm:py-8 flex flex-col lg:flex-row items-center sm:items-start lg:items-center lg:justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xl overflow-hidden relative">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=40')] opacity-5 mix-blend-overlay bg-cover bg-center pointer-events-none" />
+          <div className="absolute inset-0 bg-[url('/images/bg-health.jpg')] opacity-5 mix-blend-overlay bg-cover bg-center pointer-events-none" />
           <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center text-center sm:text-left gap-3 sm:gap-4 relative z-10 w-full sm:w-auto">
             <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-white/15 flex items-center justify-center shrink-0 backdrop-blur-sm shadow-inner">
               <HeartPulse className="w-5 h-5 sm:w-6 sm:h-6 text-white" />

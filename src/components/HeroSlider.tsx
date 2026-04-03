@@ -5,8 +5,7 @@ type Slide = { id: number; imageUrl: string; alt: string }
 const FALLBACK: Slide[] = [
   {
     id: 0,
-    imageUrl:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200',
+    imageUrl: '/images/bg-diagnostic.jpg',
     alt: 'Healthcare professionals at work',
   },
 ]

@@ -20,7 +20,7 @@ export default function ContactPage() {
     <div className="bg-gray-50 pb-10 sm:pb-16">
       {/* Header */}
       <div className="relative isolate overflow-hidden bg-brand-green py-3 sm:py-5 lg:py-6 text-center px-4">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 opacity-10 bg-[url('/images/bg-diagnostic.jpg')] bg-cover bg-center" />
         <div ref={reveal()} className="relative">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-2">
             {content['contact_page_badge']}

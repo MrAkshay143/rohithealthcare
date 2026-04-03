@@ -327,7 +327,7 @@ export default function HomePage() {
       {/* =========== CTA =========== */}
       {isTrueValue(content['cta_visible']) && (
       <section className="relative overflow-hidden bg-linear-to-r from-[#A62B2B] to-[#811e1e] py-5 sm:py-8 lg:py-10">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=40&w=1400')] bg-cover bg-center opacity-10 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/images/bg-medical.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay" />
         <div ref={reveal()} className="relative mx-auto max-w-5xl px-4 sm:px-8 lg:px-10">
           <div className="flex flex-col lg:flex-row items-center sm:items-start lg:items-center lg:justify-between gap-4 sm:gap-6 lg:gap-8">
             <div className="text-center sm:text-left">

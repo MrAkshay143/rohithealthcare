@@ -25,7 +25,7 @@ api.get<any[]>('/doctors?orderBy=order&orderDir=asc').then(setDoctors).catch(() 
     <div>
       {/* Header */}
       <div className="relative isolate overflow-hidden bg-brand-green py-3 sm:py-5 lg:py-6 text-center px-4">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 opacity-10 bg-[url('/images/bg-lab.jpg')] bg-cover bg-center" />
         <div ref={reveal()} className="relative max-w-3xl mx-auto">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#f87171] mb-2">
             {content['doctors_page_badge']}
