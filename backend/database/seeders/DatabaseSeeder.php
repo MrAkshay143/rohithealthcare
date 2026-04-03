@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'site_name',            'value' => 'Rohit Health Care'],
             ['key' => 'site_tagline',         'value' => 'Precision diagnostics with care you can trust.'],
             ['key' => 'site_logo',            'value' => ''],
-            ['key' => 'years_experience',     'value' => '10+'],
+            ['key' => 'years_experience',     'value' => '5'],
             ['key' => 'google_maps_url',      'value' => 'https://maps.app.goo.gl/N5KrFWzKUspjw1YD6'],
             ['key' => 'google_maps_embed',    'value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14647.23432717014!2d86.2215444!3d23.1027786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f697446700c25d%3A0xe67c1e550c608bfa!2sBalarampur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1711111111111!5m2!1sen!2sin'],
             // Navbar
@@ -168,7 +168,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'hero_subtext',        'value' => 'Your trusted partner for accurate diagnostics and home sample collection. Fast, reliable and right at your doorstep.'],
             ['key' => 'hero_btn_call',       'value' => 'Call Us Now'],
             ['key' => 'hero_btn_directions', 'value' => 'Directions'],
-            ['key' => 'hero_pills',          'value' => 'NABL Accredited, Same Day Reports, Home Collection, 10+ Years'],
+            ['key' => 'hero_pills',          'value' => 'NABL Accredited, Same Day Reports, Home Collection, 5 Years'],
             // Stats Strip
             ['key' => 'stat_1_value', 'value' => '50,000+'],
             ['key' => 'stat_1_label', 'value' => 'Happy Patients'],
