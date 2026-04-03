@@ -238,8 +238,8 @@ class DatabaseSeeder extends Seeder
             ['key' => 'cta_btn_call',    'value' => 'Call Now'],
             ['key' => 'cta_btn_inquiry', 'value' => 'Send an Inquiry'],
             // Contact Info
-            ['key' => 'contact_phone',         'value' => '8597215824'],
-            ['key' => 'contact_phone_display', 'value' => '+91 85972 15824'],
+            ['key' => 'contact_phone',         'value' => '918597215824'],
+            ['key' => 'contact_phone_display', 'value' => '+91 8597215824'],
             ['key' => 'contact_whatsapp',      'value' => '918597215824'],
             ['key' => 'contact_email',         'value' => ''],
             ['key' => 'contact_address',       'value' => 'Masjid Road, Balarampur, West Bengal, India'],

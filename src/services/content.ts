@@ -8,7 +8,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── General ───────────────────────────────────────────────
   site_name:            { value: 'Rohit Health Care', label: 'Site / Brand Name', group: 'General' },
   site_domain:          { value: 'https://rohithealthcare.com', label: 'Site URL (e.g. https://domain.com)', group: 'General' },
-  site_tagline:         { value: 'Trusted diagnostics. Accurate results. Right at your doorstep.', label: 'Site Tagline', group: 'General' },
+  site_tagline:         { value: 'Precision diagnostics with care you can trust.', label: 'Site Tagline', group: 'General' },
   site_logo:            { value: '', label: 'Custom Logo URL (leave empty for default)', group: 'General', type: 'image' },
   years_experience:     { value: '5+', label: 'Years of Experience', group: 'General' },
   allowed_domains:      { value: 'rohithealthcare.com, rohithealthcare.in, localhost:5173', label: 'Allowed Domains (CORS)', group: 'General' },
@@ -46,8 +46,8 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   navbar_link_7_mobile:  { value: 'true', label: 'Link 7 - Mobile', group: 'Navbar', type: 'toggle' },
 
   // ─── Footer ────────────────────────────────────────────────
-  footer_tagline:            { value: 'Your trusted partner for comprehensive medical services, diagnostics, and daycare.', label: 'Footer Tagline', group: 'Footer' },
-  footer_address_short:      { value: 'Masjid Road, Balarampur,\nWest Bengal, India', label: 'Footer Address (short)', group: 'Footer' },
+  footer_tagline:            { value: 'Comprehensive healthcare for your whole family, right in your neighbourhood.', label: 'Footer Tagline', group: 'Footer' },
+  footer_address_short:      { value: 'Masjid Road, Balarampur, West Bengal, India', label: 'Footer Address (short)', group: 'Footer' },
   footer_logo_desktop:       { value: 'true', label: 'Show Logo - Desktop', group: 'Footer', type: 'toggle' },
   footer_logo_mobile:        { value: 'true', label: 'Show Logo - Mobile', group: 'Footer', type: 'toggle' },
   footer_quicklinks_heading: { value: 'Quick Links', label: 'Quick Links Section Title', group: 'Footer' },
@@ -93,7 +93,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   hero_badge:          { value: 'Associated with Apollo Diagnostics', label: 'Hero Badge Text', group: 'Hero Section' },
   hero_heading:        { value: 'Accurate Diagnostics.', label: 'Hero Main Heading', group: 'Hero Section' },
   hero_accent:         { value: 'Trusted Care.', label: 'Hero Accent (red) Text', group: 'Hero Section' },
-  hero_subtext:        { value: 'Your trusted partner for accurate diagnostics and home sample collection.\nFast, reliable and right at your doorstep.', label: 'Hero Sub-text', group: 'Hero Section' },
+  hero_subtext:        { value: 'Complete healthcare and diagnostics under one roof, at our clinic or at your doorstep.', label: 'Hero Sub-text', group: 'Hero Section' },
   hero_btn_call:       { value: 'Call Us Now', label: 'Hero Call Button Label', group: 'Hero Section' },
   hero_btn_directions: { value: 'Directions', label: 'Hero Directions Button Label', group: 'Hero Section' },
   hero_pills:          { value: 'NABL Accredited, Same Day Reports, Home Collection, 5+ Years', label: 'Hero Trust Pills (comma-separated)', group: 'Hero Section', type: 'pills' },
@@ -110,8 +110,8 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── Home Services ────────────────────────────────────────
   home_services_badge:   { value: 'What We Offer', label: 'Section Badge', group: 'Home Services' },
-  home_services_heading: { value: 'Comprehensive Diagnostic Services', label: 'Section Heading', group: 'Home Services' },
-  home_services_subtext: { value: 'Cutting-edge technology and skilled professionals - all under one roof.', label: 'Section Sub-text', group: 'Home Services' },
+  home_services_heading: { value: 'Comprehensive Healthcare Services', label: 'Section Heading', group: 'Home Services' },
+  home_services_subtext: { value: 'Comprehensive healthcare services delivered through expert consultation, diagnostics, and patient-focused care.', label: 'Section Sub-text', group: 'Home Services' },
   home_services_visible: { value: 'true', label: 'Show Section', group: 'Home Services', type: 'toggle' },
   home_services_btn:     { value: 'View All Services', label: 'View All Button', group: 'Home Services' },
 
@@ -120,16 +120,16 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   home_whyus_badge:      { value: 'Why Choose Us', label: 'Section Badge', group: 'Home Why Us' },
   home_whyus_heading:    { value: 'Precision You Can', label: 'Heading (white)', group: 'Home Why Us' },
   home_whyus_accent:     { value: 'Trust Every Time', label: 'Heading Accent (red)', group: 'Home Why Us' },
-  home_whyus_items:      { value: 'NABL Accredited Laboratory, Same-day digital reports via WhatsApp, Experienced & trained phlebotomists, Hygienic safe and clean environment, Confidential patient data always', label: 'Checklist Items (comma-separated)', group: 'Home Why Us', type: 'pills' },
+  home_whyus_items:      { value: 'NABL Accredited Laboratory, Same-day reports delivered via WhatsApp, Trained and experienced staff, Clean and hygienic environment, Complete patient data confidentiality', label: 'Checklist Items (comma-separated)', group: 'Home Why Us', type: 'pills' },
   home_whyus_btn1_label: { value: 'About Us', label: 'Button 1 Label', group: 'Home Why Us' },
   home_whyus_btn2_label: { value: 'Our Services', label: 'Button 2 Label', group: 'Home Why Us' },
   home_whyus_image:      { value: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000', label: 'Section Image URL', group: 'Home Why Us', type: 'image' },
 
   // ─── Home Team ────────────────────────────────────────────
   home_team_visible: { value: 'true', label: 'Show Section', group: 'Home Team', type: 'toggle' },
-  home_team_badge:   { value: 'Expert Doctors', label: 'Section Badge', group: 'Home Team' },
-  home_team_heading: { value: 'Our Medical Team', label: 'Section Heading', group: 'Home Team' },
-  home_team_link:    { value: 'Meet All Doctors', label: 'View All Link Text', group: 'Home Team' },
+  home_team_badge:   { value: 'Our Healthcare Team', label: 'Section Badge', group: 'Home Team' },
+  home_team_heading: { value: 'Meet Our Team', label: 'Section Heading', group: 'Home Team' },
+  home_team_link:    { value: 'View Our Full Team', label: 'View All Link Text', group: 'Home Team' },
 
   // ─── Home Blog ────────────────────────────────────────────
   home_blog_visible:   { value: 'true', label: 'Show Section', group: 'Home Blog', type: 'toggle' },
@@ -146,8 +146,8 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   cta_btn_inquiry: { value: 'Send an Inquiry', label: 'CTA Inquiry Button', group: 'CTA Section' },
 
   // ─── Contact Info ─────────────────────────────────────────
-  contact_phone:         { value: '8597215824', label: 'Phone (digits only, no +91)', group: 'Contact Info' },
-  contact_phone_display: { value: '+91 85972 15824', label: 'Phone Display Text', group: 'Contact Info' },
+  contact_phone:         { value: '918597215824', label: 'Phone (with country code 91)', group: 'Contact Info' },
+  contact_phone_display: { value: '+91 8597215824', label: 'Phone Display Text', group: 'Contact Info' },
   contact_whatsapp:      { value: '918597215824', label: 'WhatsApp (with country code)', group: 'Contact Info' },
   contact_email:         { value: 'rohithealthcare1@gmail.com', label: 'Email Address', group: 'Contact Info' },
   contact_address:       { value: 'Masjid Road, Balarampur, West Bengal, India', label: 'Clinic Address (full)', group: 'Contact Info' },
@@ -157,11 +157,11 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── About Page ───────────────────────────────────────────
   about_page_badge:       { value: 'Our Story', label: 'Hero Badge', group: 'About Page' },
   about_page_heading:     { value: 'Built on Trust, Driven by Accuracy', label: 'Hero Heading', group: 'About Page' },
-  about_page_subtext:     { value: 'Committed to care, accuracy, and trust.', label: 'Hero Sub-text', group: 'About Page' },
+  about_page_subtext:     { value: 'Quality care, delivered with precision and genuine compassion.', label: 'Hero Sub-text', group: 'About Page' },
   about_excellence_badge: { value: 'Committed to Excellence', label: 'Content Section Badge', group: 'About Page' },
   about_section_heading:  { value: 'The Right Diagnosis Changes Everything', label: 'Content Heading', group: 'About Page' },
-  about_body_1:           { value: 'At Rohit Health Care, we understand that an accurate diagnosis is the cornerstone of effective medical treatment. That is why we have partnered to bring world-class, NABL-accredited diagnostic testing facilities right to your neighbourhood.', label: 'Body Paragraph 1', group: 'About Page' },
-  about_body_2:           { value: 'Our modern collection centre is staffed by trained phlebotomists who prioritise your comfort and safety. Every sample is handled with utmost care, processed using precision technology, and reported with unparalleled accuracy - whether it is a routine blood test or a complex clinical profile.', label: 'Body Paragraph 2', group: 'About Page' },
+  about_body_1:           { value: 'At Rohit Health Care, we believe good treatment starts with an accurate diagnosis. In partnership with Apollo Diagnostics, we bring NABL-accredited testing facilities right to your neighbourhood.', label: 'Body Paragraph 1', group: 'About Page' },
+  about_body_2:           { value: 'Our centre is staffed by trained professionals who put your comfort first. Every sample is processed with care and every report is delivered accurately, whether it is a routine check-up or a detailed clinical test.', label: 'Body Paragraph 2', group: 'About Page' },
   about_hero_bg:          { value: '', label: 'Hero Background Image URL', group: 'About Page', type: 'image' },
   about_image:            { value: '', label: 'Section Photo URL', group: 'About Page', type: 'image' },
   about_years_label:      { value: 'Years serving the community', label: 'Years Badge Label', group: 'About Page' },
@@ -180,28 +180,28 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── About Why Us ─────────────────────────────────────────
   about_whyus_heading: { value: 'Why Rohit Health Care?', label: 'Section Heading', group: 'About Why Us' },
-  about_whyus_items:   { value: 'NABL Accredited testing, 100% data confidentiality and secure digital reports, Minimum waiting time - walk-in friendly, Home sample collection at your schedule, Hygienic sterile and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
-  about_cta_title:     { value: 'Experience Care Like Never Before', label: 'CTA Heading', group: 'About Why Us' },
-  about_cta_subtitle:  { value: 'Walk in today or arrange a home collection. Your health remains our top priority.', label: 'CTA Sub-text', group: 'About Why Us' },
+  about_whyus_items:   { value: 'NABL Accredited testing, Secure and confidential digital reports, Minimal wait time, walk-ins welcome, Home sample collection available, Clean and modern collection facility', label: 'Checklist (comma-separated)', group: 'About Why Us', type: 'pills' },
+  about_cta_title:     { value: 'We are here whenever you need us.', label: 'CTA Heading', group: 'About Why Us' },
+  about_cta_subtitle:  { value: 'Walk in today or book a home visit. Your health comes first.', label: 'CTA Sub-text', group: 'About Why Us' },
   about_cta_btn:       { value: 'Get in Touch', label: 'CTA Button Label', group: 'About Why Us' },
 
   // ─── Services Page ────────────────────────────────────────
-  services_page_badge:   { value: 'Premium Diagnostics', label: 'Page Badge', group: 'Services Page' },
-  services_page_heading: { value: 'Our Diagnostic Services', label: 'Page Heading', group: 'Services Page' },
-  services_page_subtext: { value: 'Precision testing you can rely on.', label: 'Page Sub-text', group: 'Services Page' },
+  services_page_badge:   { value: 'What We Offer', label: 'Page Badge', group: 'Services Page' },
+  services_page_heading: { value: 'Our Comprehensive Services', label: 'Page Heading', group: 'Services Page' },
+  services_page_subtext: { value: 'Comprehensive care across consultations, diagnostics, dental, home services, and pharmacy in one place.', label: 'Page Sub-text', group: 'Services Page' },
 
   // ─── Services CTA ─────────────────────────────────────────
   services_cta_heading:      { value: 'Need a specific test?', label: 'CTA Heading', group: 'Services CTA' },
-  services_cta_subtext:      { value: 'We offer a vast catalog of advanced tests. Contact us directly to check availability and pricing for any test.', label: 'CTA Sub-text', group: 'Services CTA' },
+  services_cta_subtext:      { value: 'We cover a wide range of tests and services. Call or message us to confirm availability and pricing.', label: 'CTA Sub-text', group: 'Services CTA' },
   services_cta_btn_call:     { value: 'Call Now', label: 'Call Button', group: 'Services CTA' },
   services_cta_btn_whatsapp: { value: 'WhatsApp', label: 'WhatsApp Button', group: 'Services CTA' },
   services_cta_btn_book:     { value: 'Book Appointment', label: 'Book Button', group: 'Services CTA' },
 
   // ─── Doctors Page ─────────────────────────────────────────
-  doctors_page_badge:       { value: 'Expert Professionals', label: 'Page Badge', group: 'Doctors Page' },
-  doctors_page_heading:     { value: 'Our Medical Team', label: 'Page Heading', group: 'Doctors Page' },
-  doctors_page_subtext:     { value: 'Experienced hands, compassionate care.', label: 'Page Sub-text', group: 'Doctors Page' },
-  doctors_empty_text:       { value: 'No doctors found. Add some from the admin panel.', label: 'Empty State Text', group: 'Doctors Page' },
+  doctors_page_badge:       { value: 'Our Healthcare Professionals', label: 'Page Badge', group: 'Doctors Page' },
+  doctors_page_heading:     { value: 'Meet Our Team', label: 'Page Heading', group: 'Doctors Page' },
+  doctors_page_subtext:     { value: 'A team of dedicated doctors and specialists committed to delivering compassionate, quality care to every patient.', label: 'Page Sub-text', group: 'Doctors Page' },
+  doctors_empty_text:       { value: 'No team members found. Add from admin panel.', label: 'Empty State Text', group: 'Doctors Page' },
   doctors_cta_heading:      { value: 'Book a Consultation', label: 'CTA Heading', group: 'Doctors Page' },
   doctors_cta_subtext:      { value: 'Our team is available 7 days a week. Walk in or call us to schedule at your convenience.', label: 'CTA Sub-text', group: 'Doctors Page' },
   doctors_cta_btn_call:     { value: 'Call Now', label: 'CTA Call Button', group: 'Doctors Page' },
@@ -254,7 +254,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
   // ─── Gallery Page ─────────────────────────────────────────
   gallery_page_badge:    { value: 'Our Facility & Events', label: 'Page Badge', group: 'Gallery Page' },
   gallery_page_heading:  { value: 'Photo Gallery', label: 'Page Heading', group: 'Gallery Page' },
-  gallery_page_subtext:  { value: 'A glimpse into our modern diagnostics center and community health camps.', label: 'Page Sub-text', group: 'Gallery Page' },
+  gallery_page_subtext:  { value: 'A look at our facility, team, and community health camps.', label: 'Page Sub-text', group: 'Gallery Page' },
   gallery_empty_title:   { value: 'No photos yet', label: 'Empty Title', group: 'Gallery Page' },
   gallery_empty_subtext: { value: 'Check back soon for updates from our events and facility.', label: 'Empty Text', group: 'Gallery Page' },
 
@@ -264,7 +264,7 @@ export const CONTENT_DEFAULTS: Record<string, ContentFieldDef> = {
 
   // ─── 404 Page ─────────────────────────────────────────────
   notfound_heading:     { value: 'Page Not Found', label: 'Heading', group: '404 Page' },
-  notfound_text:        { value: "Sorry, the page you're looking for doesn't exist or may have been moved. Let us help you find your way back.", label: 'Message', group: '404 Page' },
+  notfound_text:        { value: "This page does not exist or may have moved. Let us help you get back on track.", label: 'Message', group: '404 Page' },
   notfound_home_btn:    { value: 'Back to Home', label: 'Home Button', group: '404 Page' },
   notfound_call_btn:    { value: 'Call Us', label: 'Call Button', group: '404 Page' },
   notfound_links_label: { value: 'Quick Links', label: 'Links Section Label', group: '404 Page' },
