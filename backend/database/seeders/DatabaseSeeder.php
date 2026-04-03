@@ -15,24 +15,21 @@ class DatabaseSeeder extends Seeder
             ['id' => 2, 'username' => 'admin', 'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', 'ChangeMe@2025'))],
         ]);
 
-        // Doctors - exact data from SQLite (IDs preserved)
-        $doctors = [
-            ['id' => 16, 'name' => 'Dr. Sourav Sen', 'specialty' => 'General Physician & Sugar, Pressure, Thyroid', 'qualifications' => 'MBBS, MD (Medicine)', 'imageUrl' => null],
-            ['id' => 17, 'name' => 'Dr. K.K. Gupta', 'specialty' => 'General Physician & Sugar, Pressure, Thyroid', 'qualifications' => 'MBBS, MD', 'imageUrl' => null],
-            ['id' => 18, 'name' => 'Dr. K.K. Gupta', 'specialty' => 'Paediatric (Child)', 'qualifications' => 'MBBS, MD', 'imageUrl' => null],
-            ['id' => 19, 'name' => 'Dr. Rakhi Basu', 'specialty' => 'Obstetrics & Gynaecology', 'qualifications' => 'MBBS, DNB', 'imageUrl' => null],
-            ['id' => 20, 'name' => 'Dr. K.K. Gupta', 'specialty' => 'Oncology (Cancer)', 'qualifications' => 'MBBS, MD (Radiation Oncologist)', 'imageUrl' => null],
-            ['id' => 21, 'name' => 'Dr. Kabita Sarkar', 'specialty' => 'Dermatology (Skin)', 'qualifications' => 'BAMS, CMS, ED, CMCP, E-Derma', 'imageUrl' => null],
-            ['id' => 22, 'name' => 'Dr. Kumar Abhishek', 'specialty' => 'Orthopaedic', 'qualifications' => 'MBBS, DNB (Ex-TMH)', 'imageUrl' => null],
-            ['id' => 23, 'name' => 'Dr. Mahesh Hembram', 'specialty' => 'Neuro-Psychiatry', 'qualifications' => 'MBBS, MD, DPM (Ex-KANKE)', 'imageUrl' => null],
-            ['id' => 24, 'name' => 'Dr. Neha Agarwala', 'specialty' => 'Dietitian', 'qualifications' => 'BHMS, DDHN', 'imageUrl' => null],
-            ['id' => 25, 'name' => 'Dr. Arpan Goswami', 'specialty' => 'Dentistry', 'qualifications' => 'BDS, MDS (Orthodontist)', 'imageUrl' => null],
-            ['id' => 26, 'name' => 'Dr. Sanjay Mondal', 'specialty' => 'Dentistry', 'qualifications' => 'BDS (Dental Surgeon)', 'imageUrl' => null],
-            ['id' => 27, 'name' => 'Dr. Basudev Sen', 'specialty' => 'Dentistry', 'qualifications' => 'BDS (Dental Surgeon)', 'imageUrl' => null],
-        ];
-        foreach ($doctors as $doc) {
-            DB::table('doctors')->insertOrIgnore($doc);
-        }
+        // Team / Consulting Doctors - clears and reseeds on every deployment
+        DB::table('doctors')->delete();
+        DB::table('doctors')->insert([
+            ['name' => 'Dr. K.K. Gupta',             'specialty' => 'General Physician',        'qualifications' => 'MBBS, MD',   'imageUrl' => null, 'order' => 1],
+            ['name' => 'Dr. Anwar Jamal',            'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 2],
+            ['name' => 'Dr. Arpan Singha',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 3],
+            ['name' => 'Dr. Anu Priya',              'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 4],
+            ['name' => 'Dr. Aniruddha Mandal',       'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 5],
+            ['name' => 'Dr. Chandan Seth',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 6],
+            ['name' => 'Dr. Neha Agarwala',          'specialty' => 'Dietitian & Nutritionist', 'qualifications' => 'BHMS, DDHN', 'imageUrl' => null, 'order' => 7],
+            ['name' => 'Dr. Sanjay Mandal',          'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 8],
+            ['name' => 'Dr. Sabhyasachi Chatterjee', 'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 9],
+            ['name' => 'Dr. Tamajit Chakraborty',    'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 10],
+            ['name' => 'Dr. Sandeep Prasad',         'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 11],
+        ]);
 
         // Blogs - exact data from SQLite (IDs preserved)
         $blogs = [
@@ -104,7 +101,7 @@ class DatabaseSeeder extends Seeder
         $siteContent = [
             // General
             ['key' => 'site_name',            'value' => 'Rohit Health Care'],
-            ['key' => 'site_tagline',         'value' => 'Trusted diagnostics. Accurate results. Right at your doorstep.'],
+            ['key' => 'site_tagline',         'value' => 'Precision diagnostics with care you can trust.'],
             ['key' => 'site_logo',            'value' => ''],
             ['key' => 'years_experience',     'value' => '10+'],
             ['key' => 'google_maps_url',      'value' => 'https://maps.app.goo.gl/N5KrFWzKUspjw1YD6'],
@@ -138,7 +135,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'navbar_link_7_mobile',  'value' => 'true'],
             // Footer
             ['key' => 'footer_tagline',            'value' => 'Your trusted partner for comprehensive medical services, diagnostics, and daycare.'],
-            ['key' => 'footer_address_short',      'value' => "123 Medical Hub Ave,\nDiagnostic Square, City, 110011"],
+            ['key' => 'footer_address_short',      'value' => 'Masjid Road, Balarampur, West Bengal, India'],
             ['key' => 'footer_logo_desktop',       'value' => 'true'],
             ['key' => 'footer_logo_mobile',        'value' => 'true'],
             ['key' => 'footer_quicklinks_heading', 'value' => 'Quick Links'],
@@ -192,27 +189,27 @@ class DatabaseSeeder extends Seeder
             ['key' => 'stat_4_label', 'value' => 'Same-Day Reports'],
             // Home Services
             ['key' => 'home_services_badge',   'value' => 'What We Offer'],
-            ['key' => 'home_services_heading', 'value' => 'Comprehensive Diagnostic Services'],
-            ['key' => 'home_services_subtext', 'value' => 'Cutting-edge technology and skilled professionals - all under one roof.'],
+            ['key' => 'home_services_heading', 'value' => 'Comprehensive Healthcare Services'],
+            ['key' => 'home_services_subtext', 'value' => 'Comprehensive healthcare services delivered through expert consultation, diagnostics, and patient-focused care.'],
             ['key' => 'home_services_visible', 'value' => 'true'],
             ['key' => 'home_services_btn',     'value' => 'View All Services'],
-            ['key' => 'home_svc_1_title',      'value' => 'Pathology & Hematology'],
-            ['key' => 'home_svc_1_desc',       'value' => 'CBC, ESR, blood sugar, lipid profiles, liver and kidney panels with unmatched precision.'],
+            ['key' => 'home_svc_1_title',      'value' => 'Polyclinic & Doctor Consultation'],
+            ['key' => 'home_svc_1_desc',       'value' => 'Experienced physicians and specialist consultants available seven days a week for routine check-ups and expert medical advice.'],
             ['key' => 'home_svc_1_visible',    'value' => 'true'],
-            ['key' => 'home_svc_2_title',      'value' => 'Cardiology Tests'],
-            ['key' => 'home_svc_2_desc',       'value' => 'ECG, Echo, cardiac markers, and Holter monitoring to keep your heart health in check.'],
+            ['key' => 'home_svc_2_title',      'value' => 'Pathology'],
+            ['key' => 'home_svc_2_desc',       'value' => 'Complete laboratory diagnostic services covering blood, urine, stool, sputum, and semen analysis with reliable, precise reporting.'],
             ['key' => 'home_svc_2_visible',    'value' => 'true'],
-            ['key' => 'home_svc_3_title',      'value' => 'Biochemistry'],
-            ['key' => 'home_svc_3_desc',       'value' => 'Hormonal, thyroid, vitamin, and electrolyte panels for a complete metabolic view.'],
+            ['key' => 'home_svc_3_title',      'value' => 'Day Care'],
+            ['key' => 'home_svc_3_desc',       'value' => 'Clinical support including IV saline, wound care, and diabetic foot dressing, attended by trained male and female nursing staff.'],
             ['key' => 'home_svc_3_visible',    'value' => 'true'],
-            ['key' => 'home_svc_4_title',      'value' => 'Home Sample Collection'],
-            ['key' => 'home_svc_4_desc',       'value' => 'Trained phlebotomists visit your home at a time that suits you. Zero hassle.'],
+            ['key' => 'home_svc_4_title',      'value' => 'ECG'],
+            ['key' => 'home_svc_4_desc',       'value' => 'Accurate 12-lead electrocardiogram testing by trained technicians, with male and female staff available for patient comfort.'],
             ['key' => 'home_svc_4_visible',    'value' => 'true'],
-            ['key' => 'home_svc_5_title',      'value' => 'NABL Quality Standards'],
-            ['key' => 'home_svc_5_desc',       'value' => 'All tests meet national accreditation standards for diagnostic accuracy and safety.'],
+            ['key' => 'home_svc_5_title',      'value' => 'Dental Clinic'],
+            ['key' => 'home_svc_5_desc',       'value' => 'Comprehensive oral healthcare from preventive check-ups and restorative treatments to advanced dental procedures using modern practices.'],
             ['key' => 'home_svc_5_visible',    'value' => 'true'],
-            ['key' => 'home_svc_6_title',      'value' => 'Same-Day Reports'],
-            ['key' => 'home_svc_6_desc',       'value' => 'Receive your digital reports within hours, delivered directly to WhatsApp.'],
+            ['key' => 'home_svc_6_title',      'value' => 'Homeopathy & Nutrition Clinic'],
+            ['key' => 'home_svc_6_desc',       'value' => 'Holistic healing through personalised homeopathic treatment and expert nutrition planning for weight management and long-term wellness.'],
             ['key' => 'home_svc_6_visible',    'value' => 'true'],
             // Home Why Us
             ['key' => 'home_whyus_visible',    'value' => 'true'],
@@ -225,9 +222,9 @@ class DatabaseSeeder extends Seeder
             ['key' => 'home_whyus_image',      'value' => 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000'],
             // Home Team
             ['key' => 'home_team_visible', 'value' => 'true'],
-            ['key' => 'home_team_badge',   'value' => 'Expert Doctors'],
-            ['key' => 'home_team_heading', 'value' => 'Our Medical Team'],
-            ['key' => 'home_team_link',    'value' => 'Meet All Doctors'],
+            ['key' => 'home_team_badge',   'value' => 'Our Healthcare Team'],
+            ['key' => 'home_team_heading', 'value' => 'Meet Our Team'],
+            ['key' => 'home_team_link',    'value' => 'View Our Full Team'],
             // Home Blog
             ['key' => 'home_blog_visible',   'value' => 'true'],
             ['key' => 'home_blog_badge',     'value' => 'Latest Updates'],
@@ -241,11 +238,11 @@ class DatabaseSeeder extends Seeder
             ['key' => 'cta_btn_call',    'value' => 'Call Now'],
             ['key' => 'cta_btn_inquiry', 'value' => 'Send an Inquiry'],
             // Contact Info
-            ['key' => 'contact_phone',         'value' => '9876543210'],
-            ['key' => 'contact_phone_display', 'value' => '+91 98765 43210'],
-            ['key' => 'contact_whatsapp',      'value' => '919876543210'],
+            ['key' => 'contact_phone',         'value' => '8597215824'],
+            ['key' => 'contact_phone_display', 'value' => '+91 85972 15824'],
+            ['key' => 'contact_whatsapp',      'value' => '918597215824'],
             ['key' => 'contact_email',         'value' => ''],
-            ['key' => 'contact_address',       'value' => '123 Medical Hub Avenue, Near City Landmark, Diagnostic Square, Metropolitan City, State - PIN 110011'],
+            ['key' => 'contact_address',       'value' => 'Masjid Road, Balarampur, West Bengal, India'],
             ['key' => 'contact_hours_weekday', 'value' => 'Mon - Sat: 7:00 AM - 9:00 PM'],
             ['key' => 'contact_hours_sunday',  'value' => 'Sunday: 7:00 AM - 2:00 PM'],
             // About Page
@@ -277,22 +274,22 @@ class DatabaseSeeder extends Seeder
             ['key' => 'about_cta_subtitle',  'value' => 'Walk in today or arrange a home collection. Your health remains our top priority.'],
             ['key' => 'about_cta_btn',       'value' => 'Get in Touch'],
             // Services Page
-            ['key' => 'services_page_badge',   'value' => 'Premium Diagnostics'],
-            ['key' => 'services_page_heading', 'value' => 'Our Diagnostic Services'],
-            ['key' => 'services_page_subtext', 'value' => 'Advanced technology, trained professionals, and a top-tier NABL-accredited network - delivering accurate results on time, every time.'],
-            // Service Cards
-            ['key' => 'svc_1_title', 'value' => 'Clinical Pathology'],
-            ['key' => 'svc_1_desc',  'value' => 'Routine and specialised tests for blood, urine, and stool essential to any diagnosis.'],
-            ['key' => 'svc_2_title', 'value' => 'Haematology'],
-            ['key' => 'svc_2_desc',  'value' => 'Complete blood counts, coagulation panels, haemoglobin electrophoresis, and more.'],
-            ['key' => 'svc_3_title', 'value' => 'Biochemistry'],
-            ['key' => 'svc_3_desc',  'value' => 'LFT, KFT, lipid profiles, thyroid function, vitamin levels, and electrolyte panels.'],
-            ['key' => 'svc_4_title', 'value' => 'Microbiology & Culture'],
-            ['key' => 'svc_4_desc',  'value' => 'Bacterial, fungal, and viral cultures paired with antibiotic sensitivity reports.'],
-            ['key' => 'svc_5_title', 'value' => 'Cardiology Diagnostics'],
-            ['key' => 'svc_5_desc',  'value' => 'ECG, Echo, cardiac enzyme markers, and Holter monitoring for comprehensive cardiac care.'],
-            ['key' => 'svc_6_title', 'value' => 'Home Sample Collection'],
-            ['key' => 'svc_6_desc',  'value' => 'Trained phlebotomists visit your home at a time that suits you, with zero waiting.'],
+            ['key' => 'services_page_badge',   'value' => 'What We Offer'],
+            ['key' => 'services_page_heading', 'value' => 'Our Comprehensive Services'],
+            ['key' => 'services_page_subtext', 'value' => 'Comprehensive care across consultations, diagnostics, dental, home services, and pharmacy in one place.'],
+            // Service Cards (reference only — live data served from services table)
+            ['key' => 'svc_1_title', 'value' => 'Polyclinic & Doctor Consultation'],
+            ['key' => 'svc_1_desc',  'value' => 'Experienced physicians and specialist consultants available seven days a week for routine check-ups and expert medical advice.'],
+            ['key' => 'svc_2_title', 'value' => 'Pathology'],
+            ['key' => 'svc_2_desc',  'value' => 'Complete laboratory diagnostic services covering blood, urine, stool, sputum, and semen analysis with reliable, precise reporting.'],
+            ['key' => 'svc_3_title', 'value' => 'Day Care'],
+            ['key' => 'svc_3_desc',  'value' => 'Clinical support including IV saline administration, wound care, and diabetic foot dressing, attended by trained male and female nursing staff.'],
+            ['key' => 'svc_4_title', 'value' => 'ECG'],
+            ['key' => 'svc_4_desc',  'value' => 'Accurate 12-lead electrocardiogram testing performed by trained technicians, with both male and female staff available for patient comfort.'],
+            ['key' => 'svc_5_title', 'value' => 'Dental Clinic'],
+            ['key' => 'svc_5_desc',  'value' => 'Comprehensive oral healthcare from preventive check-ups and restorative treatments to advanced dental procedures using modern practices.'],
+            ['key' => 'svc_6_title', 'value' => 'Homeopathy & Nutrition Clinic'],
+            ['key' => 'svc_6_desc',  'value' => 'Holistic healing through personalised homeopathic treatment and expert nutrition planning for weight management and long-term wellness.'],
             // Services CTA
             ['key' => 'services_cta_heading',      'value' => 'Need a specific test?'],
             ['key' => 'services_cta_subtext',      'value' => 'We offer a vast catalog of advanced tests. Contact us directly to check availability and pricing for any test.'],
@@ -300,10 +297,10 @@ class DatabaseSeeder extends Seeder
             ['key' => 'services_cta_btn_whatsapp', 'value' => 'WhatsApp'],
             ['key' => 'services_cta_btn_book',     'value' => 'Book Appointment'],
             // Doctors Page
-            ['key' => 'doctors_page_badge',       'value' => 'Expert Professionals'],
-            ['key' => 'doctors_page_heading',     'value' => 'Our Medical Team'],
-            ['key' => 'doctors_page_subtext',     'value' => 'Dedicated specialists committed to providing the highest standard of healthcare and accurate diagnostics.'],
-            ['key' => 'doctors_empty_text',       'value' => 'No doctors found. Add some from the admin panel.'],
+            ['key' => 'doctors_page_badge',       'value' => 'Our Healthcare Professionals'],
+            ['key' => 'doctors_page_heading',     'value' => 'Meet Our Team'],
+            ['key' => 'doctors_page_subtext',     'value' => 'A team of dedicated doctors and specialists committed to delivering compassionate, quality care to every patient.'],
+            ['key' => 'doctors_empty_text',       'value' => 'No team members found. Add from admin panel.'],
             ['key' => 'doctors_cta_heading',      'value' => 'Book a Consultation'],
             ['key' => 'doctors_cta_subtext',      'value' => 'Our team is available 7 days a week. Walk in or call us to schedule at your convenience.'],
             ['key' => 'doctors_cta_btn_call',     'value' => 'Call Now'],
@@ -386,13 +383,13 @@ class DatabaseSeeder extends Seeder
             ['key' => 'seo_about_description', 'value' => 'Learn about Rohit Health Care\'s commitment to accurate diagnostics, NABL accreditation, and delivering quality healthcare to the community.'],
             ['key' => 'seo_about_keywords',    'value' => 'about Rohit Health Care, NABL accredited lab, diagnostic centre history, community health'],
             // SEO - Services page
-            ['key' => 'seo_services_title',       'value' => 'Diagnostic Services | Rohit Health Care'],
-            ['key' => 'seo_services_description', 'value' => 'Explore our comprehensive diagnostic services: pathology, haematology, biochemistry, cardiology, microbiology, and home sample collection.'],
-            ['key' => 'seo_services_keywords',    'value' => 'diagnostic services, pathology, blood test, ECG, Echo, biochemistry, home collection, NABL lab'],
+            ['key' => 'seo_services_title',       'value' => 'Our Services | Rohit Health Care'],
+            ['key' => 'seo_services_description', 'value' => 'Explore our comprehensive services: polyclinic consultations, pathology, day care, ECG, dental clinic, homeopathy, home services, and pharmacy.'],
+            ['key' => 'seo_services_keywords',    'value' => 'polyclinic, pathology, day care, ECG, dental clinic, homeopathy, nutrition, home services, pharmacy, doctor consultation'],
             // SEO - Doctors page
-            ['key' => 'seo_doctors_title',       'value' => 'Our Medical Team | Rohit Health Care'],
-            ['key' => 'seo_doctors_description', 'value' => 'Meet our experienced team of specialist doctors and healthcare professionals at Rohit Health Care - available 7 days a week.'],
-            ['key' => 'seo_doctors_keywords',    'value' => 'doctors, medical team, specialist, gynaecology, paediatrics, orthopaedic, general physician'],
+            ['key' => 'seo_doctors_title',       'value' => 'Our Team | Rohit Health Care'],
+            ['key' => 'seo_doctors_description', 'value' => 'Meet the dedicated medical team at Rohit Health Care — experienced doctors and specialists available seven days a week.'],
+            ['key' => 'seo_doctors_keywords',    'value' => 'medical team, doctors, general physician, dietitian, specialist, consultation, Rohit Health Care'],
             // SEO - Gallery page
             ['key' => 'seo_gallery_title',       'value' => 'Gallery | Rohit Health Care Facility & Events'],
             ['key' => 'seo_gallery_description', 'value' => 'Explore photos of our modern diagnostic facility, health camps, and community events at Rohit Health Care.'],
@@ -408,7 +405,7 @@ class DatabaseSeeder extends Seeder
             // SEO - Global
             ['key' => 'seo_og_image',         'value' => ''],
             ['key' => 'google_analytics_id',  'value' => ''],
-            
+
             // AI Chatbot Info
             ['key' => 'chatbot_enabled',       'value' => 'true'],
             ['key' => 'chatbot_provider',      'value' => 'openrouter'],
@@ -426,6 +423,94 @@ class DatabaseSeeder extends Seeder
             DB::table('site_settings')->insertOrIgnore($item);
         }
 
-        echo "✅ Database seeded with all existing data (IDs preserved)\n";
+        // ─── Services - clears and reseeds on every deployment ───
+        DB::table('services')->delete();
+        DB::table('services')->insert([
+            [
+                'title'       => 'Polyclinic & Doctor Consultation',
+                'description' => 'Our polyclinic brings together experienced physicians and specialist consultants under one roof. Whether it is a routine check-up or an expert second opinion, our doctors are available seven days a week to guide you toward the right diagnosis and treatment.',
+                'icon' => 'Stethoscope',
+                'order' => 1,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Pathology',
+                'description' => 'We provide a complete range of laboratory diagnostic services covering blood, urine, stool, sputum, and semen analysis. Every test is conducted with precision using reliable methods, ensuring accurate reports for informed medical decisions.',
+                'icon' => 'TestTube',
+                'order' => 2,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Day Care',
+                'description' => 'Our day care unit offers essential clinical support services including intravenous saline administration, wound care management, and specialised diabetic foot dressing. Attended by trained male and female nursing professionals for a safe and comfortable experience.',
+                'icon' => 'Bandage',
+                'order' => 3,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'ECG',
+                'description' => 'We provide accurate 12-lead electrocardiogram testing conducted by trained staff. With a dedicated focus on patient comfort, our ECG service is available with both male and female technicians to meet every patient\'s preference.',
+                'icon' => 'Activity',
+                'order' => 4,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Dental Clinic',
+                'description' => 'Our in-house dental clinic offers comprehensive oral healthcare, from preventive check-ups and routine care to restorative treatments and advanced dental procedures. We combine modern practices with a patient-friendly approach at every visit.',
+                'icon' => 'Sparkles',
+                'order' => 5,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Homeopathy & Nutrition Clinic',
+                'description' => 'Experience the benefits of holistic care through customised homeopathic treatment and expert nutritional guidance. Our personalised diet plans address weight management, metabolic conditions, and long-term wellbeing tailored to your individual needs.',
+                'icon' => 'HeartPulse',
+                'order' => 6,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Home Services',
+                'description' => 'We bring quality healthcare to your doorstep. Our home services include laboratory sample collection, wound dressing, saline administration, and ECG, all performed by trained professionals at a time and place that suits you.',
+                'icon' => 'Heart',
+                'order' => 7,
+                'visible' => true,
+            ],
+            [
+                'title'       => 'Pharmacy',
+                'description' => 'Our pharmacy stocks a wide range of prescription medicines, over-the-counter products, and surgical supplies. Patients can conveniently access the medications and consumables they need on the same visit, ensuring uninterrupted continuity of care.',
+                'icon' => 'Pill',
+                'order' => 8,
+                'visible' => true,
+            ],
+        ]);
+
+        // ─── Force-update key content entries for existing deployments ───
+        $contentUpdates = [
+            ['key' => 'site_tagline',             'value' => 'Precision diagnostics with care you can trust.'],
+            ['key' => 'footer_address_short',     'value' => 'Masjid Road, Balarampur, West Bengal, India'],
+            ['key' => 'services_page_badge',      'value' => 'What We Offer'],
+            ['key' => 'services_page_heading',    'value' => 'Our Comprehensive Services'],
+            ['key' => 'services_page_subtext',    'value' => 'Comprehensive care across consultations, diagnostics, dental, home services, and pharmacy in one place.'],
+            ['key' => 'home_services_heading',    'value' => 'Comprehensive Healthcare Services'],
+            ['key' => 'home_services_subtext',    'value' => 'Comprehensive healthcare services delivered through expert consultation, diagnostics, and patient-focused care.'],
+            ['key' => 'home_team_badge',          'value' => 'Our Healthcare Team'],
+            ['key' => 'home_team_heading',        'value' => 'Meet Our Team'],
+            ['key' => 'home_team_link',           'value' => 'View Our Full Team'],
+            ['key' => 'doctors_page_badge',       'value' => 'Our Healthcare Professionals'],
+            ['key' => 'doctors_page_heading',     'value' => 'Meet Our Team'],
+            ['key' => 'doctors_page_subtext',     'value' => 'A team of dedicated doctors and specialists committed to delivering compassionate, quality care to every patient.'],
+            ['key' => 'doctors_empty_text',       'value' => 'No team members found. Add from admin panel.'],
+            ['key' => 'seo_services_title',       'value' => 'Our Services | Rohit Health Care'],
+            ['key' => 'seo_services_description', 'value' => 'Explore our comprehensive services: polyclinic consultations, pathology, day care, ECG, dental clinic, homeopathy, home services, and pharmacy.'],
+            ['key' => 'seo_services_keywords',    'value' => 'polyclinic, pathology, day care, ECG, dental clinic, homeopathy, nutrition, home services, pharmacy, doctor consultation'],
+            ['key' => 'seo_doctors_title',        'value' => 'Our Team | Rohit Health Care'],
+            ['key' => 'seo_doctors_description',  'value' => 'Meet the dedicated medical team at Rohit Health Care — experienced doctors and specialists available seven days a week.'],
+            ['key' => 'seo_doctors_keywords',     'value' => 'medical team, doctors, general physician, dietitian, specialist, consultation, Rohit Health Care'],
+        ];
+        foreach ($contentUpdates as $item) {
+            DB::table('site_contents')->updateOrInsert(['key' => $item['key']], ['value' => $item['value']]);
+        }
+
+        echo "✅ Database seeded: team, services, and content updated\n";
     }
 }
