@@ -74,8 +74,8 @@ class DatabaseSeeder extends Seeder
             DB::table('blogs')->insertOrIgnore($blog);
         }
 
-        // Gallery - clear all dummy photos (users can upload from admin panel)
-        DB::table('galleries')->truncate();
+        // Gallery - preserve all existing photos (users manage via admin panel)
+        // No truncate - photos uploaded by admins are kept intact
 
         // HeroSlides - exact data from SQLite (IDs preserved)
         $heroSlides = [
