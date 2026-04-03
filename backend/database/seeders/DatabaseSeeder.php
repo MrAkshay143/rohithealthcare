@@ -363,7 +363,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'notfound_links_label', 'value' => 'Quick Links'],
         ];
         foreach ($siteContent as $item) {
-            DB::table('site_contents')->insertOrIgnore($item);
+            DB::table('site_contents')->updateOrInsert(['key' => $item['key']], ['value' => $item['value']]);
         }
 
         // ─── SiteSettings - general + SEO (insertOrIgnore = safe to re-run) ───
