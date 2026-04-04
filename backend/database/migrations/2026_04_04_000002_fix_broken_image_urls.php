@@ -47,12 +47,6 @@ return new class extends Migration {
         DB::table('blogs')
             ->where('imageUrl', 'like', '/uploads/%')
             ->update(['imageUrl' => '/images/bg-medical.jpg']);
-
-        // Delete gallery images with broken /uploads/ URLs
-        // (they're user-uploaded, not seeded, so affected by old /public/uploads/ wipe)
-        DB::table('galleries')
-            ->where('imageUrl', 'like', '/uploads/%')
-            ->delete();
     }
 
     public function down(): void
