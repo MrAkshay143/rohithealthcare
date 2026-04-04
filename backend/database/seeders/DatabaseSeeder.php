@@ -33,47 +33,33 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Blogs - exact data from SQLite (IDs preserved)
+        // Blogs — only the two real video posts. Remove any old dummy entries.
+        DB::table('blogs')->whereNotIn('id', [1, 2])->delete();
+
         $blogs = [
             [
-                'id' => 1,
-                'slug' => 'free-health-checkup-camp-april-2026',
-                'title' => 'Free Health Check-up Camp – 15th April 2026',
-                'content' => 'Rohit Health Care is organising a free health check-up camp on 15th April 2026. Services include blood pressure monitoring, blood sugar screening, eye check-up, and BMI assessment. All residents are welcome. No prior appointment needed. Camp will be held from 9 AM to 2 PM at our main centre.',
-                'imageUrl' => '/images/bg-medical.jpg',
-                'draft' => false,
-                'createdAt' => '2026-03-17 00:00:00',
+                'id'       => 1,
+                'slug'     => 'free-health-camp-jhimri-december-2023',
+                'title'    => 'Free Health Camp at Jhimri - 20th December 2023',
+                'content'  => "On 20th December 2023, our team packed up and headed to Jhimri to set up a free health check-up camp for the local community. Days like this one are close to our heart. Not everyone can easily travel to a clinic, so we thought, why not bring the clinic to them.\n\nWe had a wonderful team of doctors with us that day. Dr. Suchitra Murmu was there for the children, Dr. Sanjay Mandal and Dr. Arpan Goswami handled dental check-ups, and Dr. Kabita Sarkar was present for skin-related concerns. Along with specialist consultations, we also checked blood pressure and blood sugar for every person who came in.\n\nThe response from the people of Jhimri was truly heartwarming. Families came together, elders who had not seen a doctor in years finally got a check-up, and children got the attention they needed. Moments like these remind us what healthcare should really feel like, accessible, human, and caring.\n\nWatch the video to see how the day unfolded.",
+                'imageUrl' => null,
+                'videoUrl' => 'https://www.youtube.com/watch?v=6q3ylde-i7w&t=7s',
+                'draft'    => false,
+                'createdAt' => '2023-12-22 00:00:00',
             ],
             [
-                'id' => 2,
-                'slug' => 'world-blood-donor-day-awareness',
-                'title' => 'World Blood Donor Day – Awareness & Drive',
-                'content' => 'On the occasion of World Blood Donor Day, our team organised a community awareness drive and blood donation camp. Over 120 units of blood were collected, benefiting patients across the region. We thank all volunteers and donors for their selfless contribution.',
-                'imageUrl' => '/images/bg-blood-donation.jpg',
-                'draft' => false,
-                'createdAt' => '2026-03-17 00:00:00',
-            ],
-            [
-                'id' => 3,
-                'slug' => 'home-sample-collection-24x7',
-                'title' => 'New: Home Sample Collection Now Available 24×7',
-                'content' => 'We are delighted to announce that our home sample collection service is now available round-the-clock, 7 days a week. Our trained phlebotomists will arrive at your doorstep at a time of your choosing. Book via WhatsApp or call us directly. Same-day results guaranteed for most tests.',
-                'imageUrl' => '/images/bg-diagnostic.jpg',
-                'draft' => false,
-                'createdAt' => '2026-03-17 00:00:00',
-            ],
-            [
-                'id' => 4,
-                'slug' => 'thyroid-awareness-month',
-                'title' => 'Thyroid Awareness Month – Get Tested',
-                'content' => 'January is Thyroid Awareness Month. Did you know that over 42 million people in India suffer from thyroid disorders? We are offering a 30% discount on TSH, T3, and T4 tests throughout this month. Early detection leads to better outcomes. Book your test today.',
-                'imageUrl' => '/images/bg-thyroid.jpg',
-                'draft' => false,
-                'createdAt' => '2026-03-17 00:00:00',
+                'id'       => 2,
+                'slug'     => 'free-health-camp-chutkidih-balarampur',
+                'title'    => 'Free Health Camp at Chutkidih, Balarampur',
+                'content'  => "Back in May 2023, we organized a free health check-up camp at Chutkidih in Balarampur, Purulia, and it was one of those days where the entire team came together with one simple goal, to serve the community.\n\nChutkidih is a small village where access to regular medical care is not always easy. Many residents have health concerns they have been ignoring for a long time, either because the nearest clinic is far away or because life just gets in the way. That day, our doctors spent hours examining patients, checking vitals, and having real conversations about their health.\n\nWhat stood out most was the trust the villagers placed in us. They showed up, they listened, and many of them left knowing something important about their health that they had never known before. That is what keeps us going.\n\nThis is how Rohit Health Care began, and this is the mission we continue to carry forward. Watch the video to catch a glimpse of how the day went.",
+                'imageUrl' => null,
+                'videoUrl' => 'https://www.youtube.com/watch?v=E4G-4CAEDUM',
+                'draft'    => false,
+                'createdAt' => '2023-05-05 00:00:00',
             ],
         ];
         foreach ($blogs as $blog) {
-            DB::table('blogs')->insertOrIgnore($blog);
+            DB::table('blogs')->updateOrInsert(['id' => $blog['id']], $blog);
         }
 
         // Gallery - preserve all existing photos (users manage via admin panel)
