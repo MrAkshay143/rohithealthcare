@@ -65,10 +65,14 @@ class HeroSlideController extends Controller
 
     public function destroy(int $id)
     {
-        $slide = HeroSlide::findOrFail($id);
-        $this->deleteLocalFile($slide->imageUrl);
-        $slide->delete();
-        return response()->json(['success' => 'Slide deleted']);
+        try {
+            $slide = HeroSlide::findOrFail($id);
+            $this->deleteLocalFile($slide->imageUrl);
+            $slide->delete();
+            return response()->json(['success' => 'Slide deleted']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function count()

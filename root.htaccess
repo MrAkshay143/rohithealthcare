@@ -2,6 +2,18 @@
     RewriteEngine On
     RewriteBase /
 
+    # Redirect www.rohithealthcare.com → rohithealthcare.com (canonical)
+    RewriteCond %{HTTP_HOST} ^www\.rohithealthcare\.com$ [NC]
+    RewriteRule ^ https://rohithealthcare.com%{REQUEST_URI} [R=301,L]
+
+    # Redirect www.rohithealthcare.in → rohithealthcare.in
+    RewriteCond %{HTTP_HOST} ^www\.rohithealthcare\.in$ [NC]
+    RewriteRule ^ https://rohithealthcare.in%{REQUEST_URI} [R=301,L]
+
+    # Redirect rohithealthcare.in (non-www) → rohithealthcare.com (canonical)
+    RewriteCond %{HTTP_HOST} ^rohithealthcare\.in$ [NC]
+    RewriteRule ^ https://rohithealthcare.com%{REQUEST_URI} [R=301,L]
+
     # Pass Authorization headers to PHP
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

@@ -46,16 +46,25 @@ class GalleryController extends Controller
             'imageUrl' => 'required|string|max:500',
         ]);
 
+        // Soft-delete old image file when the image URL changes
+        if ($validated['imageUrl'] !== $photo->imageUrl) {
+            $this->deleteLocalFile($photo->imageUrl);
+        }
+
         $photo->update($validated);
         return response()->json($photo);
     }
 
     public function destroy(int $id)
     {
-        $photo = Gallery::findOrFail($id);
-        $this->deleteLocalFile($photo->imageUrl);
-        $photo->delete();
-        return response()->json(['success' => 'Photo deleted']);
+        try {
+            $photo = Gallery::findOrFail($id);
+            $this->deleteLocalFile($photo->imageUrl);
+            $photo->delete();
+            return response()->json(['success' => 'Photo deleted']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function reorder(Request $request)

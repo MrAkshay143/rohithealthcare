@@ -71,10 +71,14 @@ class DoctorController extends Controller
 
     public function destroy(int $id)
     {
-        $doctor = Doctor::findOrFail($id);
-        $this->deleteLocalFile($doctor->imageUrl);
-        $doctor->delete();
-        return response()->json(['success' => 'Doctor removed']);
+        try {
+            $doctor = Doctor::findOrFail($id);
+            $this->deleteLocalFile($doctor->imageUrl);
+            $doctor->delete();
+            return response()->json(['success' => 'Doctor removed']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function count()

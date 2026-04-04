@@ -97,10 +97,14 @@ class BlogController extends Controller
 
     public function destroy(int $id)
     {
-        $blog = Blog::findOrFail($id);
-        $this->deleteLocalFile($blog->imageUrl);
-        $blog->delete();
-        return response()->json(['success' => 'Blog post deleted']);
+        try {
+            $blog = Blog::findOrFail($id);
+            $this->deleteLocalFile($blog->imageUrl);
+            $blog->delete();
+            return response()->json(['success' => 'Blog post deleted']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function count()
