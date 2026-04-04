@@ -160,23 +160,3 @@ export function ImageUpload({
     </div>
   )
 }
-      {preview && (
-        <div className="relative inline-block">
-          <img loading="lazy"
-            src={preview}
-            alt="Preview"
-            className="h-20 w-auto rounded-lg border border-gray-200 object-cover"
-            onError={() => setPreview('')}
-          />
-          <button
-            type="button"
-            onClick={() => { setUrl(''); setPreview(''); setDlError(false); onChange?.('') }}
-            className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600"
-          >
-            <X className="w-3 h-3" />
-          </button>
-        </div>
-      )}
-    </div>
-  )
-}
