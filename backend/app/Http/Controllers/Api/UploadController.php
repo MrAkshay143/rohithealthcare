@@ -9,25 +9,65 @@ use Illuminate\Support\Str;
 
 class UploadController extends Controller
 {
+    /**
+     * Sanitize folder name: only alphanumeric, dash, underscore allowed.
+     */
+    private function safeFolder(?string $raw): string
+    {
+        if (!$raw) return 'uploads';
+        $clean = preg_replace('/[^a-z0-9_-]/i', '', $raw);
+        return $clean ?: 'uploads';
+    }
+
+    /**
+     * Build a safe filename from an optional custom name + timestamp, or a random name.
+     */
+    private function safeName(?string $customFilename, string $ext): string
+    {
+        if ($customFilename && trim($customFilename)) {
+            return Str::slug($customFilename) . '-' . time() . '.' . $ext;
+        }
+        return time() . '-' . Str::random(6) . '.' . $ext;
+    }
+
+    /**
+     * Store uploaded file.
+     * Saves to storage/app/public/{folder}/ so files survive deployments.
+     * Accepts optional: folder (e.g. "doctors"), customFilename (e.g. doctor name).
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'file'           => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'folder'         => 'nullable|string|max:50',
+            'customFilename' => 'nullable|string|max:200',
         ]);
 
-        $file = $request->file('file');
-        $ext = $file->getClientOriginalExtension() ?: 'png';
-        $safeName = time() . '-' . Str::random(6) . '.' . $ext;
+        $file   = $request->file('file');
+        $ext    = strtolower($file->getClientOriginalExtension() ?: 'jpg');
+        if ($ext === 'jpeg') $ext = 'jpg';
 
-        $file->move(public_path('uploads'), $safeName);
+        $folder   = $this->safeFolder($request->input('folder'));
+        $safeName = $this->safeName($request->input('customFilename'), $ext);
 
-        return response()->json(['url' => '/backend/uploads/' . $safeName]);
+        $dir = storage_path('app/public/' . $folder);
+        if (!is_dir($dir)) mkdir($dir, 0775, true);
+
+        $file->move($dir, $safeName);
+
+        return response()->json(['url' => '/backend/storage/' . $folder . '/' . $safeName]);
     }
 
+    /**
+     * Download an external image URL and store it locally.
+     * Saves to storage/app/public/{folder}/ so files survive deployments.
+     */
     public function fromUrl(Request $request)
     {
         $request->validate([
-            'url' => 'required|string|max:2048',
+            'url'            => 'required|string|max:2048',
+            'folder'         => 'nullable|string|max:50',
+            'customFilename' => 'nullable|string|max:200',
         ]);
 
         $url = trim($request->input('url'));
@@ -38,7 +78,7 @@ class UploadController extends Controller
         }
 
         // Already stored on our own backend — return as-is
-        if (str_contains($url, '/backend/uploads/')) {
+        if (str_contains($url, '/backend/uploads/') || str_contains($url, '/backend/storage/')) {
             return response()->json(['url' => $url]);
         }
 
@@ -50,7 +90,6 @@ class UploadController extends Controller
                 return response()->json(['error' => 'Blocked URL'], 422);
             }
         }
-        // Block private RFC-1918 ranges via IP (rough check)
         if (preg_match('/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/', $host)) {
             return response()->json(['error' => 'Blocked URL'], 422);
         }
@@ -65,13 +104,12 @@ class UploadController extends Controller
             }
 
             $contentType = strtolower($response->header('Content-Type') ?? '');
-
             $mimeToExt = [
-                'image/jpeg' => 'jpg',
-                'image/jpg'  => 'jpg',
-                'image/png'  => 'png',
-                'image/gif'  => 'gif',
-                'image/webp' => 'webp',
+                'image/jpeg'    => 'jpg',
+                'image/jpg'     => 'jpg',
+                'image/png'     => 'png',
+                'image/gif'     => 'gif',
+                'image/webp'    => 'webp',
                 'image/svg+xml' => 'svg',
             ];
 
@@ -83,7 +121,6 @@ class UploadController extends Controller
                 }
             }
 
-            // Fall back to URL extension if content-type is ambiguous
             if (!$ext) {
                 $urlPath = parse_url($url, PHP_URL_PATH) ?? '';
                 $urlExt  = strtolower(pathinfo($urlPath, PATHINFO_EXTENSION));
@@ -97,10 +134,15 @@ class UploadController extends Controller
                 return response()->json(['error' => 'URL does not appear to be an image'], 422);
             }
 
-            $safeName = time() . '-' . Str::random(6) . '.' . $ext;
-            file_put_contents(public_path('uploads') . '/' . $safeName, $response->body());
+            $folder   = $this->safeFolder($request->input('folder'));
+            $safeName = $this->safeName($request->input('customFilename'), $ext);
 
-            return response()->json(['url' => '/backend/uploads/' . $safeName]);
+            $dir = storage_path('app/public/' . $folder);
+            if (!is_dir($dir)) mkdir($dir, 0775, true);
+
+            file_put_contents($dir . '/' . $safeName, $response->body());
+
+            return response()->json(['url' => '/backend/storage/' . $folder . '/' . $safeName]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Download failed: ' . $e->getMessage()], 422);
         }

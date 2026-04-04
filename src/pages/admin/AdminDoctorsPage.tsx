@@ -216,9 +216,9 @@ export default function AdminDoctorsPage() {
                   </div>
                 )}
                 {doc.imageUrl ? (
-                  <img loading="lazy" src={doc.imageUrl} alt={doc.name} className="h-14 w-14 rounded-xl object-cover shrink-0 border border-gray-100" />
+                  <img loading="lazy" src={doc.imageUrl} alt={doc.name} className="h-14 w-14 rounded-xl object-cover shrink-0 border border-gray-100" style={{ objectPosition: doc.imagePosition || '50% 30%' }} />
                 ) : (
-                  <div className="h-14 w-14 rounded-xl bg-linear-to-br from-[#4e66b3] to-[#6878d4] flex items-center justify-center text-white font-bold text-lg shrink-0">
+                  <div className="h-14 w-14 rounded-xl bg-linear-to-br from-[#4e66b3] via-[#5c76c9] to-[#7c3aed] flex items-center justify-center text-white font-black text-lg shrink-0">
                     {doc.name?.charAt(0)}
                   </div>
                 )}

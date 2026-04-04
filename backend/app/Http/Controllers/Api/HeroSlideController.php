@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\HeroSlide;
+use App\Traits\DeletesLocalFiles;
 use Illuminate\Http\Request;
 
 class HeroSlideController extends Controller
 {
+    use DeletesLocalFiles;
+
     public function index()
     {
         $slides = HeroSlide::orderBy('order', 'asc')
@@ -51,6 +54,11 @@ class HeroSlideController extends Controller
         $validated['alt'] = $validated['alt'] ?? 'Hero slide';
         $validated['order'] = $validated['order'] ?? 0;
 
+        // Soft-delete old image file when the image URL changes
+        if ($validated['imageUrl'] !== $slide->imageUrl) {
+            $this->deleteLocalFile($slide->imageUrl);
+        }
+
         $slide->update($validated);
         return response()->json($slide);
     }
@@ -58,6 +66,7 @@ class HeroSlideController extends Controller
     public function destroy(int $id)
     {
         $slide = HeroSlide::findOrFail($id);
+        $this->deleteLocalFile($slide->imageUrl);
         $slide->delete();
         return response()->json(['success' => 'Slide deleted']);
     }

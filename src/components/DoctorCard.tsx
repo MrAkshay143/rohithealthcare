@@ -5,9 +5,8 @@ const BACKEND_ORIGIN = import.meta.env.VITE_BACKEND_ORIGIN ?? '';
 
 function resolveImageUrl(url: string | null | undefined): string | null {
   if (!url) return null;
-  // If already absolute, use as-is
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  // Relative path — prepend backend origin
+  // Relative path (e.g. /backend/storage/doctors/xxx.jpg) — prepend backend origin
   return `${BACKEND_ORIGIN}${url}`;
 }
 
@@ -17,51 +16,53 @@ type Doctor = {
   specialty: string;
   qualifications: string;
   imageUrl: string | null;
+  imagePosition?: string | null;
 };
 
 export function DoctorCard({ doc }: { doc: Doctor; index?: number }) {
   const content = useContent();
   const imageUrl = resolveImageUrl(doc.imageUrl);
+  const objectPosition = doc.imagePosition || '50% 30%';
   const initials = doc.name
     .split(" ")
     .map((w) => w[0])
+    .filter(Boolean)
     .join("")
     .slice(0, 2)
-    .toUpperCase();
-
+    .toUpperCase() || '?';
 
   return (
     <div className="group flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 h-full overflow-hidden">
-      {/* Top Section - Image or Initials */}
+      {/* Top Section - Image or Avatar */}
       <div className="shrink-0 flex justify-center pt-5 pb-4 bg-linear-to-b from-gray-50/50 to-white relative">
-        {imageUrl ? (
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-sm ring-1 ring-gray-100">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-sm ring-2 ring-gray-100/80">
+          {imageUrl ? (
             <img loading="lazy"
               src={imageUrl}
               alt={doc.name}
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              style={{ objectPosition }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
             />
-          </div>
-        ) : (
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-50 flex items-center justify-center shadow-sm ring-1 ring-gray-100 text-[#4e66b3]">
-            <span className="text-xl sm:text-2xl font-bold tracking-wide">{initials}</span>
-          </div>
-        )}
+          ) : (
+            /* Modern gradient avatar with initials */
+            <div className="w-full h-full bg-linear-to-br from-[#4e66b3] via-[#5c76c9] to-[#7c3aed] flex items-center justify-center">
+              <span className="text-white text-xl sm:text-2xl font-black tracking-tight leading-none select-none">
+                {initials}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Bottom Section - Text Details */}
       <div className="flex-1 flex flex-col px-4 pb-5 min-w-0 text-center">
-        {/* Name - Single Line */}
         <h3 className="text-[15px] sm:text-base font-bold text-gray-900 mb-1 truncate w-full" title={doc.name}>
           {doc.name}
         </h3>
-        
-        {/* Degree / Qualifications - Critical Fix: Single Line */}
         <p className="text-[13px] sm:text-sm font-semibold text-[#4e66b3] truncate w-full mb-1" title={doc.qualifications}>
           {doc.qualifications || content['doctor_default_qual'] || 'MBBS'}
         </p>
-
-        {/* Designation / Specialty - Single Line */}
         <p className="text-[11px] sm:text-xs font-medium text-gray-500 truncate w-full flex items-center justify-center gap-1" title={doc.specialty}>
           <Stethoscope className="w-3 h-3 text-gray-400 shrink-0" />
           <span className="truncate">{doc.specialty}</span>

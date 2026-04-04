@@ -9,5 +9,5 @@ class Doctor extends Model
     protected $table = 'doctors';
     public $timestamps = false;
 
-    protected $fillable = ['name', 'specialty', 'qualifications', 'imageUrl', 'order'];
+    protected $fillable = ['name', 'specialty', 'qualifications', 'imageUrl', 'imagePosition', 'order'];
 }

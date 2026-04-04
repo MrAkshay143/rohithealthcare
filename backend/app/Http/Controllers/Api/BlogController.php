@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Traits\DeletesLocalFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+    use DeletesLocalFiles;
+
     public function index(Request $request)
     {
         $query = Blog::query();
@@ -74,14 +77,19 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title'    => 'required|string|max:255',
+            'content'  => 'required|string',
             'imageUrl' => 'nullable|string|max:500',
             'videoUrl' => 'nullable|string|max:500',
-            'draft' => 'sometimes|boolean',
+            'draft'    => 'sometimes|boolean',
         ]);
 
         $validated['draft'] = $validated['draft'] ?? false;
+
+        // Soft-delete old image file when the image URL changes
+        if (isset($validated['imageUrl']) && $validated['imageUrl'] !== $blog->imageUrl) {
+            $this->deleteLocalFile($blog->imageUrl);
+        }
 
         $blog->update($validated);
         return response()->json($blog);
@@ -90,6 +98,7 @@ class BlogController extends Controller
     public function destroy(int $id)
     {
         $blog = Blog::findOrFail($id);
+        $this->deleteLocalFile($blog->imageUrl);
         $blog->delete();
         return response()->json(['success' => 'Blog post deleted']);
     }

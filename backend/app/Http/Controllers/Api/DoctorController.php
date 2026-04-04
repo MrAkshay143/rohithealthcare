@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Traits\DeletesLocalFiles;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    use DeletesLocalFiles;
+
     public function index(Request $request)
     {
         $allowed = ['id', 'name', 'specialty', 'order', 'created_at'];
@@ -27,10 +30,11 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'specialty' => 'required|string|max:255',
+            'name'          => 'required|string|max:255',
+            'specialty'     => 'required|string|max:255',
             'qualifications' => 'required|string|max:255',
-            'imageUrl' => 'nullable|string|max:500',
+            'imageUrl'      => 'nullable|string|max:500',
+            'imagePosition' => 'nullable|string|max:100',
         ]);
 
         $doctor = Doctor::create($validated);
@@ -48,11 +52,18 @@ class DoctorController extends Controller
         $doctor = Doctor::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'specialty' => 'required|string|max:255',
+            'name'          => 'required|string|max:255',
+            'specialty'     => 'required|string|max:255',
             'qualifications' => 'required|string|max:255',
-            'imageUrl' => 'nullable|string|max:500',
+            'imageUrl'      => 'nullable|string|max:500',
+            'imagePosition' => 'nullable|string|max:100',
         ]);
+
+        // Soft-delete old image file when the image URL changes
+        $oldUrl = $doctor->imageUrl;
+        if (array_key_exists('imageUrl', $validated) && $validated['imageUrl'] !== $oldUrl) {
+            $this->deleteLocalFile($oldUrl);
+        }
 
         $doctor->update($validated);
         return response()->json($doctor);
@@ -61,6 +72,7 @@ class DoctorController extends Controller
     public function destroy(int $id)
     {
         $doctor = Doctor::findOrFail($id);
+        $this->deleteLocalFile($doctor->imageUrl);
         $doctor->delete();
         return response()->json(['success' => 'Doctor removed']);
     }

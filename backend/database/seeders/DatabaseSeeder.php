@@ -15,21 +15,23 @@ class DatabaseSeeder extends Seeder
             ['id' => 2, 'username' => 'admin', 'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', 'ChangeMe@2025'))],
         ]);
 
-        // Team / Consulting Doctors - clears and reseeds on every deployment
-        DB::table('doctors')->delete();
-        DB::table('doctors')->insert([
-            ['name' => 'Dr. K.K. Gupta',             'specialty' => 'General Physician',        'qualifications' => 'MBBS, MD',   'imageUrl' => null, 'order' => 1],
-            ['name' => 'Dr. Anwar Jamal',            'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 2],
-            ['name' => 'Dr. Arpan Singha',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 3],
-            ['name' => 'Dr. Anu Priya',              'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 4],
-            ['name' => 'Dr. Aniruddha Mandal',       'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 5],
-            ['name' => 'Dr. Chandan Seth',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 6],
-            ['name' => 'Dr. Neha Agarwala',          'specialty' => 'Dietitian & Nutritionist', 'qualifications' => 'BHMS, DDHN', 'imageUrl' => null, 'order' => 7],
-            ['name' => 'Dr. Sanjay Mandal',          'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 8],
-            ['name' => 'Dr. Sabhyasachi Chatterjee', 'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 9],
-            ['name' => 'Dr. Tamajit Chakraborty',    'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 10],
-            ['name' => 'Dr. Sandeep Prasad',         'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'order' => 11],
-        ]);
+        // Team / Consulting Doctors
+        // Only seed when the table is empty — once admin has managed doctors, never overwrite
+        if (DB::table('doctors')->count() === 0) {
+            DB::table('doctors')->insert([
+                ['name' => 'Dr. K.K. Gupta',             'specialty' => 'General Physician',        'qualifications' => 'MBBS, MD',   'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 1],
+                ['name' => 'Dr. Anwar Jamal',            'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 2],
+                ['name' => 'Dr. Arpan Singha',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 3],
+                ['name' => 'Dr. Anu Priya',              'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 4],
+                ['name' => 'Dr. Aniruddha Mandal',       'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 5],
+                ['name' => 'Dr. Chandan Seth',           'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 6],
+                ['name' => 'Dr. Neha Agarwala',          'specialty' => 'Dietitian & Nutritionist', 'qualifications' => 'BHMS, DDHN', 'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 7],
+                ['name' => 'Dr. Sanjay Mandal',          'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 8],
+                ['name' => 'Dr. Sabhyasachi Chatterjee', 'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 9],
+                ['name' => 'Dr. Tamajit Chakraborty',    'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 10],
+                ['name' => 'Dr. Sandeep Prasad',         'specialty' => 'General Physician',        'qualifications' => 'MBBS',       'imageUrl' => null, 'imagePosition' => '50% 30%', 'order' => 11],
+            ]);
+        }
 
         // Blogs - exact data from SQLite (IDs preserved)
         $blogs = [

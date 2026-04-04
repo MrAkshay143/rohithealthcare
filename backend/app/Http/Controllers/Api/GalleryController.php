@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Traits\DeletesLocalFiles;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
+    use DeletesLocalFiles;
+
     public function index()
     {
         $photos = Gallery::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
@@ -50,6 +53,7 @@ class GalleryController extends Controller
     public function destroy(int $id)
     {
         $photo = Gallery::findOrFail($id);
+        $this->deleteLocalFile($photo->imageUrl);
         $photo->delete();
         return response()->json(['success' => 'Photo deleted']);
     }
