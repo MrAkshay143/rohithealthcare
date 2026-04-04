@@ -27,18 +27,18 @@ return new class extends Migration {
             ['imageUrl' => '/images/bg-medical.jpg', 'alt' => 'Patient care and consultation', 'order' => 3, 'createdAt' => now()]
         );
 
-        // Reset site_content images that have broken /uploads/ URLs
-        DB::table('site_content')
+        // Reset site_contents images that have broken /uploads/ URLs
+        DB::table('site_contents')
             ->where('key', 'about_hero_bg')
             ->where('value', 'like', '/uploads/%')
             ->update(['value' => '']);
 
-        DB::table('site_content')
+        DB::table('site_contents')
             ->where('key', 'about_image')
             ->where('value', 'like', '/uploads/%')
             ->update(['value' => '']);
 
-        DB::table('site_content')
+        DB::table('site_contents')
             ->where('key', 'home_whyus_image')
             ->where('value', 'like', '/uploads/%')
             ->update(['value' => '/images/bg-lab.jpg']);
