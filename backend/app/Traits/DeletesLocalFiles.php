@@ -14,10 +14,10 @@ trait DeletesLocalFiles
         if (!$url) return;
 
         // Only act on URLs that point to our own backend storage
-        if (!preg_match('#(?:^|https?://[^/]+)/backend/storage/([^?#\s]+)#', $url, $m)) return;
+        if (!preg_match('~(?:^|https?://[^/]+)/backend/storage/([^?#\s]+)~', $url, $m)) return;
 
         // Sanitize: strip any path traversal attempts
-        $relativePath = preg_replace('#(\.\.[\\/]|[\\/]\.\.)+#', '', $m[1]);
+        $relativePath = str_replace(['../', '..\\'], '', $m[1]);
         $fullPath = storage_path('app/public/' . $relativePath);
 
         if (is_file($fullPath)) {
