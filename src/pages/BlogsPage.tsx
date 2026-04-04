@@ -6,6 +6,11 @@ import { useContent } from "@/hooks/useContent";
 import { useSEO } from "@/hooks/useSEO";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
+function extractYoutubeId(url: string): string | null {
+  const m = url?.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  return m ? m[1] : null
+}
+
 export default function BlogsPage() {
   const content = useContent();
   useSEO('blogs');
@@ -67,6 +72,12 @@ export default function BlogsPage() {
                     {blog.imageUrl ? (
                       <img loading="lazy"
                         src={blog.imageUrl}
+                        alt={blog.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : blog.videoUrl && extractYoutubeId(blog.videoUrl) ? (
+                      <img loading="lazy"
+                        src={`https://img.youtube.com/vi/${extractYoutubeId(blog.videoUrl)}/hqdefault.jpg`}
                         alt={blog.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

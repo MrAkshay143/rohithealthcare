@@ -294,13 +294,15 @@ export default function HomePage() {
                     i === 0 ? 'flex' : i === 1 ? 'flex' : i === 2 ? 'hidden md:flex' : 'hidden lg:flex'
                   }`}>
                   <div className="h-24 sm:h-36 bg-linear-to-br from-[#4e66b3]/10 to-gray-100 overflow-hidden shrink-0">
-                    {blog.imageUrl ? (
-                      <img loading="lazy" src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <HeartPulse className="w-12 h-12 text-[#4e66b3]/30" />
-                      </div>
-                    )}
+                    {(()=>{ const ytId = blog.videoUrl?.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1] ?? null; return blog.imageUrl ? (
+                       <img loading="lazy" src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      ) : ytId ? (
+                        <img loading="lazy" src={`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <HeartPulse className="w-12 h-12 text-[#4e66b3]/30" />
+                        </div>
+                      ); })()}
                   </div>
                   <div className="p-3 sm:p-4 flex flex-col grow">
                     <p className="text-[10px] sm:text-xs font-semibold text-[#4e66b3] mb-1 sm:mb-1.5">

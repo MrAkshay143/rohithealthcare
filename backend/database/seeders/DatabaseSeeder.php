@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Blogs — only the two real video posts. Remove any old dummy entries.
-        DB::table('blogs')->whereNotIn('id', [1, 2])->delete();
+        // Blogs — only real posts. Remove any old dummy entries.
+        DB::table('blogs')->whereNotIn('id', [1, 2, 3])->delete();
 
         $blogs = [
             [
@@ -56,6 +56,16 @@ class DatabaseSeeder extends Seeder
                 'videoUrl' => 'https://www.youtube.com/watch?v=E4G-4CAEDUM',
                 'draft'    => false,
                 'createdAt' => '2023-05-05 00:00:00',
+            ],
+            [
+                'id'       => 3,
+                'slug'     => 'why-young-people-are-falling-sick-2026',
+                'title'    => 'Why Young People in 2026 Are Falling Sick More Than Ever',
+                'content'  => "We have been noticing a pattern at our clinic over the last year or so. More and more patients coming in are in their 20s and 30s, and the complaints are things we used to mostly see in people much older. Blood sugar fluctuations, thyroid irregularities, vitamin deficiencies, back pain, and chronic fatigue are no longer rare in young people.\n\nA lot of this comes down to how we are living today. Most young people sit for 8 to 10 hours a day, eat at odd hours, sleep with their phones next to them, and barely step outside. Vitamin D deficiency is now almost normal for this generation because people rarely get sunlight. B12 deficiency is common too, especially in those who mostly eat processed food.\n\nThe stress levels are something else entirely. Anxiety and burnout are real health problems that affect everything from digestion to immunity to sleep. We are seeing more people come in with complaints that trace back to stress as the root cause.\n\nThe good news is that most of these issues are highly manageable when caught early. A basic blood panel can tell you a lot about what is quietly going on inside. If you have been feeling off, tired, or just not like yourself, it is worth getting checked.\n\nWe are here for exactly this. Come in, talk to one of our doctors, and let us figure it out together.",
+                'imageUrl' => '/images/bg-health.jpg',
+                'videoUrl' => null,
+                'draft'    => false,
+                'createdAt' => '2026-01-10 00:00:00',
             ],
         ];
         foreach ($blogs as $blog) {
