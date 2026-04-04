@@ -49,6 +49,7 @@ export function DoctorForm({
   const [imageUrl, setImageUrl] = useState(editDoctor?.imageUrl ?? '')
   const [imageUploading, setImageUploading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [resetKey, setResetKey] = useState(Date.now())
 
   const initPos = parsePos(editDoctor?.imagePosition)
   const [posX, setPosX] = useState(initPos[0])
@@ -68,6 +69,7 @@ export function DoctorForm({
     e.preventDefault()
     if (imageUploading) return
     setSaving(true)
+    const form = e.currentTarget
     await onSubmit({
       name,
       specialty,
@@ -77,6 +79,16 @@ export function DoctorForm({
       ...(editDoctor ? { id: editDoctor.id } : {}),
     })
     setSaving(false)
+    if (!editDoctor) {
+      form.reset()
+      setName('')
+      setSpecialty('')
+      setQualifications('')
+      setImageUrl('')
+      setPosX(50)
+      setPosY(30)
+      setResetKey(Date.now())
+    }
   }
 
   const disabled = saving || imageUploading
@@ -131,6 +143,7 @@ export function DoctorForm({
             Doctor Photo
           </label>
           <ImageUpload
+            key={resetKey}
             name="imageUrl"
             defaultValue={editDoctor?.imageUrl ?? ''}
             placeholder="Photo URL or browse to upload"

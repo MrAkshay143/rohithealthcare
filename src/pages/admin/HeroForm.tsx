@@ -13,6 +13,7 @@ export function HeroForm({
   const [imageUrl, setImageUrl] = useState(editSlide?.imageUrl || '')
   const [imageUploading, setImageUploading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [resetKey, setResetKey] = useState(Date.now())
   const formRef = useRef<HTMLFormElement>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -31,6 +32,7 @@ export function HeroForm({
     if (!editSlide) {
       setImageUrl('')
       formRef.current?.reset()
+      setResetKey(Date.now())
     }
   }
 
@@ -39,6 +41,7 @@ export function HeroForm({
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
       <ImageUpload
+        key={resetKey}
         name="imageUrl"
         defaultValue={editSlide?.imageUrl || ''}
         placeholder="Slide image URL or upload"

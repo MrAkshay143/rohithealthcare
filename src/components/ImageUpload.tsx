@@ -29,6 +29,12 @@ export function ImageUpload({
   const [preview, setPreview] = useState(defaultValue)
   const fileRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    setUrl(defaultValue)
+    setPreview(defaultValue)
+    if (fileRef.current) fileRef.current.value = ''
+  }, [defaultValue])
+
   const busy = uploading || downloading
 
   // Notify parent whenever busy state changes

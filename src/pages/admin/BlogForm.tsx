@@ -1,6 +1,6 @@
 import { ImageUpload } from '@/components/ImageUpload'
 import { Plus, Eye, EyeOff, Type, FileText, Loader2, Youtube, LinkIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const INPUT = 'w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4e66b3]/25 focus:border-[#4e66b3] bg-white transition-colors'
@@ -14,13 +14,21 @@ export function BlogForm({
   onSubmit,
   editBlog,
 }: {
-  onSubmit: (data: { title: string; content: string; imageUrl: string; videoUrl: string; draft: boolean; id?: number }) => void
+  onSubmit: (data: { title: string; content: string; imageUrl: string; videoUrl: string; draft: boolean; id?: number }) => void | Promise<void>
   editBlog?: { id: number; title: string; content: string; imageUrl?: string; videoUrl?: string; draft?: boolean } | null
 }) {
   const [draft, setDraft] = useState(editBlog?.draft || false)
   const [imageUrl, setImageUrl] = useState(editBlog?.imageUrl || '')
   const [videoUrl, setVideoUrl] = useState(editBlog?.videoUrl || '')
   const [saving, setSaving] = useState(false)
+  const [resetKey, setResetKey] = useState(Date.now())
+
+  useEffect(() => {
+    setDraft(editBlog?.draft || false)
+    setImageUrl(editBlog?.imageUrl || '')
+    setVideoUrl(editBlog?.videoUrl || '')
+    setResetKey(Date.now())
+  }, [editBlog])
 
   function handleVideoUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
     const url = e.target.value
@@ -37,7 +45,8 @@ export function BlogForm({
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setSaving(true)
-    const fd = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const fd = new FormData(form)
     await onSubmit({
       title: fd.get('title') as string,
       content: fd.get('content') as string,
@@ -47,6 +56,13 @@ export function BlogForm({
       ...(editBlog ? { id: editBlog.id } : {}),
     })
     setSaving(false)
+    if (!editBlog) {
+      form.reset()
+      setDraft(false)
+      setImageUrl('')
+      setVideoUrl('')
+      setResetKey(Date.now())
+    }
   }
 
   return (
@@ -91,7 +107,7 @@ export function BlogForm({
           Cover Image
           <span className="ml-1 text-[10px] font-normal normal-case text-gray-400">(auto-filled from YouTube if blank)</span>
         </label>
-        <ImageUpload name="imageUrl" defaultValue={imageUrl} placeholder="Blog cover image (optional)" onChange={setImageUrl} />
+        <ImageUpload key={resetKey} name="imageUrl" defaultValue={imageUrl || editBlog?.imageUrl || ''} placeholder="Blog cover image (optional)" onChange={setImageUrl} />
       </div>
       <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-gray-100">
         <button

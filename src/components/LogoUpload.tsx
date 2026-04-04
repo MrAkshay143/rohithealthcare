@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Upload, X, Loader2 } from 'lucide-react'
 import { api } from '@/services/api'
 
@@ -15,6 +15,12 @@ export function LogoUpload({
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState(defaultValue)
   const fileRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    setUrl(defaultValue)
+    setPreview(defaultValue)
+    if (fileRef.current) fileRef.current.value = ''
+  }, [defaultValue])
 
   async function handleFile(file: File) {
     setUploading(true)
