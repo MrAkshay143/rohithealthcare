@@ -125,7 +125,7 @@ export default function AboutPage() {
               <div className="absolute -bottom-4 right-10 w-32 h-32 bg-brand-red/5 rounded-full blur-2xl pointer-events-none" />
               <img
                 loading="lazy"
-                src="/uploads/clinic_building_transparent.png"
+                src={content['about_image'] || '/uploads/clinic_building_transparent.png'}
                 alt={`${content['site_name'] || 'Clinic'} Building`}
                 className="w-full max-w-xs sm:max-w-sm h-auto block object-contain object-bottom relative z-10 drop-shadow-xl"
                 style={{ maxHeight: '320px' }}
@@ -142,7 +142,7 @@ export default function AboutPage() {
               <div className="relative w-full overflow-hidden flex items-end justify-center" style={{ minHeight: '400px', height: '100%' }}>
                 <img
                   loading="lazy"
-                  src="/uploads/clinic_building_transparent.png"
+                  src={content['about_image'] || '/uploads/clinic_building_transparent.png'}
                   alt={`${content['site_name'] || 'Clinic'} Building`}
                   className="w-full block max-w-sm sm:max-w-md lg:max-w-lg mx-auto object-contain object-bottom"
                   style={{ maxHeight: '480px', height: '100%' }}
